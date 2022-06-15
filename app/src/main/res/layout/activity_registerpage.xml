@@ -1,0 +1,85 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/theme_color_8"
+    android:gravity="center"
+    android:orientation="vertical"
+    tools:context=".registerpage">
+
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:fontFamily="sans-serif-condensed"
+        android:gravity="center"
+        android:text="Register Here"
+        android:textAllCaps="true"
+        android:textColor="#FFFF"
+        android:textSize="35dp"
+        android:textStyle="bold" />
+
+    <EditText
+        android:id="@+id/r_name"
+        android:layout_width="match_parent"
+        android:layout_height="50dp"
+        android:layout_marginStart="20dp"
+        android:layout_marginEnd="20dp"
+        android:layout_marginTop="40dp"
+        android:background="@drawable/round_back_white_10"
+        android:hint="Name"
+        android:inputType="text"
+        android:maxLines="1"
+        android:paddingStart="20dp"
+        android:paddingEnd="0dp"
+        android:textSize="16sp" />
+
+
+    <EditText
+        android:id="@+id/r_phoneno"
+
+        android:layout_width="match_parent"
+        android:layout_height="50dp"
+        android:layout_marginStart="20dp"
+        android:layout_marginEnd="20dp"
+        android:layout_marginTop="40dp"
+        android:background="@drawable/round_back_white_10"
+        android:hint="Phone no."
+        android:inputType="number"
+        android:maxLines="1"
+        android:paddingStart="20dp"
+        android:paddingEnd="0dp"
+        android:textSize="16sp" />
+
+    <EditText
+        android:id="@+id/r_email"
+        android:layout_width="match_parent"
+        android:layout_height="50dp"
+        android:layout_marginStart="20dp"
+        android:layout_marginEnd="20dp"
+        android:layout_marginTop="20dp"
+        android:background="@drawable/round_back_white_10"
+        android:hint="Email Address"
+        android:inputType="text"
+        android:maxLines="1"
+        android:paddingStart="20dp"
+        android:paddingEnd="0dp"
+        android:textSize="16sp" />
+
+    <androidx.appcompat.widget.AppCompatButton
+
+        android:id="@+id/r_registerBtn"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="20dp"
+        android:layout_marginTop="40dp"
+        android:layout_marginEnd="20dp"
+        android:background="@drawable/round_back_theme"
+        android:text="Register"
+        android:textColor="#FFFF"
+        android:textStyle="bold" />
+
+
+</LinearLayout>

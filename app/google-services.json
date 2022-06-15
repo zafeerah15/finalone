@@ -1,0 +1,40 @@
+{
+  "project_info": {
+    "project_number": "680169875888",
+    "firebase_url": "https://chatapplication-69609-default-rtdb.asia-southeast1.firebasedatabase.app",
+    "project_id": "chatapplication-69609",
+    "storage_bucket": "chatapplication-69609.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:680169875888:android:85821a0910da088e3f0e75",
+        "android_client_info": {
+          "package_name": "sg.edu.np.mad.chatapp"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "680169875888-anktavivu04u11ttch8v5vh7vk0e14fg.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyBUDpiVYKnTEkEI3xOiyFnxg_t9YEFZIVo"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "680169875888-anktavivu04u11ttch8v5vh7vk0e14fg.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
