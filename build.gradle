@@ -29,7 +29,13 @@ buildscript {
 
         }
     }
-
+    ///---------------------By Syafiq---------------------------V
+    allprojects {
+        repositories {
+            maven { url 'https://jitpack.io' }
+        }
+    }
+    ///---------------------By Syafiq---------------------------^
 
 
 
