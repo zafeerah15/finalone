@@ -32,6 +32,7 @@ import de.hdodenhof.circleimageview.CircleImageView;
 import sg.edu.np.mad.chatapp.MemoryData;
 import sg.edu.np.mad.chatapp.R;
 import sg.edu.np.mad.chatapp.registerpage;
+import com.devlomi.record_view.OnRecordListener;
 
 public class Chat extends AppCompatActivity {
 
@@ -180,5 +181,11 @@ public class Chat extends AppCompatActivity {
                 finish();
             }
         });
+
+        ///---------------------By Syafiq---------------------------V
+
+
+
+        ///---------------------By Syafiq---------------------------^
     }
 }

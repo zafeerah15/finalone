@@ -26,32 +26,7 @@ android {
         sourceCompatibility JavaVersion.VERSION_1_8
         targetCompatibility JavaVersion.VERSION_1_8
     }
-    ///---------------------By Syafiq---------------------------V
-//    lintOptions {
-//        abortOnError false
-//    }
-//
-//    compileSdkVersion rootProject.ext.compileSdkVersion
-//    buildToolsVersion rootProject.ext.buildToolsVersion
-//    defaultConfig {
-//        applicationId "com.devlomi.recordview"
-//        minSdkVersion rootProject.ext.minSdkVersion
-//        targetSdkVersion rootProject.ext.targetSdkVersion
-//        versionCode 1
-//        versionName "1.0"
-//        testInstrumentationRunner 'androidx.test.runner.AndroidJUnitRunner'
-//    }
-//    buildTypes {
-//        release {
-//            minifyEnabled false
-//            proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
-//        }
-//    }
-//    compileOptions {
-//        sourceCompatibility JavaVersion.VERSION_1_8
-//        targetCompatibility JavaVersion.VERSION_1_8
-//    }
-    ///---------------------By Syafiq---------------------------^
+
 }
 
 dependencies {
@@ -70,12 +45,8 @@ dependencies {
     ///---------------------By Syafiq---------------------------V
 //    //for AppCompat use:
 //    //appcompat v26+ is highly recommended to support older APIs
-//    implementation 'com.devlomi.record-view:record-view:2.0.1'
-//
-////    //for AndroidX use:
-////    implementation 'com.github.3llomi:RecordView:3.1.1'
-////    implementation fileTree(dir: 'libs', include: ['*.jar'])
-////    implementation project(path: ':record-view')
+    implementation 'com.devlomi.record-view:record-view:2.0.1'
+
     ///---------------------By Syafiq---------------------------^
 
 }

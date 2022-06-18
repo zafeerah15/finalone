@@ -3,7 +3,8 @@
   <component name="DesignSurface">
     <option name="filePathToZoomLevelMap">
       <map>
-        <entry key="..\:/Users/user/Desktop/Poly Stuff/MAD/MAD_Assignment1/app/src/main/res/layout/activity_chat.xml" value="0.25" />
+        <entry key="..\:/Users/user/Desktop/Poly Stuff/MAD/MAD_Assignment1/app/src/main/res/drawable/ic_mic.xml" value="0.109" />
+        <entry key="..\:/Users/user/Desktop/Poly Stuff/MAD/MAD_Assignment1/app/src/main/res/layout/activity_chat.xml" value="0.1" />
         <entry key="..\:/Users/user/Desktop/Poly Stuff/MAD/MAD_Assignment1/app/src/main/res/layout/activity_registerpage.xml" value="0.22" />
         <entry key="..\:/Users/user/Desktop/Poly Stuff/MAD/MAD_Assignment1/app/src/main/res/layout/chat_adapter_layout.xml" value="0.22" />
         <entry key="..\:/Users/user/Desktop/Poly Stuff/MAD/MAD_Assignment1/app/src/main/res/layout/messages_adapter_layout.xml" value="0.2" />
