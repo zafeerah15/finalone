@@ -31,25 +31,25 @@ buildscript {
         }
     }
     ///---------------------By Syafiq---------------------------V
-    project.ext{
-        compileSdkVersion = 30
-        buildToolsVersion = '30.0.3'
-        targetSdkVersion = 30
-        minSdkVersion = 14
-    }
+//    project.ext{
+//        compileSdkVersion = 30
+//        buildToolsVersion = '30.0.3'
+//        targetSdkVersion = 30
+//        minSdkVersion = 14
+//    }
 
-    allprojects {
-        repositories {
-            mavenCentral()
-            jcenter()
-            google()
-            maven {url 'https://jitpack.io'}
-        }
-    }
+//    allprojects {
+//        repositories {
+////            mavenCentral()
+////            jcenter()
+////            google()
+//            maven {url 'https://jitpack.io'}
+//        }
+//    }
 
-    task clean(type: Delete) {
-        delete rootProject.buildDir
-    }
+//    task clean(type: Delete) {
+//        delete rootProject.buildDir
+//    }
     ///---------------------By Syafiq---------------------------^
 
 
