@@ -11,21 +11,21 @@
     <RelativeLayout
         android:id="@+id/topBar"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content">
+        android:layout_height="wrap_content"
+        android:background="@color/theme_color">
 
 
         <ImageView
             android:id="@+id/backBtn"
             android:layout_width="35dp"
             android:layout_height="35dp"
-            android:background="@drawable/round_back_light_10"
-            android:paddingStart="12sp"
-            android:paddingEnd="2dp"
             android:layout_centerVertical="true"
             android:layout_marginStart="20dp"
             android:layout_marginTop="40dp"
-            android:src="@drawable/back_btn"
-            />
+            android:background="@drawable/round_back_light_10"
+            android:paddingStart="12sp"
+            android:paddingEnd="2dp"
+            android:src="@drawable/back_btn" />
 
         <de.hdodenhof.circleimageview.CircleImageView
             android:id="@+id/profilepicture"
@@ -40,30 +40,30 @@
 
         <LinearLayout
 
-            android:layout_marginStart="10dp"
-            android:layout_centerVertical="true"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:orientation="vertical"
-            android:layout_toEndOf="@+id/profilepicture">
+            android:layout_centerVertical="true"
+            android:layout_marginStart="10dp"
+            android:layout_toEndOf="@+id/profilepicture"
+            android:orientation="vertical">
 
             <TextView
                 android:id="@+id/user_name"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="User Name"
                 android:maxLines="1"
+                android:text="User Name"
                 android:textColor="#424242"
-                android:textStyle="bold"
-                android:textSize="18sp"/>
+                android:textSize="18sp"
+                android:textStyle="bold" />
 
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:textSize="13sp"
-                android:text="Online"
                 android:layout_marginTop="2dp"
-                android:textColor="#00C853"/>
+                android:text="Online"
+                android:textColor="#00C853"
+                android:textSize="13sp" />
         </LinearLayout>
     </RelativeLayout>
 
@@ -79,62 +79,32 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_alignParentBottom="true"
+        android:layout_marginBottom="0dp"
         android:background="@color/theme_color_8"
         android:paddingTop="10dp"
         android:paddingBottom="10dp">
-
-
-
 
         <EditText
             android:id="@+id/messageEditTxt"
             android:layout_width="match_parent"
             android:layout_height="50dp"
-            android:layout_marginStart="20dp"
-            android:layout_marginEnd="10dp"
+            android:layout_marginStart="10dp"
+            android:layout_marginEnd="20dp"
             android:layout_toStartOf="@+id/sendBtn"
-            android:backgroundTint="@android:color/transparent"
-            android:hint="Type Something..."
+            android:background="@color/white"
+            android:backgroundTint="@android:color/white"
+            android:hint=" Type Something..."
             android:textColor="@color/white"
-            android:textSize="14sp" />
-        <com.devlomi.record_view.RecordView
-            android:id="@+id/record_view"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_alignParentBottom="true"
-            android:layout_toLeftOf="@id/record_button"
-            app:slide_to_cancel_arrow="@drawable/recv_ic_arrow"
-            app:slide_to_cancel_arrow_color="#000000"
-            app:slide_to_cancel_bounds="8dp"
-            app:slide_to_cancel_margin_right="10dp"
-            app:slide_to_cancel_text="Slide To Cancel"
-            app:counter_time_color="#ff0000"
-            />
-
-
+            android:textSize="14sp"/>
 
         <ImageView
             android:id="@+id/sendBtn"
-            android:src="@drawable/send_icon"
             android:layout_width="50dp"
             android:layout_height="50dp"
             android:layout_alignParentEnd="true"
             android:layout_marginEnd="10dp"
-            />
-
-        <com.devlomi.record_view.RecordButton
-            android:id="@+id/record_button"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_alignParentBottom="true"
-            android:layout_alignParentRight="true"
-            android:background="@drawable/ic_mic"
-            android:scaleType="centerInside"
-            app:mic_icon="@drawable/recv_ic_mic_white" />
-
-
+            android:src="@drawable/send_icon"/>
     </RelativeLayout>
-
 
 
 </RelativeLayout>
