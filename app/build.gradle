@@ -45,7 +45,7 @@ dependencies {
     ///---------------------By Syafiq---------------------------V
 //    //for AppCompat use:
 //    //appcompat v26+ is highly recommended to support older APIs
-    implementation 'com.devlomi.record-view:record-view:2.0.1'
+//    implementation 'com.devlomi.record-view:record-view:2.0.1'
 
     ///---------------------By Syafiq---------------------------^
 
