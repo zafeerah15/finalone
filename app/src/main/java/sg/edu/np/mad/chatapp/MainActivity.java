@@ -2,10 +2,14 @@ package sg.edu.np.mad.chatapp;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.core.app.ActivityCompat;
+import androidx.core.content.ContextCompat;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
+import android.Manifest;
 import android.app.ProgressDialog;
+import android.content.pm.PackageManager;
 import android.os.Bundle;
 import android.util.Log;
 import android.widget.Toast;
@@ -28,6 +32,8 @@ import sg.edu.np.mad.chatapp.messages.MessagesList;
 public class MainActivity extends AppCompatActivity {
 
     private final List<MessagesList> messagesLists = new ArrayList<>();
+    private static final String TAG = "MainActivity";
+    private static final int REQUEST_CODE = 1;
     private String mobile;
     private String email;
     private String name;
@@ -51,6 +57,7 @@ public class MainActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+        verifyPermissions();
 
         final CircleImageView userProfilePic = findViewById(R.id.userProfilePic);
 
@@ -190,6 +197,25 @@ public class MainActivity extends AppCompatActivity {
             }
         });
 
+    }
+
+    private void verifyPermissions() {
+        Log.d(TAG, "verifyPermissions: asking user for permissions");
+        String[] permissions = {Manifest.permission.READ_EXTERNAL_STORAGE,
+                Manifest.permission.WRITE_EXTERNAL_STORAGE,
+                Manifest.permission.CAMERA};
+
+        if (ContextCompat.checkSelfPermission(this.getApplicationContext(),
+                permissions[0]) == PackageManager.PERMISSION_GRANTED
+                && ContextCompat.checkSelfPermission(this.getApplicationContext(),
+                permissions[1]) == PackageManager.PERMISSION_GRANTED
+                && ContextCompat.checkSelfPermission(this.getApplicationContext(),
+                permissions[2]) == PackageManager.PERMISSION_GRANTED) {
+        } else {
+            ActivityCompat.requestPermissions(MainActivity.this,
+                    permissions,
+                    REQUEST_CODE);
+        }
     }
 }
 
