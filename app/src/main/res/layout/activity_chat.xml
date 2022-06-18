@@ -68,12 +68,11 @@
     </RelativeLayout>
 
     <androidx.recyclerview.widget.RecyclerView
-        android:layout_below="@+id/topBar"
-        android:layout_height="match_parent"
-        android:layout_width="match_parent"
         android:id="@+id/chattingRecyclerView"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
         android:layout_above="@id/bottomBar"
-        />
+        android:layout_below="@+id/topBar" />
 
     <RelativeLayout
         android:id="@+id/bottomBar"
@@ -86,15 +85,15 @@
 
         <EditText
             android:id="@+id/messageEditTxt"
-            android:layout_toStartOf="@+id/sendBtn"
             android:layout_width="match_parent"
             android:layout_height="50dp"
-            android:backgroundTint="@android:color/transparent"
-            android:textSize="14sp"
-            android:layout_marginEnd="10dp"
             android:layout_marginStart="20dp"
+            android:layout_marginEnd="10dp"
+            android:layout_toStartOf="@+id/sendBtn"
+            android:backgroundTint="@android:color/transparent"
             android:hint="Type Something..."
-            />
+            android:textColor="@color/white"
+            android:textSize="14sp" />
 
         <ImageView
             android:id="@+id/sendBtn"

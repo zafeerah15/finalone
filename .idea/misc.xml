@@ -1,5 +1,15 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
+  <component name="DesignSurface">
+    <option name="filePathToZoomLevelMap">
+      <map>
+        <entry key="..\:/Users/user/Desktop/Poly Stuff/MAD/MAD_Assignment1/app/src/main/res/layout/activity_chat.xml" value="0.25" />
+        <entry key="..\:/Users/user/Desktop/Poly Stuff/MAD/MAD_Assignment1/app/src/main/res/layout/activity_registerpage.xml" value="0.22" />
+        <entry key="..\:/Users/user/Desktop/Poly Stuff/MAD/MAD_Assignment1/app/src/main/res/layout/chat_adapter_layout.xml" value="0.22" />
+        <entry key="..\:/Users/user/Desktop/Poly Stuff/MAD/MAD_Assignment1/app/src/main/res/layout/messages_adapter_layout.xml" value="0.2" />
+      </map>
+    </option>
+  </component>
   <component name="ProjectRootManager" version="2" languageLevel="JDK_11" default="true" project-jdk-name="11" project-jdk-type="JavaSDK">
     <output url="file://$PROJECT_DIR$/out" />
   </component>
