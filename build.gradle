@@ -6,6 +6,7 @@ buildscript {
 
         google()// Google's Maven repository
         mavenCentral()
+        jcenter()
 
     }
    /* plugins {
@@ -30,11 +31,25 @@ buildscript {
         }
     }
     ///---------------------By Syafiq---------------------------V
-//    allprojects {
-//        repositories {
-//            maven { url 'https://jitpack.io' }
-//        }
-//    }
+    project.ext{
+        compileSdkVersion = 30
+        buildToolsVersion = '30.0.3'
+        targetSdkVersion = 30
+        minSdkVersion = 14
+    }
+
+    allprojects {
+        repositories {
+            mavenCentral()
+            jcenter()
+            google()
+            maven {url 'https://jitpack.io'}
+        }
+    }
+
+    task clean(type: Delete) {
+        delete rootProject.buildDir
+    }
     ///---------------------By Syafiq---------------------------^
 
 
