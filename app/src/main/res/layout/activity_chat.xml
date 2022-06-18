@@ -93,9 +93,9 @@
             android:layout_toStartOf="@+id/sendBtn"
             android:background="@color/white"
             android:backgroundTint="@android:color/white"
-            android:hint=" Type Something..."
-            android:textColor="@color/white"
-            android:textSize="14sp"/>
+            android:hint="  Type Something..."
+            android:textColor="@color/black"
+            android:textSize="14sp" />
 
         <ImageView
             android:id="@+id/sendBtn"
