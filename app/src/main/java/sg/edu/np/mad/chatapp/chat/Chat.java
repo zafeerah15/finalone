@@ -80,6 +80,7 @@ public class Chat extends AppCompatActivity {
         startRecordingButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
+
                 startRecording();
             }
         });
@@ -88,6 +89,7 @@ public class Chat extends AppCompatActivity {
         stopRecordingButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
+
                 stopRecording();
             }
         });
@@ -95,6 +97,7 @@ public class Chat extends AppCompatActivity {
         playRecordingButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
+
                 playRecording();
             }
         });
@@ -103,6 +106,7 @@ public class Chat extends AppCompatActivity {
         stopPlayingButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
+
                 stopPlaying();
             }
         });
@@ -257,9 +261,7 @@ public class Chat extends AppCompatActivity {
         }
     }
     private void startRecording() {
-//        String uuid = UUID.randomUUID().toString();
-//        fileName = getExternalCacheDir().getAbsolutePath() + "/" + uuid + ".3gp";
-//        Log.i(MainActivity.class.getSimpleName(), fileName);
+
 
         try {
             recorder = new MediaRecorder();
