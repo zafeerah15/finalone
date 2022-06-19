@@ -4,6 +4,7 @@ import android.content.Context;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+//import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 
@@ -45,6 +46,7 @@ public class ChatAdapter extends RecyclerView.Adapter<ChatAdapter.MyViewHolder> 
             holder.oppoLayout.setVisibility(View.GONE);
 
             holder.myMessage.setText(list2.getMessage());
+            //holder.myImage.setImageBitmap(list2);
             holder.myTime.setText(list2.getDate()+" "+list2.getTime());
 
         } else {
@@ -65,6 +67,7 @@ public class ChatAdapter extends RecyclerView.Adapter<ChatAdapter.MyViewHolder> 
     static class MyViewHolder extends RecyclerView.ViewHolder {
 
         private LinearLayout oppoLayout, myLayout;
+        //private ImageView oppoImage,myImage;
         private TextView oppoMessage, myMessage;
         private TextView oppoTime, myTime;
 
@@ -76,6 +79,8 @@ public class ChatAdapter extends RecyclerView.Adapter<ChatAdapter.MyViewHolder> 
             myLayout = itemView.findViewById(R.id.myLayout);
             oppoMessage = itemView.findViewById(R.id.oppoMessage);
             myMessage = itemView.findViewById(R.id.myMessage);
+            //oppoImage = itemView.findViewById(R.id.oppoImage);
+            //myImage = itemView.findViewById(R.id.myImage);
             oppoTime = itemView.findViewById(R.id.oppoMsgTime);
             myTime = itemView.findViewById(R.id.myMsgTime);
 
