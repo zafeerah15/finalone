@@ -35,7 +35,7 @@
         android:paddingStart="20dp"
         android:paddingEnd="0dp"
         android:textColor="@color/black"
-        android:textColorHint="@color/teal_700"
+        android:textColorHint="@color/theme_color_8"
         android:textSize="16sp" />
 
 
@@ -54,7 +54,7 @@
         android:paddingStart="20dp"
         android:paddingEnd="0dp"
         android:textColor="@color/black"
-        android:textColorHint="@color/teal_700"
+        android:textColorHint="@color/theme_color_8"
         android:textSize="16sp" />
 
     <EditText
@@ -71,7 +71,7 @@
         android:paddingStart="20dp"
         android:paddingEnd="0dp"
         android:textColor="@color/black"
-        android:textColorHint="@color/teal_700"
+        android:textColorHint="@color/theme_color_8"
         android:textSize="16sp" />
 
     <androidx.appcompat.widget.AppCompatButton
