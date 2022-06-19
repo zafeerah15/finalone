@@ -7,7 +7,7 @@ android {
     compileSdk 32
 
     defaultConfig {
-        applicationId "sg.edu.np.mad.chatapp"
+        applicationId "sg.edu.np.mad.FriendsOnly"
         minSdk 21
         targetSdk 32
         versionCode 1
