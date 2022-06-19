@@ -271,7 +271,7 @@ public class Chat extends AppCompatActivity {
             recorder.start();
             Toast.makeText(this, "Recording has started",Toast.LENGTH_LONG).show();
         } catch (IOException e) {
-            Log.e(MainActivity.class.getSimpleName() + ":startRecording()", "prepare() failed");
+            e.printStackTrace();
         }
 
         recorder.start();
@@ -282,11 +282,12 @@ public class Chat extends AppCompatActivity {
             recorder.release();
             recorder = null;
         }
+        Toast.makeText(this, "Recording has stopped",Toast.LENGTH_LONG).show();
     }
     private void playRecording() {
         player = new MediaPlayer();
         try {
-            player.setDataSource(fileName);
+            player.setDataSource(getRecordingFilePath());
             player.setOnCompletionListener(new MediaPlayer.OnCompletionListener() {
                 @Override
                 public void onCompletion(MediaPlayer mediaPlayer) {
@@ -295,8 +296,9 @@ public class Chat extends AppCompatActivity {
             });
             player.prepare();
             player.start();
+            Toast.makeText(this, "Recording is playing",Toast.LENGTH_LONG).show();
         } catch (IOException e) {
-            Log.e(MainActivity.class.getSimpleName() + ":playRecording()", "prepare() failed");
+            e.printStackTrace();
         }
     }
 
@@ -305,6 +307,7 @@ public class Chat extends AppCompatActivity {
             player.release();
             player = null;
         }
+        Toast.makeText(this, "Recording has stopped playing",Toast.LENGTH_LONG).show();
     }
     private String getRecordingFilePath(){
         ContextWrapper contextWrapper = new ContextWrapper(getApplicationContext());
