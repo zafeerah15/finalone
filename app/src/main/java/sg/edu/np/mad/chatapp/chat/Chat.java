@@ -7,10 +7,12 @@ import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import android.Manifest;
+import android.content.ContextWrapper;
 import android.content.pm.PackageManager;
 import android.media.MediaPlayer;
 import android.media.MediaRecorder;
 import android.os.Bundle;
+import android.os.Environment;
 import android.util.Log;
 import android.view.View;
 import android.widget.Button;
@@ -26,6 +28,7 @@ import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
 import com.squareup.picasso.Picasso;
 
+import java.io.File;
 import java.io.IOException;
 import java.sql.Time;
 import java.sql.Timestamp;
@@ -254,18 +257,19 @@ public class Chat extends AppCompatActivity {
         }
     }
     private void startRecording() {
-        String uuid = UUID.randomUUID().toString();
-        fileName = getExternalCacheDir().getAbsolutePath() + "/" + uuid + ".3gp";
-        Log.i(MainActivity.class.getSimpleName(), fileName);
-
-        recorder = new MediaRecorder();
-        recorder.setAudioSource(MediaRecorder.AudioSource.MIC);
-        recorder.setOutputFormat(MediaRecorder.OutputFormat.THREE_GPP);
-        recorder.setOutputFile(fileName);
-        recorder.setAudioEncoder(MediaRecorder.AudioEncoder.AMR_NB);
+//        String uuid = UUID.randomUUID().toString();
+//        fileName = getExternalCacheDir().getAbsolutePath() + "/" + uuid + ".3gp";
+//        Log.i(MainActivity.class.getSimpleName(), fileName);
 
         try {
+            recorder = new MediaRecorder();
+            recorder.setAudioSource(MediaRecorder.AudioSource.MIC);
+            recorder.setOutputFormat(MediaRecorder.OutputFormat.THREE_GPP);
+            recorder.setOutputFile(getRecordingFilePath());
+            recorder.setAudioEncoder(MediaRecorder.AudioEncoder.AMR_NB);
             recorder.prepare();
+            recorder.start();
+            Toast.makeText(this, "Recording has started",Toast.LENGTH_LONG).show();
         } catch (IOException e) {
             Log.e(MainActivity.class.getSimpleName() + ":startRecording()", "prepare() failed");
         }
@@ -301,6 +305,12 @@ public class Chat extends AppCompatActivity {
             player.release();
             player = null;
         }
+    }
+    private String getRecordingFilePath(){
+        ContextWrapper contextWrapper = new ContextWrapper(getApplicationContext());
+        File musicDirectory = contextWrapper.getExternalFilesDir(Environment.DIRECTORY_MUSIC);
+        File file = new File(musicDirectory, "RecordingFile" + ".mp3");
+        return file.getPath();
     }
     ///---------------------By Syafiq---------------------------^
 }

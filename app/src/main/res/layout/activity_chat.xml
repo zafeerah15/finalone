@@ -111,57 +111,19 @@
             android:src="@drawable/send_icon" />
     </RelativeLayout>
 
-<!--    <Button-->
-<!--        android:id="@+id/activity_main_record"-->
-<!--        android:layout_width="64dp"-->
-<!--        android:layout_height="64dp"-->
-<!--        android:layout_alignParentBottom="true"-->
-<!--        android:layout_marginEnd="43dp"-->
-<!--        android:layout_marginBottom="75dp"-->
-<!--        android:layout_toStartOf="@id/activity_main_stop"-->
-<!--         />-->
-
-<!--    <Button-->
-<!--        android:id="@+id/activity_main_stop"-->
-<!--        android:layout_width="64dp"-->
-<!--        android:layout_height="64dp"-->
-<!--        android:layout_alignParentBottom="true"-->
-<!--        android:layout_marginEnd="52dp"-->
-<!--        android:layout_marginBottom="75dp"-->
-<!--        android:layout_toStartOf="@id/activity_main_play"-->
-<!--         />-->
-
-<!--    <Button-->
-<!--        android:id="@+id/activity_main_play"-->
-<!--        android:layout_width="64dp"-->
-<!--        android:layout_height="64dp"-->
-<!--        android:layout_alignParentBottom="true"-->
-<!--        android:layout_marginEnd="46dp"-->
-<!--        android:layout_marginBottom="75dp"-->
-<!--        android:layout_toStartOf="@id/activity_main_stop_playing"-->
-<!--         />-->
-
-<!--    <Button-->
-<!--        android:id="@+id/activity_main_stop_playing"-->
-<!--        android:layout_width="64dp"-->
-<!--        android:layout_height="64dp"-->
-<!--        android:layout_alignParentEnd="true"-->
-<!--        android:layout_alignParentBottom="true"-->
-<!--        android:layout_marginEnd="6dp"-->
-<!--        android:layout_marginBottom="75dp"-->
-<!--         />-->
-
-    <ImageView
+    <Button
         android:id="@+id/activity_main_record"
         android:layout_width="64dp"
         android:layout_height="64dp"
         android:layout_alignParentBottom="true"
-        android:layout_marginEnd="42dp"
-        android:layout_marginBottom="73dp"
+        android:layout_marginEnd="43dp"
+        android:layout_marginBottom="75dp"
         android:layout_toStartOf="@id/activity_main_stop"
-        app:srcCompat="@android:drawable/ic_btn_speak_now" />
+        android:text="Record"
+        android:textColor="@color/black"
+        android:textSize="7sp" />
 
-    <ImageView
+    <Button
         android:id="@+id/activity_main_stop"
         android:layout_width="64dp"
         android:layout_height="64dp"
@@ -169,9 +131,11 @@
         android:layout_marginEnd="52dp"
         android:layout_marginBottom="75dp"
         android:layout_toStartOf="@id/activity_main_play"
-        app:srcCompat="@android:drawable/radiobutton_off_background" />
+        android:text="Stop"
+        android:textColor="@color/black"
+        android:textSize="8sp" />
 
-    <ImageView
+    <Button
         android:id="@+id/activity_main_play"
         android:layout_width="64dp"
         android:layout_height="64dp"
@@ -179,9 +143,11 @@
         android:layout_marginEnd="46dp"
         android:layout_marginBottom="75dp"
         android:layout_toStartOf="@id/activity_main_stop_playing"
-        app:srcCompat="@android:drawable/ic_media_play" />
+        android:text="Play"
+        android:textColor="@color/black"
+        android:textSize="8sp" />
 
-    <ImageView
+    <Button
         android:id="@+id/activity_main_stop_playing"
         android:layout_width="64dp"
         android:layout_height="64dp"
@@ -189,7 +155,49 @@
         android:layout_alignParentBottom="true"
         android:layout_marginEnd="6dp"
         android:layout_marginBottom="75dp"
-        app:srcCompat="@android:drawable/ic_media_pause" />
+        android:text="Stop_P"
+        android:textColor="@color/black"
+        android:textSize="7sp" />
+
+<!--    <ImageView-->
+<!--        android:id="@+id/activity_main_record"-->
+<!--        android:layout_width="64dp"-->
+<!--        android:layout_height="64dp"-->
+<!--        android:layout_alignParentBottom="true"-->
+<!--        android:layout_marginEnd="42dp"-->
+<!--        android:layout_marginBottom="73dp"-->
+<!--        android:layout_toStartOf="@id/activity_main_stop"-->
+<!--        app:srcCompat="@android:drawable/ic_btn_speak_now" />-->
+
+<!--    <ImageView-->
+<!--        android:id="@+id/activity_main_stop"-->
+<!--        android:layout_width="64dp"-->
+<!--        android:layout_height="64dp"-->
+<!--        android:layout_alignParentBottom="true"-->
+<!--        android:layout_marginEnd="52dp"-->
+<!--        android:layout_marginBottom="75dp"-->
+<!--        android:layout_toStartOf="@id/activity_main_play"-->
+<!--        app:srcCompat="@android:drawable/radiobutton_off_background" />-->
+
+<!--    <ImageView-->
+<!--        android:id="@+id/activity_main_play"-->
+<!--        android:layout_width="64dp"-->
+<!--        android:layout_height="64dp"-->
+<!--        android:layout_alignParentBottom="true"-->
+<!--        android:layout_marginEnd="46dp"-->
+<!--        android:layout_marginBottom="75dp"-->
+<!--        android:layout_toStartOf="@id/activity_main_stop_playing"-->
+<!--        app:srcCompat="@android:drawable/ic_media_play" />-->
+
+<!--    <ImageView-->
+<!--        android:id="@+id/activity_main_stop_playing"-->
+<!--        android:layout_width="64dp"-->
+<!--        android:layout_height="64dp"-->
+<!--        android:layout_alignParentEnd="true"-->
+<!--        android:layout_alignParentBottom="true"-->
+<!--        android:layout_marginEnd="6dp"-->
+<!--        android:layout_marginBottom="75dp"-->
+<!--        app:srcCompat="@android:drawable/ic_media_pause" />-->
 
 
 </RelativeLayout>
