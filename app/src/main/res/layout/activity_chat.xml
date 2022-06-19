@@ -77,7 +77,7 @@
         android:layout_centerVertical="true"
         android:layout_marginStart="0dp"
         android:layout_marginTop="4dp"
-        android:layout_marginBottom="-3dp" />
+        android:layout_marginBottom="69dp" />
 
     <RelativeLayout
         android:id="@+id/bottomBar"
