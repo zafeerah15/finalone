@@ -2,11 +2,18 @@ package sg.edu.np.mad.chatapp.chat;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.core.app.ActivityCompat;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
+import android.Manifest;
+import android.content.pm.PackageManager;
+import android.media.MediaPlayer;
+import android.media.MediaRecorder;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
+import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.TextView;
@@ -19,6 +26,7 @@ import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
 import com.squareup.picasso.Picasso;
 
+import java.io.IOException;
 import java.sql.Time;
 import java.sql.Timestamp;
 import java.text.SimpleDateFormat;
@@ -27,14 +35,25 @@ import java.util.Date;
 import java.util.List;
 import java.util.Locale;
 import java.util.TimeZone;
+import java.util.UUID;
 
 import de.hdodenhof.circleimageview.CircleImageView;
+import sg.edu.np.mad.chatapp.MainActivity;
 import sg.edu.np.mad.chatapp.MemoryData;
 import sg.edu.np.mad.chatapp.R;
 import sg.edu.np.mad.chatapp.registerpage;
 //import com.devlomi.record_view.OnRecordListener;
 
 public class Chat extends AppCompatActivity {
+    ///---------------------By Syafiq---------------------------V
+    private static final int REQUEST_RECORD_AUDIO_PERMISSION = 200;
+    private static final String[] permissions = {Manifest.permission.RECORD_AUDIO};
+    private boolean audioRecordingPermissionGranted = false;
+    private String fileName;
+    private Button startRecordingButton, stopRecordingButton, playRecordingButton, stopPlayingButton;;
+    private MediaRecorder recorder;
+    private MediaPlayer player;
+    ///---------------------By Syafiq---------------------------^
 
     DatabaseReference databaseReference = FirebaseDatabase.getInstance().getReference();
 
@@ -49,6 +68,44 @@ public class Chat extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        ///---------------------By Syafiq---------------------------V
+        ActivityCompat.requestPermissions(this, permissions,
+                REQUEST_RECORD_AUDIO_PERMISSION);
+        setContentView(R.layout.activity_chat);
+
+        startRecordingButton = findViewById(R.id.activity_main_record);
+        startRecordingButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                startRecording();
+            }
+        });
+
+        stopRecordingButton = findViewById(R.id.activity_main_stop);
+        stopRecordingButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                stopRecording();
+            }
+        });
+        playRecordingButton = findViewById(R.id.activity_main_play);
+        playRecordingButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                playRecording();
+            }
+        });
+
+        stopPlayingButton = findViewById(R.id.activity_main_stop_playing);
+        stopPlayingButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                stopPlaying();
+            }
+        });
+
+
+        ///---------------------By Syafiq---------------------------^
         setContentView(R.layout.activity_chat);
 
         final ImageView backBtn = findViewById(R.id.backBtn);
@@ -181,11 +238,69 @@ public class Chat extends AppCompatActivity {
                 finish();
             }
         });
-
-        ///---------------------By Syafiq---------------------------V
-
-
-
-        ///---------------------By Syafiq---------------------------^
     }
+    ///---------------------By Syafiq---------------------------V
+    @Override
+    public void onRequestPermissionsResult(int requestCode, @NonNull String[] permissions, @NonNull int[] grantResults) {
+        super.onRequestPermissionsResult(requestCode, permissions, grantResults);
+        switch (requestCode) {
+            case REQUEST_RECORD_AUDIO_PERMISSION:
+                audioRecordingPermissionGranted = grantResults[0] == PackageManager.PERMISSION_GRANTED;
+                break;
+        }
+
+        if (!audioRecordingPermissionGranted) {
+            finish();
+        }
+    }
+    private void startRecording() {
+        String uuid = UUID.randomUUID().toString();
+        fileName = getExternalCacheDir().getAbsolutePath() + "/" + uuid + ".3gp";
+        Log.i(MainActivity.class.getSimpleName(), fileName);
+
+        recorder = new MediaRecorder();
+        recorder.setAudioSource(MediaRecorder.AudioSource.MIC);
+        recorder.setOutputFormat(MediaRecorder.OutputFormat.THREE_GPP);
+        recorder.setOutputFile(fileName);
+        recorder.setAudioEncoder(MediaRecorder.AudioEncoder.AMR_NB);
+
+        try {
+            recorder.prepare();
+        } catch (IOException e) {
+            Log.e(MainActivity.class.getSimpleName() + ":startRecording()", "prepare() failed");
+        }
+
+        recorder.start();
+    }
+
+    private void stopRecording() {
+        if (recorder != null) {
+            recorder.release();
+            recorder = null;
+        }
+    }
+    private void playRecording() {
+        player = new MediaPlayer();
+        try {
+            player.setDataSource(fileName);
+            player.setOnCompletionListener(new MediaPlayer.OnCompletionListener() {
+                @Override
+                public void onCompletion(MediaPlayer mediaPlayer) {
+                    stopPlaying();
+                }
+            });
+            player.prepare();
+            player.start();
+        } catch (IOException e) {
+            Log.e(MainActivity.class.getSimpleName() + ":playRecording()", "prepare() failed");
+        }
+    }
+
+    private void stopPlaying() {
+        if (player != null) {
+            player.release();
+            player = null;
+        }
+    }
+    ///---------------------By Syafiq---------------------------^
 }
