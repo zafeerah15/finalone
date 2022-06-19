@@ -104,8 +104,8 @@ public class Chat extends AppCompatActivity {
             }
         });
 
-
         ///---------------------By Syafiq---------------------------^
+
         setContentView(R.layout.activity_chat);
 
         final ImageView backBtn = findViewById(R.id.backBtn);
