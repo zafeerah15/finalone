@@ -199,18 +199,22 @@ public class MainActivity extends AppCompatActivity {
 
     }
 
+// FUNCTION TO REQUEST PERMISSION FROM USER FOR STORAGE, CAMERA
     private void verifyPermissions() {
         Log.d(TAG, "verifyPermissions: asking user for permissions");
         String[] permissions = {Manifest.permission.READ_EXTERNAL_STORAGE,
                 Manifest.permission.WRITE_EXTERNAL_STORAGE,
-                Manifest.permission.CAMERA};
+                Manifest.permission.CAMERA,
+                Manifest.permission.RECORD_AUDIO};
 
         if (ContextCompat.checkSelfPermission(this.getApplicationContext(),
                 permissions[0]) == PackageManager.PERMISSION_GRANTED
                 && ContextCompat.checkSelfPermission(this.getApplicationContext(),
                 permissions[1]) == PackageManager.PERMISSION_GRANTED
                 && ContextCompat.checkSelfPermission(this.getApplicationContext(),
-                permissions[2]) == PackageManager.PERMISSION_GRANTED) {
+                permissions[2]) == PackageManager.PERMISSION_GRANTED
+                && ContextCompat.checkSelfPermission(this.getApplicationContext(),
+                permissions[3]) == PackageManager.PERMISSION_GRANTED) {
         } else {
             ActivityCompat.requestPermissions(MainActivity.this,
                     permissions,

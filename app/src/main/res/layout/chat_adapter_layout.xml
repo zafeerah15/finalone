@@ -1,5 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent">
 
@@ -27,14 +29,19 @@
                 android:text="This is opponent message"
                 />
 
+<!--            <ImageView-->
+<!--                android:id="@+id/oppoImage"-->
+<!--                android:layout_width="wrap_content"-->
+<!--                android:layout_height="wrap_content"-->
+<!--                tools:srcCompat="@tools:sample/avatars" />-->
+
             <TextView
                 android:id="@+id/oppoMsgTime"
-                android:layout_marginTop="5sp"
-                android:textSize="10sp"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
+                android:layout_marginTop="5sp"
                 android:text="05-06-2022 06:16 PM"
-                />
+                android:textSize="10sp" />
         </LinearLayout>
 
 
@@ -58,6 +65,12 @@
                 android:text="This is opponent message"
                 />
 
+<!--            <ImageView-->
+<!--                android:id="@+id/myImage"-->
+<!--                android:layout_width="match_parent"-->
+<!--                android:layout_height="wrap_content"-->
+<!--                tools:srcCompat="@tools:sample/avatars" />-->
+
             <TextView
                 android:layout_gravity="end"
                 android:id="@+id/myMsgTime"
@@ -67,6 +80,7 @@
                 android:layout_height="wrap_content"
                 android:text="05-06-2022 06:16 PM"
                 />
+
         </LinearLayout>
 
     </RelativeLayout>
