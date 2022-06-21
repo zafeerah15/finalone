@@ -113,10 +113,11 @@ public class MainActivity extends AppCompatActivity {
                 granted = false;
                 lastMessage = "";
                 messagesLists.clear();
+                final int userCount = (int) snapshot.child("users").getChildrenCount();
 
                 for (DataSnapshot dataSnapshot : snapshot.child("users").getChildren()) {
                     final String getMobile = dataSnapshot.getKey();
-                    final int userCount = (int) dataSnapshot.getChildrenCount();
+
 
                     dataSet = false;
 
@@ -175,7 +176,7 @@ public class MainActivity extends AppCompatActivity {
                                     dataSet = true;
                                     MessagesList messagesList = new MessagesList(getName, getMobile, lastMessage, getProfilePic, unseenMessages,
                                             getMobile, granted, userType);
-                                    if ((userCount) != messagesLists.size()) {
+                                if (messagesLists.size() + 1 < userCount) {
                                         messagesLists.add(messagesList);
                                         messagesAdapter.updateData(messagesLists);
                                     }
