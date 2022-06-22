@@ -25,13 +25,13 @@
                 android:src="@drawable/pleasebeapng" />
 
             <LinearLayout
-                android:layout_toStartOf="@+id/unseenMessages"
-                android:layout_width="match_parent"
+                android:layout_width="263dp"
                 android:layout_height="wrap_content"
                 android:layout_marginStart="20dp"
-                android:gravity="right"
-                android:layout_marginEnd="10dp"
+                android:layout_marginEnd="18dp"
+                android:layout_toStartOf="@+id/unseenMessages"
                 android:layout_toEndOf="@+id/profilepicture"
+                android:gravity="right"
                 android:orientation="vertical"
                 tools:ignore="NotSibling">
 
@@ -46,15 +46,25 @@
                     android:textStyle="bold" />
 
                 <TextView
+                    android:id="@+id/bio"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="5dp"
+                    android:maxLines="1"
+                    android:text="This is a bio"
+                    android:textColor="@color/theme_color_80"
+                    android:textSize="14sp"/>
+
+                <TextView
                     android:id="@+id/lastMessages"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:textStyle="bold"
-                    android:maxLines="1"
                     android:layout_marginTop="5dp"
+                    android:maxLines="1"
+                    android:text="This is the last sent message"
                     android:textColor="@color/theme_color_80"
                     android:textSize="14sp"
-                    android:text="This is the last sent message"/>
+                    android:textStyle="bold" />
             </LinearLayout>
 
             <TextView
