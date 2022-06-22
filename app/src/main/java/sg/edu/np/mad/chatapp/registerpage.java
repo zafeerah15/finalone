@@ -28,6 +28,7 @@ public class registerpage extends AppCompatActivity {
         setContentView(R.layout.activity_registerpage);
 
         final EditText name = findViewById(R.id.r_name);
+        final EditText bio = findViewById(R.id.r_desc);
         final EditText phone = findViewById(R.id.r_phoneno);
         final EditText email = findViewById(R.id.r_email);
         final AppCompatButton registerBtn = findViewById(R.id.r_registerBtn);
@@ -54,6 +55,7 @@ public class registerpage extends AppCompatActivity {
                 final String nameTxt = name.getText().toString();
                 final String phoneTxt = phone.getText().toString();
                 final String emailTxt = email.getText().toString();
+                final String bioTxt = bio.getText().toString();
 
                 if (nameTxt.isEmpty() || phoneTxt.isEmpty() || emailTxt.isEmpty()) {
                     Toast.makeText(registerpage.this, "All Fields are Required !", Toast.LENGTH_SHORT).show();
@@ -71,6 +73,7 @@ public class registerpage extends AppCompatActivity {
                             else{
                                 databaseReference.child("users").child(phoneTxt).child("email").setValue(emailTxt);
                                 databaseReference.child("users").child(phoneTxt).child("name").setValue(nameTxt);
+                                databaseReference.child("users").child(phoneTxt).child("bio").setValue(bioTxt);
                                 databaseReference.child("users").child(phoneTxt).child("profile_pic").setValue("");
 
                                 // save mobile to memory

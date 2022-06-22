@@ -60,6 +60,12 @@ public class MessagesAdapter extends RecyclerView.Adapter<MessagesAdapter.MyView
         if (!list2.getProfilepicture().isEmpty()) {
             Picasso.get().load(list2.getProfilepicture()).into(holder.profilepicture);
         }
+        //if bio is empty
+        if (list2.getBio() != null){
+            holder.bio.setText(" " + list2.getBio());
+        } else {
+            holder.bio.setText("");
+        }
 
         holder.name.setText(list2.getName());
         holder.lastMessage.setText(list2.getLastMessage());
@@ -236,13 +242,16 @@ public class MessagesAdapter extends RecyclerView.Adapter<MessagesAdapter.MyView
         private TextView name;
         private TextView lastMessage;
         private TextView unseenMessages;
+        private TextView bio;
         private LinearLayout rootLayout;
+
 
         public MyViewHolder(@NonNull View itemView) {
             super(itemView);
 
             profilepicture = itemView.findViewById(R.id.profilepicture);
             name = itemView.findViewById(R.id.name);
+            bio = itemView.findViewById(R.id.bio);
             lastMessage = itemView.findViewById(R.id.lastMessages);
             unseenMessages = itemView.findViewById(R.id.unseenMessages);
             rootLayout = itemView.findViewById(R.id.rootLayout);

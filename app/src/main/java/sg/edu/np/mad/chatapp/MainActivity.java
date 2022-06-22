@@ -87,13 +87,14 @@ public class MainActivity extends AppCompatActivity {
         progressDialog.show();
         messagesLists.clear();
 
+
         databaseReference.addListenerForSingleValueEvent(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot snapshot) {
 
                 final String profilepictureUrl = snapshot.child("users").child(mobile).child("profile_pic").getValue(String.class);
 
-                if (!profilepictureUrl.isEmpty()) {
+                if (profilepictureUrl == null || !profilepictureUrl.isEmpty()) {
                     // set profile pic to circle image view
                     Picasso.get().load(profilepictureUrl).into(userProfilePic);
                 }
@@ -124,6 +125,7 @@ public class MainActivity extends AppCompatActivity {
                     if (!getMobile.equals(mobile)) {
                         final String getName = dataSnapshot.child("name").getValue(String.class);
                         final String getProfilePic = dataSnapshot.child("profile_pic").getValue(String.class);
+                        final String getBio = dataSnapshot.child("bio").getValue(String.class);
 
                         databaseReference.child("chat").addValueEventListener(new ValueEventListener() {
 
@@ -142,11 +144,18 @@ public class MainActivity extends AppCompatActivity {
                                         final String pToUser = dataSnapshot1.child("permission").child("toUser").getValue(String.class);
                                         final String pFromUser = dataSnapshot1.child("permission").child("fromUser").getValue(String.class);
                                         final Boolean pGranted = dataSnapshot1.child("permission").child("granted").getValue(Boolean.class);
+                                        final String profilepictureUrl = snapshot.child("users").child(mobile).child("profile_pic").getValue(String.class);
 
                                         // chat get key msg e.g. "646434681458797"
                                         final String getKey = dataSnapshot1.getKey();
 
                                         chatKey = getKey;
+
+                                        if (profilepictureUrl == null || !profilepictureUrl.isEmpty()){
+                                            //set the profile pic into circle imageview
+                                            Picasso.get().load(profilepictureUrl).into(userProfilePic);
+                                        }
+                                        progressDialog.dismiss();
 
                                         if (dataSnapshot1.getKey().equals(chatKey) && dataSnapshot1.child("permission").hasChild("toUser")) {
                                             Log.d("test", chatKey + " " + pToUser);
@@ -175,7 +184,7 @@ public class MainActivity extends AppCompatActivity {
                                 Log.d("test", String.valueOf(messagesLists.size()));
                                     dataSet = true;
                                     MessagesList messagesList = new MessagesList(getName, getMobile, lastMessage, getProfilePic, unseenMessages,
-                                            getMobile, granted, userType);
+                                            getMobile, granted, userType, getBio);
                                 if (messagesLists.size() + 1 < userCount) {
                                         messagesLists.add(messagesList);
                                         messagesAdapter.updateData(messagesLists);
