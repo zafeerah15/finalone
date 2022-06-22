@@ -2,11 +2,11 @@
 
 
 # Team Members:
-#" Ahmad Syafiq (S"
-# Herman Low Jun Peng (S
-# Ong Jun Wei (S10204864B)
-# Rajeshkanna Thanya (S
-# Zafeerah (S
+# Ahmad Syafiq Bin Hamzah (S10208272)
+# Herman Lee Junpeng (S10208320)
+# Ong Jun Wei (S10204864)
+# Rajeshkanna Thanya (S10205556)
+# Zafeerah (S10205175)
 
 
 
