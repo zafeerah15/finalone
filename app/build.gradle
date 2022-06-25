@@ -7,10 +7,10 @@ android {
     compileSdk 32
 
     defaultConfig {
-        applicationId "sg.edu.np.mad.chatapp"
+        applicationId "sG.EDU.NP.MAD.friendsOnly"
         minSdk 21
         targetSdk 32
-        versionCode 3
+        versionCode 5
         versionName "1.2"
 
         testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"

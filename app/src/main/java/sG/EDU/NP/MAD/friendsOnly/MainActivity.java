@@ -1,4 +1,4 @@
-package sg.edu.np.mad.chatapp;
+package sG.EDU.NP.MAD.friendsOnly;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
@@ -12,7 +12,6 @@ import android.app.ProgressDialog;
 import android.content.pm.PackageManager;
 import android.os.Bundle;
 import android.util.Log;
-import android.widget.Toast;
 
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
@@ -25,9 +24,8 @@ import java.util.ArrayList;
 import java.util.List;
 
 import de.hdodenhof.circleimageview.CircleImageView;
-import sg.edu.np.mad.chatapp.chat.Chat;
-import sg.edu.np.mad.chatapp.messages.MessagesAdapter;
-import sg.edu.np.mad.chatapp.messages.MessagesList;
+import sG.EDU.NP.MAD.friendsOnly.messages.MessagesAdapter;
+import sG.EDU.NP.MAD.friendsOnly.messages.MessagesList;
 
 public class MainActivity extends AppCompatActivity {
 

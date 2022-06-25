@@ -1,4 +1,4 @@
-package sg.edu.np.mad.chatapp.chat;
+package sG.EDU.NP.MAD.friendsOnly.CHAT;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
@@ -13,7 +13,6 @@ import android.media.MediaPlayer;
 import android.media.MediaRecorder;
 import android.os.Bundle;
 import android.os.Environment;
-import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
@@ -30,7 +29,6 @@ import com.squareup.picasso.Picasso;
 
 import java.io.File;
 import java.io.IOException;
-import java.sql.Time;
 import java.sql.Timestamp;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
@@ -38,13 +36,10 @@ import java.util.Date;
 import java.util.List;
 import java.util.Locale;
 import java.util.TimeZone;
-import java.util.UUID;
 
 import de.hdodenhof.circleimageview.CircleImageView;
-import sg.edu.np.mad.chatapp.MainActivity;
-import sg.edu.np.mad.chatapp.MemoryData;
-import sg.edu.np.mad.chatapp.R;
-import sg.edu.np.mad.chatapp.registerpage;
+import sG.EDU.NP.MAD.friendsOnly.MemoryData;
+import sG.EDU.NP.MAD.friendsOnly.R;
 //import com.devlomi.record_view.OnRecordListener;
 
 public class Chat extends AppCompatActivity {
@@ -60,12 +55,12 @@ public class Chat extends AppCompatActivity {
 
     DatabaseReference databaseReference = FirebaseDatabase.getInstance().getReference();
 
-    private final List<ChatList> chatLists = new ArrayList<>();
+    private final List<Chat_List> chatLists = new ArrayList<>();
 
     private String chatKey;
     String getUserMobile = "";
     private RecyclerView chattingRecyclerView;
-    private ChatAdapter chatAdapter;
+    private Chat_Adapter chatAdapter;
     private boolean loadingFirstTime = true;
 
     @Override
@@ -144,7 +139,7 @@ public class Chat extends AppCompatActivity {
         chattingRecyclerView.setLayoutManager(new LinearLayoutManager(Chat.this));
 
 
-        chatAdapter = new ChatAdapter(chatLists, Chat.this);
+        chatAdapter = new Chat_Adapter(chatLists, Chat.this);
 
         chattingRecyclerView.setAdapter(chatAdapter);
 
@@ -188,7 +183,7 @@ public class Chat extends AppCompatActivity {
                                 simpleTimeFormat.setTimeZone(TimeZone.getDefault());
 
 
-                                ChatList chatList = new ChatList(getMobile, getName, getMsg, simpleDateFormat.format(date), simpleTimeFormat.format(date));
+                                Chat_List chatList = new Chat_List(getMobile, getName, getMsg, simpleDateFormat.format(date), simpleTimeFormat.format(date));
                                 chatLists.add(chatList);
 
                                 if (loadingFirstTime || Long.parseLong(messageTimestamps) > Long.parseLong(MemoryData.getLastMsgTS(Chat.this, chatKey))) {

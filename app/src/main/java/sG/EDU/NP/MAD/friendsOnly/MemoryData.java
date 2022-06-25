@@ -1,4 +1,4 @@
-package sg.edu.np.mad.chatapp;
+package sG.EDU.NP.MAD.friendsOnly;
 
 import android.content.Context;
 

@@ -4,7 +4,7 @@ import java.util.Date;
 import java.util.Locale;
 import java.util.TimeZone;
 
-public class Test {
+public class Test1 {
     public static void main(String[] args) {
         final String messageTimestamps = "1654869348590";
         Timestamp timestamp = new Timestamp(Long.parseLong(messageTimestamps));

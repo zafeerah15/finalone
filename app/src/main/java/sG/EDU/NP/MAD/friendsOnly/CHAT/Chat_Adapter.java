@@ -1,4 +1,4 @@
-package sg.edu.np.mad.chatapp.chat;
+package sG.EDU.NP.MAD.friendsOnly.CHAT;
 
 import android.content.Context;
 import android.view.LayoutInflater;
@@ -13,18 +13,18 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import java.util.List;
 
-import sg.edu.np.mad.chatapp.MemoryData;
-import sg.edu.np.mad.chatapp.R;
+import sG.EDU.NP.MAD.friendsOnly.MemoryData;
+import sG.EDU.NP.MAD.friendsOnly.R;
 
-public class ChatAdapter extends RecyclerView.Adapter<ChatAdapter.MyViewHolder> {
+public class Chat_Adapter extends RecyclerView.Adapter<Chat_Adapter.MyViewHolder> {
 
-    private List<ChatList> chatLists;
+    private List<Chat_List> chatLists;
     private final Context context;
     private String userMobile;
 
 
 
-    public ChatAdapter(List<ChatList> chatListList, Context context) {
+    public Chat_Adapter(List<Chat_List> chatListList, Context context) {
         this.chatLists = chatListList;
         this.context = context;
         this.userMobile = MemoryData.getData(context);
@@ -32,14 +32,14 @@ public class ChatAdapter extends RecyclerView.Adapter<ChatAdapter.MyViewHolder> 
 
     @NonNull
     @Override
-    public ChatAdapter.MyViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
+    public Chat_Adapter.MyViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
         return new MyViewHolder(LayoutInflater.from(parent.getContext()).inflate(R.layout.chat_adapter_layout, null));
     }
 
     @Override
-    public void onBindViewHolder(@NonNull ChatAdapter.MyViewHolder holder, int position) {
+    public void onBindViewHolder(@NonNull Chat_Adapter.MyViewHolder holder, int position) {
 
-        ChatList list2 = chatLists.get(position);
+        Chat_List list2 = chatLists.get(position);
 
         if (list2.getMobile().equals(userMobile)) {
             holder.myLayout.setVisibility(View.VISIBLE);
@@ -62,7 +62,7 @@ public class ChatAdapter extends RecyclerView.Adapter<ChatAdapter.MyViewHolder> 
     @Override
     public int getItemCount() { return chatLists.size();}
 
-    public void updateChatList(List<ChatList> chatLists) { this.chatLists = chatLists; }
+    public void updateChatList(List<Chat_List> chatLists) { this.chatLists = chatLists; }
 
     static class MyViewHolder extends RecyclerView.ViewHolder {
 

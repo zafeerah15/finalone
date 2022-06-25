@@ -1,4 +1,4 @@
-package sg.edu.np.mad.chatapp.messages;
+package sG.EDU.NP.MAD.friendsOnly.messages;
 
 import android.app.AlertDialog;
 import android.content.Context;
@@ -9,16 +9,12 @@ import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
-import com.google.android.gms.tasks.OnCompleteListener;
-import com.google.android.gms.tasks.OnSuccessListener;
-import com.google.android.gms.tasks.Task;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
@@ -29,9 +25,9 @@ import com.squareup.picasso.Picasso;
 import java.util.List;
 
 import de.hdodenhof.circleimageview.CircleImageView;
-import sg.edu.np.mad.chatapp.MemoryData;
-import sg.edu.np.mad.chatapp.R;
-import sg.edu.np.mad.chatapp.chat.Chat;
+import sG.EDU.NP.MAD.friendsOnly.MemoryData;
+import sG.EDU.NP.MAD.friendsOnly.R;
+import sG.EDU.NP.MAD.friendsOnly.CHAT.Chat;
 
 public class MessagesAdapter extends RecyclerView.Adapter<MessagesAdapter.MyViewHolder> {
     DatabaseReference databaseReference = FirebaseDatabase.getInstance().getReference();

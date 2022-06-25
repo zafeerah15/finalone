@@ -1,4 +1,4 @@
-package sg.edu.np.mad.chatapp.messages;
+package sG.EDU.NP.MAD.friendsOnly.messages;
 
 public class MessagesList {
 

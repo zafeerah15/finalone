@@ -1,4 +1,4 @@
-package sg.edu.np.mad.chatapp;
+package sG.EDU.NP.MAD.friendsOnly;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
@@ -17,7 +17,7 @@ import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
 
-public class registerpage extends AppCompatActivity {
+public class Registerpage extends AppCompatActivity {
 
     DatabaseReference databaseReference = FirebaseDatabase.getInstance().getReference();
 
@@ -39,7 +39,7 @@ public class registerpage extends AppCompatActivity {
 
         // check if you already logged in
         if (!MemoryData.getData(this).isEmpty()) {
-            Intent intent = new Intent ( registerpage.this, MainActivity.class);
+            Intent intent = new Intent ( Registerpage.this, MainActivity.class);
             intent.putExtra("mobile", MemoryData.getData(this));
             intent.putExtra("name", MemoryData.getName(this));
             intent.putExtra("email", "");
@@ -58,7 +58,7 @@ public class registerpage extends AppCompatActivity {
                 final String bioTxt = bio.getText().toString();
 
                 if (nameTxt.isEmpty() || phoneTxt.isEmpty() || emailTxt.isEmpty()) {
-                    Toast.makeText(registerpage.this, "All Fields are Required !", Toast.LENGTH_SHORT).show();
+                    Toast.makeText(Registerpage.this, "All Fields are Required !", Toast.LENGTH_SHORT).show();
                     progressDialog.dismiss();
                 } else {
                     databaseReference.addListenerForSingleValueEvent(new ValueEventListener() {
@@ -68,7 +68,7 @@ public class registerpage extends AppCompatActivity {
                             progressDialog.dismiss();
 
                             if (snapshot.child("users").hasChild(phoneTxt)){
-                                Toast.makeText(registerpage.this,"Phone no. already exists", Toast.LENGTH_SHORT).show();
+                                Toast.makeText(Registerpage.this,"Phone no. already exists", Toast.LENGTH_SHORT).show();
                             }
                             else{
                                 databaseReference.child("users").child(phoneTxt).child("email").setValue(emailTxt);
@@ -77,14 +77,14 @@ public class registerpage extends AppCompatActivity {
                                 databaseReference.child("users").child(phoneTxt).child("profile_pic").setValue("");
 
                                 // save mobile to memory
-                                MemoryData.saveData(phoneTxt, registerpage.this);
+                                MemoryData.saveData(phoneTxt, Registerpage.this);
 
                                 // save name to memory
-                                MemoryData.saveName(nameTxt, registerpage.this);
+                                MemoryData.saveName(nameTxt, Registerpage.this);
 
-                                Toast.makeText(registerpage.this,"Success", Toast.LENGTH_SHORT).show();
+                                Toast.makeText(Registerpage.this,"Success", Toast.LENGTH_SHORT).show();
 
-                                Intent intent = new Intent ( registerpage.this, MainActivity.class);
+                                Intent intent = new Intent ( Registerpage.this, MainActivity.class);
                                 intent.putExtra("mobile", phoneTxt);
                                 intent.putExtra("name", nameTxt);
                                 intent.putExtra("email", emailTxt);

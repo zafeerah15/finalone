@@ -1,11 +1,11 @@
-package sg.edu.np.mad.chatapp.chat;
+package sG.EDU.NP.MAD.friendsOnly.CHAT;
 
-public class ChatList {
+public class Chat_List {
 
 
     private String mobile, name, message, date, time;
 
-    public ChatList(String mobile, String name, String message, String date, String time) {
+    public Chat_List(String mobile, String name, String message, String date, String time) {
         this.mobile = mobile;
         this.name = name;
         this.message = message;
