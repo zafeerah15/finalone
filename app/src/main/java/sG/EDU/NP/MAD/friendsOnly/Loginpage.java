@@ -15,6 +15,7 @@ import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.AuthResult;
 import com.google.firebase.auth.FirebaseAuth;
 
+//Login page with firebase authentication
 public class Loginpage extends AppCompatActivity {
     private FirebaseAuth mAuth;
 
@@ -33,7 +34,7 @@ public class Loginpage extends AppCompatActivity {
         final EditText email = findViewById(R.id.l_email);
         final EditText password = findViewById(R.id.l_password);
 
-
+        //loginBtn on click listener
         loginBtn.setOnClickListener(new View.OnClickListener() {
 
             @Override
@@ -42,7 +43,7 @@ public class Loginpage extends AppCompatActivity {
                 final String emailTxt = email.getText().toString();
                 final String passwordTxt = password.getText().toString();
 
-
+                //Sign in authentication using firebase
                 mAuth.signInWithEmailAndPassword(emailTxt, passwordTxt)
                         .addOnCompleteListener(Loginpage.this, new OnCompleteListener<AuthResult>() {
                             @Override

@@ -32,7 +32,7 @@ public class Startup extends AppCompatActivity {
 
 
         mAuth = FirebaseAuth.getInstance();
-
+        //If user was already logged in previously
         if (mAuth.getCurrentUser() != null) {
             databaseReference.addListenerForSingleValueEvent(new ValueEventListener() {
                 @Override

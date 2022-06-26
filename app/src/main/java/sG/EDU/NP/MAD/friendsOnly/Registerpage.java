@@ -67,6 +67,7 @@ public class Registerpage extends AppCompatActivity {
                 final String passwordTxt = password.getText().toString();
                 final String bioTxt = bio.getText().toString();
 
+                //If user did not fill in any fields, show toast message
                 if (nameTxt.isEmpty() || phoneTxt.isEmpty() || emailTxt.isEmpty()) {
                     Toast.makeText(Registerpage.this, "All Fields are Required !", Toast.LENGTH_SHORT).show();
                     progressDialog.dismiss();
@@ -76,7 +77,7 @@ public class Registerpage extends AppCompatActivity {
                         public void onDataChange(@NonNull DataSnapshot snapshot) {
 
                             progressDialog.dismiss();
-
+                            //Check if phone number exists when registering
                             if (snapshot.child("users").hasChild(phoneTxt)) {
                                 Toast.makeText(Registerpage.this, "Phone no. already exists", Toast.LENGTH_SHORT).show();
                             } else {
@@ -119,6 +120,7 @@ public class Registerpage extends AppCompatActivity {
 
 
                                                 } else {
+                                                    //User fails to create an account due to conflicting information
                                                     Toast.makeText(Registerpage.this, "There's something wrong, please try again.", Toast.LENGTH_SHORT).show();
                                                 }
 

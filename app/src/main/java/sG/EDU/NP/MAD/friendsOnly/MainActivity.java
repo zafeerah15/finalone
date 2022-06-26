@@ -72,6 +72,7 @@ public class MainActivity extends AppCompatActivity {
         FirebaseUser currentUser = mAuth.getCurrentUser();
         fab = findViewById(R.id.fab);
 
+        //log out button on click listener
         fab.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -79,8 +80,9 @@ public class MainActivity extends AppCompatActivity {
                 builder.setMessage("Log out?");
                 builder.setPositiveButton("Yes", new DialogInterface.OnClickListener() {
                     public void onClick(DialogInterface dialog, int id) {
-
+                        //logging out of the app
                         mAuth.signOut();
+                        //once user logs out, go to startup page
                         Intent intent = new Intent(MainActivity.this, Startup.class);
 
 
@@ -98,7 +100,7 @@ public class MainActivity extends AppCompatActivity {
 
         });
 
-
+        //firebase database on data change listener
         databaseReference.addListenerForSingleValueEvent(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot snapshot) {
@@ -136,7 +138,7 @@ public class MainActivity extends AppCompatActivity {
         progressDialog.show();
         messagesLists.clear();
 
-
+        //Profile picture onDataChange listener
         databaseReference.addListenerForSingleValueEvent(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot snapshot) {
@@ -154,7 +156,7 @@ public class MainActivity extends AppCompatActivity {
         });
         //Log.d("test", "My name: " + name + "My Number:" + mobile);
 
-
+        //firebase database event listener
         databaseReference.addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot snapshot) {
@@ -258,7 +260,7 @@ public class MainActivity extends AppCompatActivity {
 
     }
 
-// FUNCTION TO REQUEST PERMISSION FROM USER FOR STORAGE, CAMERA
+// FUNCTION TO REQUEST PERMISSION FROM USER FOR READ & WRITE TO STORAGE, CAMERA
     private void verifyPermissions() {
         Log.d(TAG, "verifyPermissions: asking user for permissions");
         String[] permissions = {Manifest.permission.READ_EXTERNAL_STORAGE,
