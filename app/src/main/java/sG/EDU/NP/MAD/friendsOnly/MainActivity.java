@@ -56,6 +56,8 @@ public class MainActivity extends AppCompatActivity {
 
     private FirebaseAuth mAuth;
     private String userType = "";
+    
+    // referencing Fire base real time database
 
     DatabaseReference databaseReference= FirebaseDatabase.getInstance().getReference();
 
