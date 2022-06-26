@@ -59,7 +59,7 @@ public final class MemoryData {
         }
         return data;
     }
-
+        //To get the name
         public static String getName(Context context) {
             String data = "";
             try {
@@ -79,6 +79,7 @@ public final class MemoryData {
             return data;
         }
 
+    //To get the last message
     public static String getLastMsgTS(Context context, String chatId) {
         String data = "0";
         try {

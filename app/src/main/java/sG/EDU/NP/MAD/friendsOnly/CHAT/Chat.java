@@ -69,7 +69,7 @@ public class Chat extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        ///---------------------By Syafiq---------------------------V
+        ///---------------------By Syafiq (Recording of audio)---------------------------V
         ActivityCompat.requestPermissions(this, permissions,
                 REQUEST_RECORD_AUDIO_PERMISSION);
         setContentView(R.layout.activity_chat);
@@ -249,7 +249,7 @@ public class Chat extends AppCompatActivity {
             }
         });
     }
-    ///---------------------By Syafiq---------------------------V
+    ///---------------------By Syafiq (For recording of audio)---------------------------V
     @Override
     public void onRequestPermissionsResult(int requestCode, @NonNull String[] permissions, @NonNull int[] grantResults) {
         super.onRequestPermissionsResult(requestCode, permissions, grantResults);
