@@ -16,7 +16,7 @@
 
 
 # Roles and Contributions of each member
-# Syafiq :
+# Syafiq : Start/stop recording and play/stop playing of recording. The Bio for the chat and login page.
 # Herman :
 # Junwei :
 # Thanya :
