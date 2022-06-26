@@ -21,7 +21,7 @@
 
 # Roles and Contributions of each member
 # Syafiq :
-# Herman :
+# Herman : Helped with Ui/UX design, coded portions in manifest,Chat_list,MainActivity, Troubleshooter
 # Junwei :
 # Thanya :
 # Zafeerah :

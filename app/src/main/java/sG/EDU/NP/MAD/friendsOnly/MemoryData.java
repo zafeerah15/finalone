@@ -8,6 +8,7 @@ import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.InputStreamReader;
 
+//For saving the user data
 public final class MemoryData {
 
     public static void saveData(String data, Context context) {
@@ -20,6 +21,7 @@ public final class MemoryData {
         }
     }
 
+    //Saving the user's last message
     public static void saveLastMsgTS(String data, String chatId, Context context) {
         try {
             FileOutputStream fileOutputStream = context.openFileOutput(chatId+".txt", Context.MODE_PRIVATE);
@@ -29,7 +31,7 @@ public final class MemoryData {
             e.printStackTrace();
         }
     }
-
+    //Saving the usernames
     public static void saveName(String data, Context context) {
         try {
             FileOutputStream fileOutputStream = context.openFileOutput("nameee.txt", Context.MODE_PRIVATE);

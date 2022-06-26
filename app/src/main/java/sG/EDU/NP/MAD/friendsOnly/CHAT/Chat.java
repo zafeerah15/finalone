@@ -119,7 +119,7 @@ public class Chat extends AppCompatActivity {
         final CircleImageView profilePic = findViewById(R.id.profilepicture);
         final ImageView sendBtn = findViewById(R.id.sendBtn);
 
-
+        //Recyclerview
         chattingRecyclerView = findViewById(R.id.chattingRecyclerView);
         // get data from messages adapter class
         final String getName = getIntent().getStringExtra("name");
@@ -127,7 +127,7 @@ public class Chat extends AppCompatActivity {
         chatKey = getIntent().getStringExtra("chat_key");
         final String getMobile = getIntent().getStringExtra("mobile");
 
-
+        //Firebase get instance
         mAuth = FirebaseAuth.getInstance();
         FirebaseUser currentUser = mAuth.getCurrentUser();
         // get user mobile from memory
@@ -136,6 +136,7 @@ public class Chat extends AppCompatActivity {
 
         nameTV.setText(getName);
 
+        //Profile picture loading default
         if (!getProfilePic.isEmpty()) {
             Picasso.get().load(getProfilePic).into(profilePic);
         }
@@ -218,7 +219,7 @@ public class Chat extends AppCompatActivity {
             }
         });
 
-
+        //Send button onclick listener, send to firebase instance
         sendBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -240,6 +241,7 @@ public class Chat extends AppCompatActivity {
 
         });
 
+        //Back button to go back to previous page
         backBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
