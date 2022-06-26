@@ -20,9 +20,9 @@
 
 
 # Roles and Contributions of each member
-# Syafiq :
+# Syafiq : 
 # Herman :
-# Junwei :
+# Junwei : 
 # Thanya :
 # Zafeerah :
 
