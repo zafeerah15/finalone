@@ -1,5 +1,7 @@
 package sG.EDU.NP.MAD.friendsOnly.CHAT;
 
+// setting the variables later required for the chat
+
 public class Chat_List {
 
 
