@@ -11,6 +11,9 @@ import android.widget.TextView;
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
+import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.auth.FirebaseUser;
+
 import java.util.List;
 
 import sG.EDU.NP.MAD.friendsOnly.MemoryData;
@@ -22,12 +25,17 @@ public class Chat_Adapter extends RecyclerView.Adapter<Chat_Adapter.MyViewHolder
     private final Context context;
     private String userMobile;
 
+    private FirebaseAuth mAuth;
+
 
 
     public Chat_Adapter(List<Chat_List> chatListList, Context context) {
+        mAuth = FirebaseAuth.getInstance();
+        FirebaseUser currentUser = mAuth.getCurrentUser();
         this.chatLists = chatListList;
         this.context = context;
-        this.userMobile = MemoryData.getData(context);
+        //this.userMobile = MemoryData.getData(context);
+        this.userMobile = currentUser.getDisplayName();
     }
 
     @NonNull

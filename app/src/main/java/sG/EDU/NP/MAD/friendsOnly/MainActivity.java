@@ -6,12 +6,16 @@ import androidx.core.app.ActivityCompat;
 import androidx.core.content.ContextCompat;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
+import android.app.AlertDialog;
+import android.content.DialogInterface;
+import android.content.Intent;
 
 import android.Manifest;
 import android.app.ProgressDialog;
 import android.content.pm.PackageManager;
 import android.os.Bundle;
 import android.util.Log;
+import android.view.View;
 
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
@@ -19,6 +23,9 @@ import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
 import com.squareup.picasso.Picasso;
+import com.google.android.material.floatingactionbutton.FloatingActionButton;
+import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.auth.FirebaseUser;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -32,7 +39,7 @@ public class MainActivity extends AppCompatActivity {
     private final List<MessagesList> messagesLists = new ArrayList<>();
     private static final String TAG = "MainActivity";
     private static final int REQUEST_CODE = 1;
-    private String mobile;
+    private String mobile = "";
     private String email;
     private String name;
     private Boolean granted;
@@ -43,9 +50,11 @@ public class MainActivity extends AppCompatActivity {
 
     private boolean dataSet = false;
     private RecyclerView messagesRecyclerView;
+    private FloatingActionButton fab;
     private String lastMessage = "";
     private MessagesAdapter messagesAdapter;
 
+    private FirebaseAuth mAuth;
     private String userType = "";
 
     DatabaseReference databaseReference= FirebaseDatabase.getInstance().getReference();
@@ -59,12 +68,54 @@ public class MainActivity extends AppCompatActivity {
 
         final CircleImageView userProfilePic = findViewById(R.id.userProfilePic);
 
+        mAuth = FirebaseAuth.getInstance();
+        FirebaseUser currentUser = mAuth.getCurrentUser();
+        fab = findViewById(R.id.fab);
+
+        fab.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                AlertDialog.Builder builder = new AlertDialog.Builder(MainActivity.this);
+                builder.setMessage("Log out?");
+                builder.setPositiveButton("Yes", new DialogInterface.OnClickListener() {
+                    public void onClick(DialogInterface dialog, int id) {
+
+                        mAuth.signOut();
+                        Intent intent = new Intent(MainActivity.this, Startup.class);
+
+
+                        startActivity(intent);
+                        // User clicked OK button
+                    }
+                });
+                builder.setNegativeButton("Cancel", new DialogInterface.OnClickListener() {
+                    public void onClick(DialogInterface dialog, int id) {
+                        // User cancelled the dialog
+                    }
+                });
+                builder.show();
+            }
+
+        });
+
+
+        databaseReference.addListenerForSingleValueEvent(new ValueEventListener() {
+            @Override
+            public void onDataChange(@NonNull DataSnapshot snapshot) {
+                mobile = currentUser.getDisplayName();
+            }
+
+            @Override
+            public void onCancelled(@NonNull DatabaseError error) {
+
+            }
+        });
         messagesRecyclerView = findViewById(R.id.messagesRecyclerView);
 
         // get intent data from registerpage.class activity
 //        mobile = getIntent().getStringExtra("mobile");
 
-        mobile = MemoryData.getData(MainActivity.this);
+       //mobile = MemoryData.getData(MainActivity.this);
         if (mobile.isEmpty()) {
             mobile = getIntent().getStringExtra("mobile");
         }
@@ -101,7 +152,7 @@ public class MainActivity extends AppCompatActivity {
             @Override
             public void onCancelled(@NonNull DatabaseError error) { progressDialog.dismiss();}
         });
-        Log.d("test", "My name: " + name + "My Number:" + mobile);
+        //Log.d("test", "My name: " + name + "My Number:" + mobile);
 
 
         databaseReference.addValueEventListener(new ValueEventListener() {
@@ -156,13 +207,13 @@ public class MainActivity extends AppCompatActivity {
                                         progressDialog.dismiss();
 
                                         if (dataSnapshot1.getKey().equals(chatKey) && dataSnapshot1.child("permission").hasChild("toUser")) {
-                                            Log.d("test", chatKey + " " + pToUser);
+                                            //Log.d("test", chatKey + " " + pToUser);
                                             if (chatKey.contains(mobile) && chatKey.contains(getMobile) && pGranted.equals(false) && pToUser.equals(mobile)) {
                                                 lastMessage = getName + " wants to chat with you!";
                                                 unseenMessages = 1;
                                                 userType = "recipient";
 //
-                                                Log.d("test", chatKey + " " + pToUser + " " + getName + " no is " + getMobile);
+                                                //Log.d("test", chatKey + " " + pToUser + " " + getName + " no is " + getMobile);
                                                 // For sender: check if recipient accept
 
                                             }
@@ -170,7 +221,7 @@ public class MainActivity extends AppCompatActivity {
                                             if (chatKey.contains(mobile) && chatKey.contains(getMobile) && pGranted.equals(false) && pFromUser.equals(mobile)) {
                                                 userType = "sender";
                                                 lastMessage = "Chat request sent!";
-                                                Log.d("test", "recipient not accepted yet");
+                                                //Log.d("test", "recipient not accepted yet");
                                             }
                                         }
 

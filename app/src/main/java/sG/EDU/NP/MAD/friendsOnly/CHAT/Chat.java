@@ -20,6 +20,8 @@ import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
@@ -57,10 +59,11 @@ public class Chat extends AppCompatActivity {
 
     private final List<Chat_List> chatLists = new ArrayList<>();
 
+    private FirebaseAuth mAuth;
     private String chatKey;
     String getUserMobile = "";
     private RecyclerView chattingRecyclerView;
-    private Chat_Adapter chatAdapter;
+    private sG.EDU.NP.MAD.friendsOnly.CHAT.Chat_Adapter chatAdapter;
     private boolean loadingFirstTime = true;
 
     @Override
@@ -125,8 +128,11 @@ public class Chat extends AppCompatActivity {
         final String getMobile = getIntent().getStringExtra("mobile");
 
 
+        mAuth = FirebaseAuth.getInstance();
+        FirebaseUser currentUser = mAuth.getCurrentUser();
         // get user mobile from memory
-        getUserMobile = MemoryData.getData(Chat.this);
+        //getUserMobile = MemoryData.getData(Chat.this);
+        getUserMobile = currentUser.getDisplayName();
 
         nameTV.setText(getName);
 

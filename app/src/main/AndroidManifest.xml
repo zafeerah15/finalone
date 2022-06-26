@@ -17,10 +17,10 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.Chatapp">
         <activity
-            android:name="sG.EDU.NP.MAD.friendsOnly.CHAT.Chat"
+            android:name=".Loginpage"
             android:exported="false" />
         <activity
-            android:name="sG.EDU.NP.MAD.friendsOnly.Registerpage"
+            android:name=".Startup"
             android:exported="true">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
@@ -29,8 +29,14 @@
             </intent-filter>
         </activity>
         <activity
-            android:name="sG.EDU.NP.MAD.friendsOnly.MainActivity"
+            android:name=".CHAT.Chat"
+            android:exported="false" />
+        <activity
+            android:name=".Registerpage"
             android:exported="true"></activity>
+        <activity
+            android:name=".MainActivity"
+            android:exported="true" />
     </application>
 
 </manifest>
