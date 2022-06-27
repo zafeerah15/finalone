@@ -28,7 +28,7 @@ public class Chat_Adapter extends RecyclerView.Adapter<Chat_Adapter.MyViewHolder
     private FirebaseAuth mAuth;
 
 
-
+    //Chat Adapter with firebase integration
     public Chat_Adapter(List<Chat_List> chatListList, Context context) {
         mAuth = FirebaseAuth.getInstance();
         FirebaseUser currentUser = mAuth.getCurrentUser();
@@ -38,17 +38,19 @@ public class Chat_Adapter extends RecyclerView.Adapter<Chat_Adapter.MyViewHolder
         this.userMobile = currentUser.getDisplayName();
     }
 
+    //Chat adapter view holder creation and format
     @NonNull
     @Override
     public Chat_Adapter.MyViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
         return new MyViewHolder(LayoutInflater.from(parent.getContext()).inflate(R.layout.chat_adapter_layout, null));
     }
 
+    //on bind view holder
     @Override
     public void onBindViewHolder(@NonNull Chat_Adapter.MyViewHolder holder, int position) {
 
         Chat_List list2 = chatLists.get(position);
-
+        //if it is user mobile set the view to myLayout
         if (list2.getMobile().equals(userMobile)) {
             holder.myLayout.setVisibility(View.VISIBLE);
             holder.oppoLayout.setVisibility(View.GONE);
@@ -58,6 +60,7 @@ public class Chat_Adapter extends RecyclerView.Adapter<Chat_Adapter.MyViewHolder
             holder.myTime.setText(list2.getDate()+" "+list2.getTime());
 
         } else {
+            //if it is not user mobile set the view to oppoLayout
             holder.myLayout.setVisibility(View.GONE);
             holder.oppoLayout.setVisibility(View.VISIBLE);
 
@@ -67,11 +70,14 @@ public class Chat_Adapter extends RecyclerView.Adapter<Chat_Adapter.MyViewHolder
 
     }
 
+    //Get item count of chat list
     @Override
     public int getItemCount() { return chatLists.size();}
 
+    //to update the chat list
     public void updateChatList(List<Chat_List> chatLists) { this.chatLists = chatLists; }
 
+    //layouts for myLayout if user and oppoLayout for non user
     static class MyViewHolder extends RecyclerView.ViewHolder {
 
         private LinearLayout oppoLayout, myLayout;
@@ -79,7 +85,7 @@ public class Chat_Adapter extends RecyclerView.Adapter<Chat_Adapter.MyViewHolder
         private TextView oppoMessage, myMessage;
         private TextView oppoTime, myTime;
 
-
+        //View holder for itemView
         public MyViewHolder(@NonNull View itemView) {
             super(itemView);
 
