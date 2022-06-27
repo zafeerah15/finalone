@@ -10,7 +10,7 @@ android {
         applicationId "sG.EDU.NP.MAD.friendsOnly"
         minSdk 21
         targetSdk 32
-        versionCode 5
+        versionCode 7
         versionName "1.2"
 
         testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
