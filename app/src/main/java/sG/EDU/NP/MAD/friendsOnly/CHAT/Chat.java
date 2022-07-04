@@ -60,8 +60,8 @@ public class Chat extends AppCompatActivity {
     public static final int RequestPermissionCode = 1;
     String RandomAudioFileName = "ABCDEFGHIJKLMNOP";
     Button startRecordingButton, stopRecordingButton, playRecordingButton, stopPlayingButton;;
-    private MediaRecorder recorder;
-    private MediaPlayer player;
+    MediaRecorder recorder;
+    MediaPlayer player;
     Random random ;
     ///---------------------By Syafiq---------------------------^
 
