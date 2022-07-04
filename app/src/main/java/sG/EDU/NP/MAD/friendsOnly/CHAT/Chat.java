@@ -100,7 +100,6 @@ public class Chat extends AppCompatActivity {
         startRecordingButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-
                 if(checkPermission()) {
 
                     AudioSavePathInDevice =
@@ -113,10 +112,10 @@ public class Chat extends AppCompatActivity {
                         recorder.prepare();
                         recorder.start();
                     } catch (IllegalStateException e) {
-                        // TODO Auto-generated catch block
+                        //TODO Auto-generated catch block
                         e.printStackTrace();
                     } catch (IOException e) {
-                        // TODO Auto-generated catch block
+                        //TODO Auto-generated catch block
                         e.printStackTrace();
                     }
 
@@ -124,11 +123,11 @@ public class Chat extends AppCompatActivity {
                     stopRecordingButton.setEnabled(true);
 
                     Toast.makeText(Chat.this, "Recording started",
+
                             Toast.LENGTH_LONG).show();
                 } else {
                     requestPermission();
                 }
-
             }
         });
 
