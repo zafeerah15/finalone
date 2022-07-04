@@ -370,33 +370,33 @@ public class Chat extends AppCompatActivity {
         recorder.setOutputFile(AudioSavePathInDevice);
     }
 
-    private void stopRecording() {
-        if (recorder != null) {
-            recorder.stop();
-            recorder.release();
-            recorder = null;
-        }
-        Toast.makeText(this, "Recording has stopped",Toast.LENGTH_LONG).show();
-    }
-    private void playRecording() {
-        player = new MediaPlayer();
-        try {
-            player.setDataSource(getRecordingFilePath());
-            player.prepare();
-            player.start();
-            Toast.makeText(this, "Recording is playing",Toast.LENGTH_LONG).show();
-        } catch (IOException e) {
-            Log.e(LOG_TAG, "prepare() failed");
-        }
-    }
-
-    private void stopPlaying() {
-        if (player != null) {
-            player.release();
-            player = null;
-        }
-        Toast.makeText(this, "Recording has stopped playing",Toast.LENGTH_LONG).show();
-    }
+//    private void stopRecording() {
+//        if (recorder != null) {
+//            recorder.stop();
+//            recorder.release();
+//            recorder = null;
+//        }
+//        Toast.makeText(this, "Recording has stopped",Toast.LENGTH_LONG).show();
+//    }
+//    private void playRecording() {
+//        player = new MediaPlayer();
+//        try {
+//            player.setDataSource(getRecordingFilePath());
+//            player.prepare();
+//            player.start();
+//            Toast.makeText(this, "Recording is playing",Toast.LENGTH_LONG).show();
+//        } catch (IOException e) {
+//            Log.e(LOG_TAG, "prepare() failed");
+//        }
+//    }
+//
+//    private void stopPlaying() {
+//        if (player != null) {
+//            player.release();
+//            player = null;
+//        }
+//        Toast.makeText(this, "Recording has stopped playing",Toast.LENGTH_LONG).show();
+//    }
     private String getRecordingFilePath(){
         String timeStamp = new SimpleDateFormat("yyyyMMdd_HHmmss").format(new Date());
         ContextWrapper contextWrapper = new ContextWrapper(getApplicationContext());
