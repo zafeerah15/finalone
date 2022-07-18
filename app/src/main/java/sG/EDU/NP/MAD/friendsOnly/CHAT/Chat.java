@@ -87,9 +87,6 @@ public class Chat extends AppCompatActivity {
                 REQUEST_RECORD_AUDIO_PERMISSION);
 
         startRecordingButton = (Button) findViewById(R.id.activity_main_record);
-        stopRecordingButton = (Button) findViewById(R.id.activity_main_stop);
-        playRecordingButton = (Button) findViewById(R.id.activity_main_play);
-        stopPlayingButton = (Button) findViewById(R.id.activity_main_stop_playing);
 
         stopRecordingButton.setEnabled(false);
         playRecordingButton.setEnabled(false);
