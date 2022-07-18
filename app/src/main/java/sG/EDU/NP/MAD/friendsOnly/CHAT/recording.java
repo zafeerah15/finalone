@@ -38,7 +38,7 @@ public class recording extends AppCompatActivity {
     private static final String LOG_TAG = "AudioRecordTest";
     String AudioSavePathInDevice = null;
     public static final int RequestPermissionCode = 1;
-    String RandomAudioFileName = "ABCDEFGHIJKLMNOP";
+    String RandomAudioFileName = "ABCDEFGHIJKLMNOP12345";
     Button startRecordingButton, stopRecordingButton, playRecordingButton, stopPlayingButton;;
     MediaRecorder recorder;
     MediaPlayer player;
