@@ -36,9 +36,9 @@ public class recording extends AppCompatActivity {
     private static final String[] permissions = {RECORD_AUDIO};
     private boolean audioRecordingPermissionGranted = false;
     private static final String LOG_TAG = "AudioRecordTest";
-    String AudioSavePathInDevice = null;
     public static final int RequestPermissionCode = 1;
-    String RandomAudioFileName = "ABCDEFGHIJKLMNOP12345";
+    private File recordfile;
+    String RandomAudioFileName = "ABCDEF0123456789";
     Button startRecordingButton, stopRecordingButton, playRecordingButton, stopPlayingButton;;
     MediaRecorder recorder;
     MediaPlayer player;
@@ -103,7 +103,7 @@ public class recording extends AppCompatActivity {
                                 runOnUiThread(new Runnable() {
                                     @Override
                                     public void run() {
-                                        recordingpath.setText(getRecordingFilePath());
+                                        recordingpath.setText(path);
                                         playableseconds=0;
                                         seconds=0;
                                         dummyseconds=0;
@@ -175,7 +175,7 @@ public class recording extends AppCompatActivity {
                     if (path!=null){
                         player = new MediaPlayer();
                         try {
-                            player.setDataSource(getRecordingFilePath());
+                            player.setDataSource(path);
                             player.prepare();
                         } catch (IOException e) {
                             e.printStackTrace();
@@ -301,8 +301,8 @@ public class recording extends AppCompatActivity {
         recorder=new MediaRecorder();
         recorder.setAudioSource(MediaRecorder.AudioSource.MIC);
         recorder.setOutputFormat(MediaRecorder.OutputFormat.THREE_GPP);
-        recorder.setAudioEncoder(MediaRecorder.AudioEncoder.AMR_NB);
         recorder.setOutputFile(getRecordingFilePath());
+        recorder.setAudioEncoder(MediaRecorder.AudioEncoder.AMR_NB);
     }
 
     //    private void stopRecording() {
@@ -334,9 +334,10 @@ public class recording extends AppCompatActivity {
 //    }
     private String getRecordingFilePath(){
         ContextWrapper contextWrapper = new ContextWrapper(getApplicationContext());
-        File musicDirectory = contextWrapper.getExternalFilesDir(Environment.DIRECTORY_MUSIC);
-        File file = new File(musicDirectory, "AudioRecording" + CreateRandomAudioFileName(5) + ".mp3");
-        return file.getPath();
+        File recordpath = contextWrapper.getExternalFilesDir(Environment.DIRECTORY_MUSIC);
+        recordfile = new File(recordpath, "AudioRecording" + CreateRandomAudioFileName(2) + ".mp3");
+
+        return recordfile.getAbsolutePath();
     }
     public boolean checkPermission() {
         int result = ContextCompat.checkSelfPermission(getApplicationContext(),
