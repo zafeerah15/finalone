@@ -130,13 +130,13 @@
         android:id="@+id/main_record"
         android:layout_width="64dp"
         android:layout_height="64dp"
+        android:layout_alignParentStart="true"
         android:layout_alignParentEnd="true"
         android:layout_alignParentBottom="true"
-        android:layout_marginEnd="347dp"
-        android:layout_marginBottom="73dp"
+        android:layout_marginStart="1dp"
+        android:layout_marginEnd="338dp"
+        android:layout_marginBottom="72dp"
         app:srcCompat="@android:drawable/ic_btn_speak_now" />
-
-
 
 
 </RelativeLayout>

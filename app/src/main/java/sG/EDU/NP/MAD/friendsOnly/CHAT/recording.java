@@ -38,6 +38,7 @@ public class recording extends AppCompatActivity {
     private static final String LOG_TAG = "AudioRecordTest";
     public static final int RequestPermissionCode = 1;
     private File recordfile;
+    private String filename;
     String RandomAudioFileName = "ABCDEF0123456789";
     Button startRecordingButton, stopRecordingButton, playRecordingButton, stopPlayingButton;;
     MediaRecorder recorder;
@@ -78,6 +79,7 @@ public class recording extends AppCompatActivity {
 //        stopPlayingButton.setEnabled(false);
 
         random = new Random();
+        player = new MediaPlayer();
 
         startRecordingButton.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -92,8 +94,9 @@ public class recording extends AppCompatActivity {
                         executorService.execute(new Runnable() {
                             @Override
                             public void run() {
-                                MediarecorderReady();
                                 path=getRecordingFilePath();
+                                MediarecorderReady();
+                                filename=path;
                                 try {
                                     recorder.prepare();
                                 } catch (IOException e) {
@@ -103,7 +106,7 @@ public class recording extends AppCompatActivity {
                                 runOnUiThread(new Runnable() {
                                     @Override
                                     public void run() {
-                                        recordingpath.setText(path);
+                                        recordingpath.setText(filename);
                                         playableseconds=0;
                                         seconds=0;
                                         dummyseconds=0;
@@ -173,10 +176,9 @@ public class recording extends AppCompatActivity {
 
                 if(!isplaying){
                     if (path!=null){
-                        player = new MediaPlayer();
                         try {
-                            player.setDataSource(path);
-                            player.prepare();
+                            player.setDataSource(filename);
+
                         } catch (IOException e) {
                             e.printStackTrace();
                         }
@@ -185,13 +187,18 @@ public class recording extends AppCompatActivity {
                         Toast.makeText(getApplicationContext(),"No Recording present", Toast.LENGTH_SHORT).show();
                         return;
                     }
+                    try {
+                        player.prepare();
+                    } catch (IOException e) {
+                        e.printStackTrace();
+                    }
+                    player.start();
+                    isplaying=true;
+                    Toast.makeText(recording.this, "Recording Playing",
+                            Toast.LENGTH_LONG).show();
+                    runTimer();
 
                 }
-                player.start();
-                isplaying=true;
-                Toast.makeText(recording.this, "Recording Playing",
-                        Toast.LENGTH_LONG).show();
-                runTimer();
             }
         });
 
@@ -203,18 +210,14 @@ public class recording extends AppCompatActivity {
 //                stopPlayingButton.setEnabled(false);
 //                playRecordingButton.setEnabled(true);
 
-                player.pause();
+                player.stop();
                 player.release();
                 player=null;
                 player= new MediaPlayer();
-                MediarecorderReady();
+                isplaying=false;
+                //MediarecorderReady();
                 seconds=0;
-                runOnUiThread(new Runnable() {
-                    @Override
-                    public void run() {
-                        handler.removeCallbacksAndMessages(null);
-                    }
-                });
+                handler.removeCallbacksAndMessages(null);
             }
         });
 
@@ -247,6 +250,7 @@ public class recording extends AppCompatActivity {
                     if (playableseconds ==-1 && isplaying){
                         player.stop();
                         player.release();
+                        isplaying=false;
                         player=null;
                         player= new MediaPlayer();
                         playableseconds=dummyseconds;
@@ -336,7 +340,7 @@ public class recording extends AppCompatActivity {
         ContextWrapper contextWrapper = new ContextWrapper(getApplicationContext());
         File recordpath = contextWrapper.getExternalFilesDir(Environment.DIRECTORY_MUSIC);
         recordfile = new File(recordpath, "AudioRecording" + CreateRandomAudioFileName(2) + ".mp3");
-
+        recordpath.mkdirs();
         return recordfile.getAbsolutePath();
     }
     public boolean checkPermission() {
