@@ -178,6 +178,7 @@ public class recording extends AppCompatActivity {
                     if (path!=null){
                         try {
                             player.setDataSource(filename);
+                            player.prepare();
 
                         } catch (IOException e) {
                             e.printStackTrace();
@@ -187,14 +188,9 @@ public class recording extends AppCompatActivity {
                         Toast.makeText(getApplicationContext(),"No Recording present", Toast.LENGTH_SHORT).show();
                         return;
                     }
-                    try {
-                        player.prepare();
-                    } catch (IOException e) {
-                        e.printStackTrace();
-                    }
                     player.start();
                     isplaying=true;
-                    Toast.makeText(recording.this, "Recording Playing",
+                    Toast.makeText(recording.this, "Playing Recording",
                             Toast.LENGTH_LONG).show();
                     runTimer();
 
@@ -340,7 +336,15 @@ public class recording extends AppCompatActivity {
         ContextWrapper contextWrapper = new ContextWrapper(getApplicationContext());
         File recordpath = contextWrapper.getExternalFilesDir(Environment.DIRECTORY_MUSIC);
         recordfile = new File(recordpath, "AudioRecording" + CreateRandomAudioFileName(2) + ".mp3");
-        recordpath.mkdirs();
+        try {
+            if(!recordpath.isDirectory()) {
+                recordpath.mkdirs();
+            }
+            recordfile.createNewFile();
+
+        } catch(Exception e) {
+            e.printStackTrace();
+        }
         return recordfile.getAbsolutePath();
     }
     public boolean checkPermission() {
