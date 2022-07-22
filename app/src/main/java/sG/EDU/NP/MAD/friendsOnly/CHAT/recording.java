@@ -39,7 +39,7 @@ public class recording extends AppCompatActivity {
     public static final int RequestPermissionCode = 1;
     private File recordfile;
     private String filename;
-    String RandomAudioFileName = "ABCDEF0123456789";
+    String RandomAudioFileName = "ABCDEFGHIJ012345";
     Button startRecordingButton, stopRecordingButton, playRecordingButton, stopPlayingButton;;
     MediaRecorder recorder;
     MediaPlayer player;
