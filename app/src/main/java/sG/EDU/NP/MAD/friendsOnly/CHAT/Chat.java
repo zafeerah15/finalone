@@ -12,7 +12,6 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import android.Manifest;
 import android.content.ContextWrapper;
-import android.content.Intent;
 import android.content.pm.PackageManager;
 import android.media.MediaPlayer;
 import android.media.MediaRecorder;
@@ -60,7 +59,7 @@ public class Chat extends AppCompatActivity {
     String AudioSavePathInDevice = null;
     public static final int RequestPermissionCode = 1;
     String RandomAudioFileName = "ABCDEFGHIJKLMNOP";
-    Button RecordingButton;
+    Button startRecordingButton, stopRecordingButton, playRecordingButton, stopPlayingButton;;
     MediaRecorder recorder;
     MediaPlayer player;
     Random random ;
@@ -87,102 +86,103 @@ public class Chat extends AppCompatActivity {
         ActivityCompat.requestPermissions(this, permissions,
                 REQUEST_RECORD_AUDIO_PERMISSION);
 
-        RecordingButton = (Button) findViewById(R.id.activity_main_record);
-        RecordingButton.setOnClickListener(new View.OnClickListener() {
+        startRecordingButton = (Button) findViewById(R.id.activity_main_record);
+        stopRecordingButton = (Button) findViewById(R.id.activity_main_stop);
+        playRecordingButton = (Button) findViewById(R.id.activity_main_play);
+        stopPlayingButton = (Button) findViewById(R.id.activity_main_stop_playing);
+
+        stopRecordingButton.setEnabled(false);
+        playRecordingButton.setEnabled(false);
+        stopPlayingButton.setEnabled(false);
+
+        random = new Random();
+
+        startRecordingButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                openrecord();
+                if(checkPermission()) {
+
+                    AudioSavePathInDevice =
+                            Environment.getExternalStorageDirectory().getAbsolutePath() + "/" +
+                                    CreateRandomAudioFileName(5) + "AudioRecording.3gp";
+
+                    startRecording();
+
+                    try {
+                        recorder.prepare();
+                        recorder.start();
+                    } catch (IllegalStateException e) {
+                        //TODO Auto-generated catch block
+                        e.printStackTrace();
+                    } catch (IOException e) {
+                        //TODO Auto-generated catch block
+                        e.printStackTrace();
+                    }
+
+                    startRecordingButton.setEnabled(false);
+                    stopRecordingButton.setEnabled(true);
+
+                    Toast.makeText(Chat.this, "Recording started",
+
+                            Toast.LENGTH_LONG).show();
+                } else {
+                    requestPermission();
+                }
             }
         });
 
-//        random = new Random();
-//
-//        startRecordingButton.setOnClickListener(new View.OnClickListener() {
-//            @Override
-//            public void onClick(View view) {
-//                if(checkPermission()) {
-//
-//                    AudioSavePathInDevice =
-//                            Environment.getExternalStorageDirectory().getAbsolutePath() + "/" +
-//                                    CreateRandomAudioFileName(5) + "AudioRecording.3gp";
-//
-//                    startRecording();
-//
-//                    try {
-//                        recorder.prepare();
-//                        recorder.start();
-//                    } catch (IllegalStateException e) {
-//                        //TODO Auto-generated catch block
-//                        e.printStackTrace();
-//                    } catch (IOException e) {
-//                        //TODO Auto-generated catch block
-//                        e.printStackTrace();
-//                    }
-//
-//                    startRecordingButton.setEnabled(false);
-//                    stopRecordingButton.setEnabled(true);
-//
-//                    Toast.makeText(Chat.this, "Recording started",
-//
-//                            Toast.LENGTH_LONG).show();
-//                } else {
-//                    requestPermission();
-//                }
-//            }
-//        });
-//
-//        stopRecordingButton.setOnClickListener(new View.OnClickListener() {
-//            @Override
-//            public void onClick(View view) {
-//                recorder.stop();
-//                stopRecordingButton.setEnabled(false);
-//                playRecordingButton.setEnabled(true);
-//                startRecordingButton.setEnabled(true);
-//                stopPlayingButton.setEnabled(false);
-//
-//                Toast.makeText(Chat.this, "Recording Completed",
-//                        Toast.LENGTH_LONG).show();
-//            }
-//        });
-//
-//        playRecordingButton.setOnClickListener(new View.OnClickListener() {
-//            @Override
-//            public void onClick(View view) throws IllegalArgumentException,
-//                    SecurityException, IllegalStateException {
-//
-//                stopRecordingButton.setEnabled(false);
-//                startRecordingButton.setEnabled(false);
-//                stopRecordingButton.setEnabled(true);
-//
-//                player = new MediaPlayer();
-//                try {
-//                    player.setDataSource(AudioSavePathInDevice);
-//                    player.prepare();
-//                } catch (IOException e) {
-//                    e.printStackTrace();
-//                }
-//
-//                player.start();
-//                Toast.makeText(Chat.this, "Recording Playing",
-//                        Toast.LENGTH_LONG).show();
-//            }
-//        });
-//
-//        stopPlayingButton.setOnClickListener(new View.OnClickListener() {
-//            @Override
-//            public void onClick(View view) {
-//                stopRecordingButton.setEnabled(false);
-//                startRecordingButton.setEnabled(true);
-//                stopPlayingButton.setEnabled(false);
-//                playRecordingButton.setEnabled(true);
-//
-//                if(player != null){
-//                    player.stop();
-//                    player.release();
-//                    startRecording();
-//                }
-//            }
-//        });
+        stopRecordingButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                recorder.stop();
+                stopRecordingButton.setEnabled(false);
+                playRecordingButton.setEnabled(true);
+                startRecordingButton.setEnabled(true);
+                stopPlayingButton.setEnabled(false);
+
+                Toast.makeText(Chat.this, "Recording Completed",
+                        Toast.LENGTH_LONG).show();
+            }
+        });
+
+        playRecordingButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) throws IllegalArgumentException,
+                    SecurityException, IllegalStateException {
+
+                stopRecordingButton.setEnabled(false);
+                startRecordingButton.setEnabled(false);
+                stopRecordingButton.setEnabled(true);
+
+                player = new MediaPlayer();
+                try {
+                    player.setDataSource(AudioSavePathInDevice);
+                    player.prepare();
+                } catch (IOException e) {
+                    e.printStackTrace();
+                }
+
+                player.start();
+                Toast.makeText(Chat.this, "Recording Playing",
+                        Toast.LENGTH_LONG).show();
+            }
+        });
+
+        stopPlayingButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                stopRecordingButton.setEnabled(false);
+                startRecordingButton.setEnabled(true);
+                stopPlayingButton.setEnabled(false);
+                playRecordingButton.setEnabled(true);
+
+                if(player != null){
+                    player.stop();
+                    player.release();
+                    startRecording();
+                }
+            }
+        });
 
         ///---------------------By Syafiq---------------------------^
 
@@ -323,97 +323,93 @@ public class Chat extends AppCompatActivity {
         });
     }
     ///---------------------By Syafiq (For recording of audio)---------------------------V
-    public void openrecord(){
-        Intent record = new Intent(this, recording.class);
-        startActivity(record);
+    public String CreateRandomAudioFileName(int string){
+        StringBuilder stringBuilder = new StringBuilder( string );
+        int i = 0 ;
+        while(i < string ) {
+            stringBuilder.append(RandomAudioFileName.charAt(random.nextInt(RandomAudioFileName.length())));
+
+            i++ ;
+        }
+        return stringBuilder.toString();
     }
-//    public String CreateRandomAudioFileName(int string){
-//        StringBuilder stringBuilder = new StringBuilder( string );
-//        int i = 0 ;
-//        while(i < string ) {
-//            stringBuilder.append(RandomAudioFileName.charAt(random.nextInt(RandomAudioFileName.length())));
-//
-//            i++ ;
+
+    private void requestPermission() {
+        ActivityCompat.requestPermissions(Chat.this, new
+                String[]{WRITE_EXTERNAL_STORAGE, RECORD_AUDIO}, RequestPermissionCode);
+    }
+    @Override
+    public void onRequestPermissionsResult(int requestCode, String permissions[],
+                                           int[] grantResults) {
+        super.onRequestPermissionsResult(requestCode, permissions, grantResults);
+        switch (requestCode) {
+            case RequestPermissionCode:
+                if (grantResults.length> 0) {
+                    boolean StoragePermission = grantResults[0] ==
+                            PackageManager.PERMISSION_GRANTED;
+                    boolean RecordPermission = grantResults[1] ==
+                            PackageManager.PERMISSION_GRANTED;
+
+                    if (StoragePermission && RecordPermission) {
+                        Toast.makeText(Chat.this, "Permission Granted",
+                                Toast.LENGTH_LONG).show();
+                    } else {
+                        Toast.makeText(Chat.this,"Permission Denied",
+                                Toast.LENGTH_LONG).show();
+                    }
+                }
+                break;
+        }
+    }
+    private void startRecording() {
+        recorder=new MediaRecorder();
+        recorder.setAudioSource(MediaRecorder.AudioSource.MIC);
+        recorder.setOutputFormat(MediaRecorder.OutputFormat.THREE_GPP);
+        recorder.setAudioEncoder(MediaRecorder.AudioEncoder.AMR_NB);
+        recorder.setOutputFile(AudioSavePathInDevice);
+    }
+
+//    private void stopRecording() {
+//        if (recorder != null) {
+//            recorder.stop();
+//            recorder.release();
+//            recorder = null;
 //        }
-//        return stringBuilder.toString();
+//        Toast.makeText(this, "Recording has stopped",Toast.LENGTH_LONG).show();
 //    }
-//
-//    private void requestPermission() {
-//        ActivityCompat.requestPermissions(Chat.this, new
-//                String[]{WRITE_EXTERNAL_STORAGE, RECORD_AUDIO}, RequestPermissionCode);
-//    }
-//    @Override
-//    public void onRequestPermissionsResult(int requestCode, String permissions[],
-//                                           int[] grantResults) {
-//        super.onRequestPermissionsResult(requestCode, permissions, grantResults);
-//        switch (requestCode) {
-//            case RequestPermissionCode:
-//                if (grantResults.length> 0) {
-//                    boolean StoragePermission = grantResults[0] ==
-//                            PackageManager.PERMISSION_GRANTED;
-//                    boolean RecordPermission = grantResults[1] ==
-//                            PackageManager.PERMISSION_GRANTED;
-//
-//                    if (StoragePermission && RecordPermission) {
-//                        Toast.makeText(Chat.this, "Permission Granted",
-//                                Toast.LENGTH_LONG).show();
-//                    } else {
-//                        Toast.makeText(Chat.this,"Permission Denied",
-//                                Toast.LENGTH_LONG).show();
-//                    }
-//                }
-//                break;
+//    private void playRecording() {
+//        player = new MediaPlayer();
+//        try {
+//            player.setDataSource(getRecordingFilePath());
+//            player.prepare();
+//            player.start();
+//            Toast.makeText(this, "Recording is playing",Toast.LENGTH_LONG).show();
+//        } catch (IOException e) {
+//            Log.e(LOG_TAG, "prepare() failed");
 //        }
 //    }
-//    private void startRecording() {
-//        recorder=new MediaRecorder();
-//        recorder.setAudioSource(MediaRecorder.AudioSource.MIC);
-//        recorder.setOutputFormat(MediaRecorder.OutputFormat.THREE_GPP);
-//        recorder.setAudioEncoder(MediaRecorder.AudioEncoder.AMR_NB);
-//        recorder.setOutputFile(AudioSavePathInDevice);
-//    }
 //
-////    private void stopRecording() {
-////        if (recorder != null) {
-////            recorder.stop();
-////            recorder.release();
-////            recorder = null;
-////        }
-////        Toast.makeText(this, "Recording has stopped",Toast.LENGTH_LONG).show();
-////    }
-////    private void playRecording() {
-////        player = new MediaPlayer();
-////        try {
-////            player.setDataSource(getRecordingFilePath());
-////            player.prepare();
-////            player.start();
-////            Toast.makeText(this, "Recording is playing",Toast.LENGTH_LONG).show();
-////        } catch (IOException e) {
-////            Log.e(LOG_TAG, "prepare() failed");
-////        }
-////    }
-////
-////    private void stopPlaying() {
-////        if (player != null) {
-////            player.release();
-////            player = null;
-////        }
-////        Toast.makeText(this, "Recording has stopped playing",Toast.LENGTH_LONG).show();
-////    }
-//    private String getRecordingFilePath(){
-//        String timeStamp = new SimpleDateFormat("yyyyMMdd_HHmmss").format(new Date());
-//        ContextWrapper contextWrapper = new ContextWrapper(getApplicationContext());
-//        File musicDirectory = contextWrapper.getExternalFilesDir(Environment.DIRECTORY_MUSIC);
-//        File file = new File(musicDirectory, "RecordingFile_" + timeStamp + ".3gp");
-//        return file.getPath();
+//    private void stopPlaying() {
+//        if (player != null) {
+//            player.release();
+//            player = null;
+//        }
+//        Toast.makeText(this, "Recording has stopped playing",Toast.LENGTH_LONG).show();
 //    }
-//    public boolean checkPermission() {
-//        int result = ContextCompat.checkSelfPermission(getApplicationContext(),
-//                WRITE_EXTERNAL_STORAGE);
-//        int result1 = ContextCompat.checkSelfPermission(getApplicationContext(),
-//                RECORD_AUDIO);
-//        return result == PackageManager.PERMISSION_GRANTED &&
-//                result1 == PackageManager.PERMISSION_GRANTED;
-//    }
+    private String getRecordingFilePath(){
+        String timeStamp = new SimpleDateFormat("yyyyMMdd_HHmmss").format(new Date());
+        ContextWrapper contextWrapper = new ContextWrapper(getApplicationContext());
+        File musicDirectory = contextWrapper.getExternalFilesDir(Environment.DIRECTORY_MUSIC);
+        File file = new File(musicDirectory, "RecordingFile_" + timeStamp + ".3gp");
+        return file.getPath();
+    }
+    public boolean checkPermission() {
+        int result = ContextCompat.checkSelfPermission(getApplicationContext(),
+                WRITE_EXTERNAL_STORAGE);
+        int result1 = ContextCompat.checkSelfPermission(getApplicationContext(),
+                RECORD_AUDIO);
+        return result == PackageManager.PERMISSION_GRANTED &&
+                result1 == PackageManager.PERMISSION_GRANTED;
+    }
     ///---------------------By Syafiq---------------------------^
 }

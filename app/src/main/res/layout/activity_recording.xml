@@ -12,18 +12,30 @@
         android:id="@+id/backBtn"
         android:layout_width="35dp"
         android:layout_height="35dp"
+<<<<<<< HEAD
+=======
+        android:layout_above="@+id/timer"
+>>>>>>> main
         android:layout_alignParentStart="true"
         android:layout_alignParentTop="true"
         android:layout_alignParentEnd="true"
         android:layout_centerHorizontal="true"
+<<<<<<< HEAD
         android:layout_marginStart="30dp"
         android:layout_marginTop="10dp"
         android:layout_marginEnd="320dp"
+=======
+        android:layout_marginStart="20dp"
+        android:layout_marginTop="40dp"
+        android:layout_marginEnd="330dp"
+        android:layout_marginBottom="297dp"
+>>>>>>> main
         android:background="@drawable/round_back_light_10"
         android:src="@drawable/back_btn" />
 
     <Button
         android:id="@+id/main_record"
+<<<<<<< HEAD
         android:layout_width="100dp"
         android:layout_height="100dp"
         android:layout_above="@+id/play_record"
@@ -56,10 +68,49 @@
         android:layout_marginBottom="80dp"
         android:layout_toStartOf="@+id/pause_play"
         android:text="Play Record" />
+=======
+        android:layout_width="410dp"
+        android:layout_height="59dp"
+        android:layout_above="@+id/pause_record"
+        android:layout_alignParentStart="true"
+        android:layout_alignParentEnd="true"
+        android:layout_marginStart="10dp"
+        android:layout_marginEnd="10dp"
+        android:layout_marginBottom="20dp"
+        android:layout_toStartOf="@id/pause_record"
+        android:text="Record" />
+
+    <Button
+        android:id="@+id/pause_record"
+        android:layout_width="410dp"
+        android:layout_height="59dp"
+        android:layout_above="@+id/play_record"
+        android:layout_alignParentStart="true"
+        android:layout_alignParentEnd="true"
+        android:layout_marginStart="10dp"
+        android:layout_marginEnd="10dp"
+        android:layout_marginBottom="20dp"
+        android:layout_toStartOf="@id/play_record"
+        android:text="Pause" />
+
+    <Button
+        android:id="@+id/play_record"
+        android:layout_width="410dp"
+        android:layout_height="59dp"
+        android:layout_above="@+id/pause_play"
+        android:layout_alignParentStart="true"
+        android:layout_alignParentEnd="true"
+        android:layout_marginStart="10dp"
+        android:layout_marginEnd="10dp"
+        android:layout_marginBottom="20dp"
+        android:layout_toStartOf="@id/pause_play"
+        android:text="Play" />
+>>>>>>> main
 
 
     <Button
         android:id="@+id/pause_play"
+<<<<<<< HEAD
         android:layout_width="100dp"
         android:layout_height="100dp"
         android:layout_alignParentEnd="true"
@@ -67,12 +118,25 @@
         android:layout_marginEnd="63dp"
         android:layout_marginBottom="80dp"
         android:text="Pause Play" />
+=======
+        android:layout_width="410dp"
+        android:layout_height="59dp"
+        android:layout_alignParentStart="true"
+        android:layout_alignParentEnd="true"
+        android:layout_alignParentBottom="true"
+        android:layout_marginStart="10dp"
+        android:layout_marginEnd="10dp"
+        android:layout_marginBottom="60dp"
+        android:text="Pause" />
+
+>>>>>>> main
 
 
     <TextView
         android:id="@+id/recording"
         android:layout_width="243dp"
         android:layout_height="wrap_content"
+<<<<<<< HEAD
         android:layout_alignParentStart="true"
         android:layout_alignParentTop="true"
         android:layout_alignParentEnd="true"
@@ -82,6 +146,16 @@
         android:text="Recording"
         android:textAlignment="center"
         android:textSize="40sp" />
+=======
+        android:layout_alignParentTop="true"
+        android:layout_alignParentEnd="true"
+        android:layout_marginStart="70dp"
+        android:layout_marginTop="50dp"
+        android:layout_marginEnd="73dp"
+        android:text="Recording"
+        android:textAlignment="center"
+        android:textSize="50sp" />
+>>>>>>> main
 
     <TextView
         android:id="@+id/recording_path"
