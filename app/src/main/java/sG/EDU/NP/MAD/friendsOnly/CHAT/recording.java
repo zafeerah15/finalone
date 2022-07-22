@@ -36,16 +36,10 @@ public class recording extends AppCompatActivity {
     private static final String[] permissions = {RECORD_AUDIO};
     private boolean audioRecordingPermissionGranted = false;
     private static final String LOG_TAG = "AudioRecordTest";
-<<<<<<< HEAD
     public static final int RequestPermissionCode = 1;
     private File recordfile;
     private String filename;
     String RandomAudioFileName = "ABCDEFGHIJ012345";
-=======
-    String AudioSavePathInDevice = null;
-    public static final int RequestPermissionCode = 1;
-    String RandomAudioFileName = "ABCDEFGHIJKLMNOP";
->>>>>>> main
     Button startRecordingButton, stopRecordingButton, playRecordingButton, stopPlayingButton;;
     MediaRecorder recorder;
     MediaPlayer player;
@@ -85,10 +79,7 @@ public class recording extends AppCompatActivity {
 //        stopPlayingButton.setEnabled(false);
 
         random = new Random();
-<<<<<<< HEAD
         player = new MediaPlayer();
-=======
->>>>>>> main
 
         startRecordingButton.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -103,14 +94,9 @@ public class recording extends AppCompatActivity {
                         executorService.execute(new Runnable() {
                             @Override
                             public void run() {
-<<<<<<< HEAD
                                 path=getRecordingFilePath();
                                 MediarecorderReady();
                                 filename=path;
-=======
-                                MediarecorderReady();
-                                path=getRecordingFilePath();
->>>>>>> main
                                 try {
                                     recorder.prepare();
                                 } catch (IOException e) {
@@ -120,11 +106,7 @@ public class recording extends AppCompatActivity {
                                 runOnUiThread(new Runnable() {
                                     @Override
                                     public void run() {
-<<<<<<< HEAD
                                         recordingpath.setText(filename);
-=======
-                                        recordingpath.setText(getRecordingFilePath());
->>>>>>> main
                                         playableseconds=0;
                                         seconds=0;
                                         dummyseconds=0;
@@ -194,17 +176,10 @@ public class recording extends AppCompatActivity {
 
                 if(!isplaying){
                     if (path!=null){
-<<<<<<< HEAD
                         try {
                             player.setDataSource(filename);
                             player.prepare();
 
-=======
-                        player = new MediaPlayer();
-                        try {
-                            player.setDataSource(getRecordingFilePath());
-                            player.prepare();
->>>>>>> main
                         } catch (IOException e) {
                             e.printStackTrace();
                         }
@@ -213,7 +188,6 @@ public class recording extends AppCompatActivity {
                         Toast.makeText(getApplicationContext(),"No Recording present", Toast.LENGTH_SHORT).show();
                         return;
                     }
-<<<<<<< HEAD
                     player.start();
                     isplaying=true;
                     Toast.makeText(recording.this, "Playing Recording",
@@ -221,15 +195,6 @@ public class recording extends AppCompatActivity {
                     runTimer();
 
                 }
-=======
-
-                }
-                player.start();
-                isplaying=true;
-                Toast.makeText(recording.this, "Recording Playing",
-                        Toast.LENGTH_LONG).show();
-                runTimer();
->>>>>>> main
             }
         });
 
@@ -241,7 +206,6 @@ public class recording extends AppCompatActivity {
 //                stopPlayingButton.setEnabled(false);
 //                playRecordingButton.setEnabled(true);
 
-<<<<<<< HEAD
                 player.stop();
                 player.release();
                 player=null;
@@ -250,20 +214,6 @@ public class recording extends AppCompatActivity {
                 //MediarecorderReady();
                 seconds=0;
                 handler.removeCallbacksAndMessages(null);
-=======
-                player.pause();
-                player.release();
-                player=null;
-                player= new MediaPlayer();
-                MediarecorderReady();
-                seconds=0;
-                runOnUiThread(new Runnable() {
-                    @Override
-                    public void run() {
-                        handler.removeCallbacksAndMessages(null);
-                    }
-                });
->>>>>>> main
             }
         });
 
@@ -296,10 +246,7 @@ public class recording extends AppCompatActivity {
                     if (playableseconds ==-1 && isplaying){
                         player.stop();
                         player.release();
-<<<<<<< HEAD
                         isplaying=false;
-=======
->>>>>>> main
                         player=null;
                         player= new MediaPlayer();
                         playableseconds=dummyseconds;
@@ -354,13 +301,8 @@ public class recording extends AppCompatActivity {
         recorder=new MediaRecorder();
         recorder.setAudioSource(MediaRecorder.AudioSource.MIC);
         recorder.setOutputFormat(MediaRecorder.OutputFormat.THREE_GPP);
-<<<<<<< HEAD
         recorder.setOutputFile(getRecordingFilePath());
         recorder.setAudioEncoder(MediaRecorder.AudioEncoder.AMR_NB);
-=======
-        recorder.setAudioEncoder(MediaRecorder.AudioEncoder.AMR_NB);
-        recorder.setOutputFile(getRecordingFilePath());
->>>>>>> main
     }
 
     //    private void stopRecording() {
@@ -392,7 +334,6 @@ public class recording extends AppCompatActivity {
 //    }
     private String getRecordingFilePath(){
         ContextWrapper contextWrapper = new ContextWrapper(getApplicationContext());
-<<<<<<< HEAD
         File recordpath = contextWrapper.getExternalFilesDir(Environment.DIRECTORY_MUSIC);
         recordfile = new File(recordpath, "AudioRecording" + CreateRandomAudioFileName(2) + ".mp3");
         try {
@@ -405,11 +346,6 @@ public class recording extends AppCompatActivity {
             e.printStackTrace();
         }
         return recordfile.getAbsolutePath();
-=======
-        File musicDirectory = contextWrapper.getExternalFilesDir(Environment.DIRECTORY_MUSIC);
-        File file = new File(musicDirectory, "AudioRecording" + CreateRandomAudioFileName(5) + ".mp3");
-        return file.getPath();
->>>>>>> main
     }
     public boolean checkPermission() {
         int result = ContextCompat.checkSelfPermission(getApplicationContext(),
