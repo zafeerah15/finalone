@@ -1,31 +1,36 @@
 package sG.EDU.NP.MAD.friendsOnly;
 
+import android.Manifest;
+import android.app.AlertDialog;
+import android.app.ProgressDialog;
+import android.content.DialogInterface;
+import android.content.Intent;
+import android.content.pm.PackageManager;
+import android.os.Bundle;
+import android.util.Log;
+import android.view.Menu;
+import android.view.MenuItem;
+import android.view.View;
+import android.widget.ArrayAdapter;
+import android.widget.ListView;
+
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.appcompat.widget.SearchView;
 import androidx.core.app.ActivityCompat;
 import androidx.core.content.ContextCompat;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
-import android.app.AlertDialog;
-import android.content.DialogInterface;
-import android.content.Intent;
 
-import android.Manifest;
-import android.app.ProgressDialog;
-import android.content.pm.PackageManager;
-import android.os.Bundle;
-import android.util.Log;
-import android.view.View;
-
+import com.google.android.material.floatingactionbutton.FloatingActionButton;
+import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
 import com.squareup.picasso.Picasso;
-import com.google.android.material.floatingactionbutton.FloatingActionButton;
-import com.google.firebase.auth.FirebaseAuth;
-import com.google.firebase.auth.FirebaseUser;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -48,6 +53,8 @@ public class MainActivity extends AppCompatActivity {
 
     private String chatKey = "";
 
+
+
     private boolean dataSet = false;
     private RecyclerView messagesRecyclerView;
     private FloatingActionButton fab;
@@ -56,10 +63,16 @@ public class MainActivity extends AppCompatActivity {
 
     private FirebaseAuth mAuth;
     private String userType = "";
-    
+
+
+
+    ArrayAdapter<String> arrayAdapter;
+
+
     // referencing Fire base real time database
 
     DatabaseReference databaseReference= FirebaseDatabase.getInstance().getReference();
+
 
 
     @Override
@@ -67,6 +80,25 @@ public class MainActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
         verifyPermissions();
+
+        ListView listView = findViewById(R.id.listview);
+        List<String> nameList = new ArrayList<>();
+        nameList.add("ttt");
+        nameList.add("jane");
+        nameList.add("miko22");
+        nameList.add("tanyaw");
+        nameList.add("jw10101");
+        nameList.add("Robert");
+        nameList.add("jwjwjwjw02");
+        nameList.add("Name");
+        nameList.add("HermanLee");
+        nameList.add("Bruh");
+        nameList.add("tanya");
+        nameList.add("peanuts22");
+
+        arrayAdapter = new ArrayAdapter<>(this, android.R.layout.simple_list_item_1, nameList);
+        listView.setAdapter(arrayAdapter);
+
 
         final CircleImageView userProfilePic = findViewById(R.id.userProfilePic);
 
@@ -260,9 +292,15 @@ public class MainActivity extends AppCompatActivity {
             }
         });
 
+
+
     }
 
-// FUNCTION TO REQUEST PERMISSION FROM USER FOR READ & WRITE TO STORAGE, CAMERA
+
+
+
+
+    // FUNCTION TO REQUEST PERMISSION FROM USER FOR READ & WRITE TO STORAGE, CAMERA
     private void verifyPermissions() {
         Log.d(TAG, "verifyPermissions: asking user for permissions");
         String[] permissions = {Manifest.permission.READ_EXTERNAL_STORAGE,
@@ -284,7 +322,32 @@ public class MainActivity extends AppCompatActivity {
                     REQUEST_CODE);
         }
     }
+
+    @Override
+    public boolean onCreateOptionsMenu(Menu menu) {
+
+        getMenuInflater().inflate(R.menu.menu, menu);
+        MenuItem menuItem = menu.findItem(R.id.search);
+        SearchView searchView = (SearchView) menuItem.getActionView();
+        searchView.setQueryHint("Search users");
+
+        searchView.setOnQueryTextListener(new SearchView.OnQueryTextListener() {
+            @Override
+            public boolean onQueryTextSubmit(String s) {
+                return false;
+            }
+
+            @Override
+            public boolean onQueryTextChange(String s) {
+                arrayAdapter.getFilter().filter(s);
+                return true;
+            }
+        });
+
+        return super.onCreateOptionsMenu(menu);
+    }
 }
+
 
 //                        databaseReference.child("chat").addValueEventListener(new ValueEventListener() {
 //                            @Override
@@ -336,3 +399,8 @@ public class MainActivity extends AppCompatActivity {
 //
 //                            }
 //                        });
+
+
+
+
+

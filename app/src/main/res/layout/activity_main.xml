@@ -10,34 +10,43 @@
 
     <RelativeLayout
         android:layout_width="match_parent"
-        android:layout_height="wrap_content">
+        android:layout_height="150dp">
 
-        <de.hdodenhof.circleimageview.CircleImageView
-            android:layout_width="35dp"
+
+        <androidx.appcompat.widget.SearchView
+            android:id="@+id/search"
+            android:layout_width="match_parent"
             android:layout_height="35dp"
             android:layout_centerVertical="true"
             android:layout_marginStart="20dp"
             android:layout_marginTop="40dp"
             android:background="@drawable/round_back_theme"
             android:padding="6dp"
-            android:src="@drawable/search_icon" />
+            android:src="@drawable/search_icon"
+            android:title="Search Here"
+            app:iconifiedByDefault="false" />
+
+        <ListView
+            android:id="@+id/listview"
+            android:layout_width="fill_parent"
+            android:layout_height="fill_parent"
+            android:layout_below="@+id/search" />
+
 
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_alignParentEnd="true"
             android:layout_marginStart="150dp"
-            android:layout_marginEnd="150dp"
             android:layout_marginTop="25dp"
+            android:layout_marginEnd="146dp"
             android:text="Messages"
-            android:textStyle="bold"
-            android:textColor="#424242">
+            android:textColor="#424242"
+            android:textStyle="bold">
             android:fontFamily="sans-serif-condensed"
             android:textStyle = "bold"
             android:textSize = "40dp"
-            android : layout_centerInParent="true"
-        </TextView>
-
+            android : layout_centerInParent="true"</TextView>
 
         <de.hdodenhof.circleimageview.CircleImageView
             android:id="@+id/userProfilePic"
@@ -52,7 +61,6 @@
         </de.hdodenhof.circleimageview.CircleImageView>
 
 
-
     </RelativeLayout>
 
     <FrameLayout
@@ -60,10 +68,11 @@
         android:layout_height="match_parent"
         android:orientation="vertical"
         >
+
         <androidx.recyclerview.widget.RecyclerView
+            android:id="@+id/messagesRecyclerView"
             android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:id="@+id/messagesRecyclerView">
+            android:layout_height="737dp">
 
         </androidx.recyclerview.widget.RecyclerView>
 
@@ -78,5 +87,8 @@
     </FrameLayout>
 
 
+
 </LinearLayout>
+
+
 
