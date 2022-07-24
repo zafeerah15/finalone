@@ -1,0 +1,75 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+
+<RelativeLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+    <com.google.android.material.card.MaterialCardView
+        android:id="@+id/story_card"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_margin="8dp">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical">
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
+                android:padding="5dp">
+
+                <de.hdodenhof.circleimageview.CircleImageView
+                    android:id="@+id/s_profile_pic"
+                    android:layout_width="30dp"
+                    android:layout_height="30dp"
+                    android:src="@drawable/pleasebeapng"
+                    />
+
+                <TextView
+                    android:id="@+id/s_username"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="5dp"
+                    android:maxLines="1"
+                    android:layout_gravity="center"
+                    android:text="username"
+                    android:textSize="18sp"
+                    android:textStyle="bold" />
+
+            </LinearLayout>
+
+
+            <ImageView
+                android:id="@+id/story_media"
+                android:layout_width="match_parent"
+                android:layout_height="194dp"
+                android:src="@drawable/story_load"
+                android:scaleType="fitCenter"
+
+                />
+
+
+            <TextView
+                android:id="@+id/post_caption"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:padding="5dp"
+                android:text="caption"
+                />
+
+        </LinearLayout>
+
+
+
+
+    </com.google.android.material.card.MaterialCardView>
+
+
+
+</RelativeLayout>

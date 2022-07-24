@@ -22,6 +22,12 @@ android {
             proguardFiles getDefaultProguardFile('proguard-android-optimize.txt'), 'proguard-rules.pro'
         }
     }
+
+    buildFeatures {
+        viewBinding true
+    }
+
+
     compileOptions {
         sourceCompatibility JavaVersion.VERSION_1_8
         targetCompatibility JavaVersion.VERSION_1_8
@@ -42,6 +48,13 @@ dependencies {
     implementation 'com.google.firebase:firebase-database'
     implementation'de.hdodenhof:circleimageview:3.1.0'
     implementation'com.squareup.picasso:picasso:2.71828'
+
+    implementation platform('com.google.firebase:firebase-bom:30.2.0')
+    // Declare the dependency for the Cloud Storage library
+    // When using the BoM, you don't specify versions in Firebase library dependencies
+    implementation 'com.google.firebase:firebase-storage'
+    implementation 'androidx.swiperefreshlayout:swiperefreshlayout:1.1.0'
+
 
     ///---------------------By Syafiq---------------------------V
 //    //for AppCompat use:
