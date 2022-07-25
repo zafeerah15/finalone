@@ -16,6 +16,7 @@ import android.content.pm.PackageManager;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
+import android.widget.LinearLayout;
 
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
@@ -35,6 +36,10 @@ import sG.EDU.NP.MAD.friendsOnly.messages.MessagesAdapter;
 import sG.EDU.NP.MAD.friendsOnly.messages.MessagesList;
 
 public class MainActivity extends AppCompatActivity {
+
+
+
+    LinearLayout radioFunc = findViewById(R.id.radioFunc);
 
     private final List<MessagesList> messagesLists = new ArrayList<>();
     private static final String TAG = "MainActivity";
@@ -56,6 +61,7 @@ public class MainActivity extends AppCompatActivity {
 
     private FirebaseAuth mAuth;
     private String userType = "";
+
     
     // referencing Fire base real time database
 
@@ -64,11 +70,21 @@ public class MainActivity extends AppCompatActivity {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
+
+        //Goes to radio selection page when clicked
+        radioFunc.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(MainActivity.this, SelectRadioActivity.class);
+                startActivity(intent);
+            }
+        });
+
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
         verifyPermissions();
 
-        final CircleImageView userProfilePic = findViewById(R.id.userProfilePic);
+        //final CircleImageView userProfilePic = findViewById(R.id.userProfilePic);
 
         mAuth = FirebaseAuth.getInstance();
         FirebaseUser currentUser = mAuth.getCurrentUser();
@@ -149,7 +165,7 @@ public class MainActivity extends AppCompatActivity {
 
                 if (profilepictureUrl == null || !profilepictureUrl.isEmpty()) {
                     // set profile pic to circle image view
-                    Picasso.get().load(profilepictureUrl).into(userProfilePic);
+                    //Picasso.get().load(profilepictureUrl).into(userProfilePic);
                 }
                 progressDialog.dismiss();
             }
@@ -206,7 +222,7 @@ public class MainActivity extends AppCompatActivity {
 
                                         if (profilepictureUrl == null || !profilepictureUrl.isEmpty()){
                                             //set the profile pic into circle imageview
-                                            Picasso.get().load(profilepictureUrl).into(userProfilePic);
+                                            //Picasso.get().load(profilepictureUrl).into(userProfilePic);
                                         }
                                         progressDialog.dismiss();
 
@@ -261,6 +277,8 @@ public class MainActivity extends AppCompatActivity {
         });
 
     }
+
+
 
 // FUNCTION TO REQUEST PERMISSION FROM USER FOR READ & WRITE TO STORAGE, CAMERA
     private void verifyPermissions() {
