@@ -12,31 +12,41 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content">
 
+
         <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
+            android:layout_width="88dp"
+            android:layout_height="29dp"
             android:layout_alignParentEnd="true"
             android:layout_marginStart="150dp"
-            android:layout_marginEnd="150dp"
             android:layout_marginTop="25dp"
+            android:layout_marginEnd="187dp"
             android:text="Messages"
-            android:textStyle="bold"
-            android:textColor="#424242">
+            android:textColor="#424242"
+            android:textStyle="bold">
             android:fontFamily="sans-serif-condensed"
             android:textStyle = "bold"
             android:textSize = "40dp"
-            android : layout_centerInParent="true"
-        </TextView>
+            android : layout_centerInParent="true"</TextView>
 
+        <de.hdodenhof.circleimageview.CircleImageView
+            android:layout_width="58dp"
+            android:layout_height="57dp"
+            android:layout_alignParentTop="true"
+            android:layout_alignParentEnd="true"
+            android:layout_marginStart="20dp"
+            android:layout_marginTop="9dp"
+            android:layout_marginEnd="29dp"
+            android:background="@drawable/round_back_theme"
+            android:padding="6dp"
+            android:src="@drawable/search_icon" />
 
         <LinearLayout
             android:id="@+id/radioFunc"
-            android:layout_width="62dp"
-            android:layout_height="wrap_content"
-            android:layout_alignParentEnd="true"
+            android:layout_width="56dp"
+            android:layout_height="63dp"
             android:layout_marginStart="10dp"
             android:layout_marginTop="10dp"
-            android:layout_marginEnd="321dp"
+            android:layout_marginEnd="10dp"
             android:layout_marginBottom="10dp"
             android:layout_weight="1"
             android:background="@drawable/round_back_theme"
@@ -45,7 +55,7 @@
 
             <ImageView
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content"
+                android:layout_height="27dp"
                 android:layout_margin="5dp"
                 android:theme="@style/Theme.Chatapp"
                 app:srcCompat="@drawable/ic_baseline_radio_24"
@@ -62,19 +72,6 @@
                 android:textColor="#777777"
                 android:textStyle="bold" />
         </LinearLayout>
-
-        <de.hdodenhof.circleimageview.CircleImageView
-            android:layout_width="58dp"
-            android:layout_height="57dp"
-            android:layout_alignParentTop="true"
-            android:layout_alignParentEnd="true"
-            android:layout_marginStart="20dp"
-            android:layout_marginTop="9dp"
-            android:layout_marginEnd="29dp"
-            android:background="@drawable/round_back_theme"
-            android:padding="6dp"
-            android:src="@drawable/search_icon" />
-
 
     </RelativeLayout>
 

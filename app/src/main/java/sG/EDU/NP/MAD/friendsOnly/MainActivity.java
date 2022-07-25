@@ -39,7 +39,7 @@ public class MainActivity extends AppCompatActivity {
 
 
 
-    LinearLayout radioFunc = findViewById(R.id.radioFunc);
+
 
     private final List<MessagesList> messagesLists = new ArrayList<>();
     private static final String TAG = "MainActivity";
@@ -58,7 +58,7 @@ public class MainActivity extends AppCompatActivity {
     private FloatingActionButton fab;
     private String lastMessage = "";
     private MessagesAdapter messagesAdapter;
-
+    private LinearLayout RadioFunc;
     private FirebaseAuth mAuth;
     private String userType = "";
 
@@ -71,14 +71,6 @@ public class MainActivity extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
 
-        //Goes to radio selection page when clicked
-        radioFunc.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                Intent intent = new Intent(MainActivity.this, SelectRadioActivity.class);
-                startActivity(intent);
-            }
-        });
 
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
@@ -116,6 +108,15 @@ public class MainActivity extends AppCompatActivity {
                 builder.show();
             }
 
+        });
+        //Goes to radio selection page when clicked
+        RadioFunc = findViewById(R.id.radioFunc);
+        RadioFunc.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(MainActivity.this, SelectRadioActivity.class);
+                startActivity(intent);
+            }
         });
 
         //firebase database on data change listener
