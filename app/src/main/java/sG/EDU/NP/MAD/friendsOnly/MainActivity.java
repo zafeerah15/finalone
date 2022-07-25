@@ -48,7 +48,7 @@ public class MainActivity extends AppCompatActivity {
     private String email;
     private String name;
     private Boolean granted;
-
+//
     private int unseenMessages = 0;
 
     private String chatKey = "";
