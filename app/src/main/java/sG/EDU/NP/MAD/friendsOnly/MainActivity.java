@@ -58,7 +58,7 @@ public class MainActivity extends AppCompatActivity {
     private FloatingActionButton fab;
     private String lastMessage = "";
     private MessagesAdapter messagesAdapter;
-    private LinearLayout RadioFunc;
+    private FloatingActionButton toDoFunc;
     private FirebaseAuth mAuth;
     private String userType = "";
 
@@ -109,12 +109,13 @@ public class MainActivity extends AppCompatActivity {
             }
 
         });
-        //Goes to radio selection page when clicked
-        RadioFunc = findViewById(R.id.radioFunc);
-        RadioFunc.setOnClickListener(new View.OnClickListener() {
+
+        //Goes to To do activity page clicked
+        toDoFunc=findViewById(R.id.toDoFunc);
+        toDoFunc.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent intent = new Intent(MainActivity.this, SelectRadioActivity.class);
+                Intent intent = new Intent(MainActivity.this, ToDoActivity.class);
                 startActivity(intent);
             }
         });

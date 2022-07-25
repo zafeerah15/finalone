@@ -40,38 +40,16 @@
             android:padding="6dp"
             android:src="@drawable/search_icon" />
 
-        <LinearLayout
-            android:id="@+id/radioFunc"
-            android:layout_width="56dp"
-            android:layout_height="63dp"
-            android:layout_marginStart="10dp"
-            android:layout_marginTop="10dp"
-            android:layout_marginEnd="10dp"
-            android:layout_marginBottom="10dp"
-            android:layout_weight="1"
-            android:background="@drawable/round_back_theme"
-            android:elevation="10dp"
-            android:orientation="vertical">
-
-            <ImageView
-                android:layout_width="match_parent"
-                android:layout_height="27dp"
-                android:layout_margin="5dp"
-                android:theme="@style/Theme.Chatapp"
-                app:srcCompat="@drawable/ic_baseline_radio_24"
-                app:tint="#777777"
-                tools:ignore="VectorDrawableCompat" />
-
-            <TextView
-                android:id="@+id/radioText"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginBottom="10dp"
-                android:text="Radio"
-                android:textAlignment="center"
-                android:textColor="#777777"
-                android:textStyle="bold" />
-        </LinearLayout>
+        <com.google.android.material.floatingactionbutton.FloatingActionButton
+            android:id="@+id/toDoFunc"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="end|bottom"
+            android:layout_marginStart="16dp"
+            android:layout_marginTop="16dp"
+            android:layout_marginEnd="16dp"
+            android:layout_marginBottom="16dp"
+            android:src="@drawable/todo_foreground" />
 
     </RelativeLayout>
 
