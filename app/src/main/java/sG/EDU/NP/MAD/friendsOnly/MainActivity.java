@@ -8,15 +8,14 @@ import android.content.Intent;
 import android.content.pm.PackageManager;
 import android.os.Bundle;
 import android.util.Log;
-import android.view.Menu;
-import android.view.MenuItem;
 import android.view.View;
+import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
+import android.widget.AutoCompleteTextView;
 import android.widget.ListView;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
-import androidx.appcompat.widget.SearchView;
 import androidx.core.app.ActivityCompat;
 import androidx.core.content.ContextCompat;
 import androidx.recyclerview.widget.LinearLayoutManager;
@@ -29,6 +28,7 @@ import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.database.Query;
 import com.google.firebase.database.ValueEventListener;
 import com.squareup.picasso.Picasso;
 
@@ -73,7 +73,9 @@ public class MainActivity extends AppCompatActivity {
 
     DatabaseReference databaseReference= FirebaseDatabase.getInstance().getReference();
 
-
+    DatabaseReference mref;
+    private ListView listdata;
+    private AutoCompleteTextView txtSearch;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -81,23 +83,24 @@ public class MainActivity extends AppCompatActivity {
         setContentView(R.layout.activity_main);
         verifyPermissions();
 
-        ListView listView = findViewById(R.id.listview);
-        List<String> nameList = new ArrayList<>();
-        nameList.add("ttt");
-        nameList.add("jane");
-        nameList.add("miko22");
-        nameList.add("tanyaw");
-        nameList.add("jw10101");
-        nameList.add("Robert");
-        nameList.add("jwjwjwjw02");
-        nameList.add("Name");
-        nameList.add("HermanLee");
-        nameList.add("Bruh");
-        nameList.add("tanya");
-        nameList.add("peanuts22");
+        mref= FirebaseDatabase.getInstance().getReference("users");
+        listdata=(ListView)findViewById(R.id.listData);
+        txtSearch=(AutoCompleteTextView)findViewById(R.id.txtSearch);
 
-        arrayAdapter = new ArrayAdapter<>(this, android.R.layout.simple_list_item_1, nameList);
-        listView.setAdapter(arrayAdapter);
+        ValueEventListener event= new ValueEventListener() {
+            @Override
+            public void onDataChange(@NonNull DataSnapshot snapshot) {
+                populateSearch(snapshot);
+            }
+
+            @Override
+            public void onCancelled(@NonNull DatabaseError error) {
+
+            }
+        };
+
+        mref.addListenerForSingleValueEvent(event);
+
 
 
         final CircleImageView userProfilePic = findViewById(R.id.userProfilePic);
@@ -322,31 +325,85 @@ public class MainActivity extends AppCompatActivity {
                     REQUEST_CODE);
         }
     }
+    private void populateSearch(DataSnapshot snapshot) {
+        ArrayList<String> names=new ArrayList<>();
+        if(snapshot.exists())
+        {
+            for(DataSnapshot ds:snapshot.getChildren())
+            {
+                String name=ds.child("name").getValue(String.class);
+                names.add(name);
+            }
 
-    @Override
-    public boolean onCreateOptionsMenu(Menu menu) {
+            ArrayAdapter adapter= new ArrayAdapter(this, android.R.layout.simple_list_item_1, names);
+            txtSearch.setAdapter(adapter);
+            txtSearch.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+                @Override
+                public void onItemClick(AdapterView<?> adapterView, View view, int position, long id) {
+                    String name=txtSearch.getText().toString();
+                    searchUser(name);
 
-        getMenuInflater().inflate(R.menu.menu, menu);
-        MenuItem menuItem = menu.findItem(R.id.search);
-        SearchView searchView = (SearchView) menuItem.getActionView();
-        searchView.setQueryHint("Search users");
+                }
+            });
 
-        searchView.setOnQueryTextListener(new SearchView.OnQueryTextListener() {
+        }else{
+            Log.d("users", "No data found");
+        }
+
+    }
+
+    private void searchUser(String name) {
+        Query query=mref.orderByChild("name").equalTo(name);
+        query.addListenerForSingleValueEvent(new ValueEventListener() {
             @Override
-            public boolean onQueryTextSubmit(String s) {
-                return false;
+            public void onDataChange(@NonNull DataSnapshot snapshot) {
+
+                if(snapshot.exists())
+                {
+                    ArrayList<String> listusers=new ArrayList<>();
+                    for(DataSnapshot ds:snapshot.getChildren())
+                    {
+                        search_data.User user= new search_data.User(ds.child("name").getValue(String.class), ds.child("email").getValue(String.class));
+                        listusers.add(user.getName()+"\n"+user.getEmail());
+                    }
+                    ArrayAdapter adapter = new ArrayAdapter(getApplicationContext(),android.R.layout.simple_list_item_1, listusers);
+                    listdata.setAdapter(adapter);
+
+                }else{
+                    Log.d("users", "No Data Found");
+                }
+
             }
 
             @Override
-            public boolean onQueryTextChange(String s) {
-                arrayAdapter.getFilter().filter(s);
-                return true;
+            public void onCancelled(@NonNull DatabaseError error) {
+
             }
         });
 
-        return super.onCreateOptionsMenu(menu);
+
     }
+    static class User
+    {
+
+        public User(String name, String email) {
+            this.name = name;
+            this.email = email;
+        }
+
+        public User() {
+        }
+        public String getName() { return name; }
+
+        public String getEmail() { return email; }
+
+        public String name;
+        public String email;
+    }
+
 }
+
+
 
 
 //                        databaseReference.child("chat").addValueEventListener(new ValueEventListener() {

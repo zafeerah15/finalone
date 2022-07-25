@@ -13,24 +13,10 @@
         android:layout_height="150dp">
 
 
-        <androidx.appcompat.widget.SearchView
-            android:id="@+id/search"
-            android:layout_width="match_parent"
-            android:layout_height="35dp"
-            android:layout_centerVertical="true"
-            android:layout_marginStart="20dp"
-            android:layout_marginTop="40dp"
-            android:background="@drawable/round_back_theme"
-            android:padding="6dp"
-            android:src="@drawable/search_icon"
-            android:title="Search Here"
-            app:iconifiedByDefault="false" />
 
-        <ListView
-            android:id="@+id/listview"
-            android:layout_width="fill_parent"
-            android:layout_height="fill_parent"
-            android:layout_below="@+id/search" />
+
+
+
 
 
         <TextView
@@ -59,6 +45,27 @@
             android:src="@drawable/pleasebeapng">
 
         </de.hdodenhof.circleimageview.CircleImageView>
+
+        <AutoCompleteTextView
+            android:id="@+id/txtSearch"
+            android:layout_width="match_parent"
+            android:layout_height="30dp"
+            android:layout_marginLeft="20dp"
+            android:layout_marginTop="60dp"
+            android:layout_marginRight="20dp"
+            android:background="@drawable/round_back_theme"
+            android:drawableLeft="@drawable/ic_search"
+            android:padding="10dp"></AutoCompleteTextView>
+
+
+        <ListView
+            android:id="@+id/listData"
+            android:layout_width="match_parent"
+            android:layout_height="fill_parent"
+            android:layout_below="@+id/txtSearch"
+            android:layout_marginLeft="20dp"
+            android:layout_marginTop="10dp"
+            android:layout_marginRight="20dp"></ListView>
 
 
     </RelativeLayout>
