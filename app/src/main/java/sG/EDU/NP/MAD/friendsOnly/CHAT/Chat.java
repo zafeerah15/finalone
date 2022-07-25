@@ -1,18 +1,24 @@
 package sG.EDU.NP.MAD.friendsOnly.CHAT;
 
+import static android.Manifest.permission.RECORD_AUDIO;
+import static android.Manifest.permission.WRITE_EXTERNAL_STORAGE;
+
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.core.app.ActivityCompat;
+import androidx.core.content.ContextCompat;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import android.Manifest;
 import android.content.ContextWrapper;
+import android.content.Intent;
 import android.content.pm.PackageManager;
 import android.media.MediaPlayer;
 import android.media.MediaRecorder;
 import android.os.Bundle;
 import android.os.Environment;
+import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
@@ -37,6 +43,7 @@ import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 import java.util.Locale;
+import java.util.Random;
 import java.util.TimeZone;
 
 import de.hdodenhof.circleimageview.CircleImageView;
@@ -47,12 +54,8 @@ import sG.EDU.NP.MAD.friendsOnly.R;
 public class Chat extends AppCompatActivity {
     ///---------------------By Syafiq---------------------------V
     private static final int REQUEST_RECORD_AUDIO_PERMISSION = 200;
-    private static final String[] permissions = {Manifest.permission.RECORD_AUDIO};
-    private boolean audioRecordingPermissionGranted = false;
-    private String fileName;
-    private Button startRecordingButton, stopRecordingButton, playRecordingButton, stopPlayingButton;;
-    private MediaRecorder recorder;
-    private MediaPlayer player;
+    private static final String[] permissions = {RECORD_AUDIO};
+    Button RecordingButton;
     ///---------------------By Syafiq---------------------------^
 
     DatabaseReference databaseReference = FirebaseDatabase.getInstance().getReference();
@@ -69,49 +72,21 @@ public class Chat extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+
+        setContentView(R.layout.activity_chat);
+
         ///---------------------By Syafiq (Recording of audio)---------------------------V
         ActivityCompat.requestPermissions(this, permissions,
                 REQUEST_RECORD_AUDIO_PERMISSION);
-        setContentView(R.layout.activity_chat);
 
-        startRecordingButton = findViewById(R.id.activity_main_record);
-        startRecordingButton.setOnClickListener(new View.OnClickListener() {
+        RecordingButton = (Button) findViewById(R.id.activity_main_record);
+        RecordingButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-
-                startRecording();
+                openrecord();
             }
         });
-
-        stopRecordingButton = findViewById(R.id.activity_main_stop);
-        stopRecordingButton.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-
-                stopRecording();
-            }
-        });
-        playRecordingButton = findViewById(R.id.activity_main_play);
-        playRecordingButton.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-
-                playRecording();
-            }
-        });
-
-        stopPlayingButton = findViewById(R.id.activity_main_stop_playing);
-        stopPlayingButton.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-
-                stopPlaying();
-            }
-        });
-
         ///---------------------By Syafiq---------------------------^
-
-        setContentView(R.layout.activity_chat);
 
         final ImageView backBtn = findViewById(R.id.backBtn);
         final TextView nameTV = findViewById(R.id.user_name);
@@ -250,75 +225,9 @@ public class Chat extends AppCompatActivity {
         });
     }
     ///---------------------By Syafiq (For recording of audio)---------------------------V
-    @Override
-    public void onRequestPermissionsResult(int requestCode, @NonNull String[] permissions, @NonNull int[] grantResults) {
-        super.onRequestPermissionsResult(requestCode, permissions, grantResults);
-        switch (requestCode) {
-            case REQUEST_RECORD_AUDIO_PERMISSION:
-                audioRecordingPermissionGranted = grantResults[0] == PackageManager.PERMISSION_GRANTED;
-                break;
-        }
-
-        if (!audioRecordingPermissionGranted) {
-            finish();
-        }
-    }
-    private void startRecording() {
-
-
-        try {
-            recorder = new MediaRecorder();
-            recorder.setAudioSource(MediaRecorder.AudioSource.MIC);
-            recorder.setOutputFormat(MediaRecorder.OutputFormat.THREE_GPP);
-            recorder.setOutputFile(getRecordingFilePath());
-            recorder.setAudioEncoder(MediaRecorder.AudioEncoder.AMR_NB);
-            recorder.prepare();
-            recorder.start();
-            Toast.makeText(this, "Recording has started",Toast.LENGTH_LONG).show();
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
-
-        recorder.start();
-    }
-
-    private void stopRecording() {
-        if (recorder != null) {
-            recorder.release();
-            recorder = null;
-        }
-        Toast.makeText(this, "Recording has stopped",Toast.LENGTH_LONG).show();
-    }
-    private void playRecording() {
-        player = new MediaPlayer();
-        try {
-            player.setDataSource(getRecordingFilePath());
-            player.setOnCompletionListener(new MediaPlayer.OnCompletionListener() {
-                @Override
-                public void onCompletion(MediaPlayer mediaPlayer) {
-                    stopPlaying();
-                }
-            });
-            player.prepare();
-            player.start();
-            Toast.makeText(this, "Recording is playing",Toast.LENGTH_LONG).show();
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
-    }
-
-    private void stopPlaying() {
-        if (player != null) {
-            player.release();
-            player = null;
-        }
-        Toast.makeText(this, "Recording has stopped playing",Toast.LENGTH_LONG).show();
-    }
-    private String getRecordingFilePath(){
-        ContextWrapper contextWrapper = new ContextWrapper(getApplicationContext());
-        File musicDirectory = contextWrapper.getExternalFilesDir(Environment.DIRECTORY_MUSIC);
-        File file = new File(musicDirectory, "RecordingFile" + ".mp3");
-        return file.getPath();
+    public void openrecord(){
+        Intent record = new Intent(this, recording.class);
+        startActivity(record);
     }
     ///---------------------By Syafiq---------------------------^
 }
