@@ -124,7 +124,7 @@ public class MainActivity extends AppCompatActivity {
             public void onDataChange(@NonNull DataSnapshot snapshot) {
                 mobile = currentUser.getDisplayName();
             }
-
+//
             @Override
             public void onCancelled(@NonNull DatabaseError error) {
 
