@@ -1,31 +1,36 @@
 package sG.EDU.NP.MAD.friendsOnly;
 
+import android.Manifest;
+import android.app.AlertDialog;
+import android.app.ProgressDialog;
+import android.content.DialogInterface;
+import android.content.Intent;
+import android.content.pm.PackageManager;
+import android.os.Bundle;
+import android.util.Log;
+import android.view.View;
+import android.widget.AdapterView;
+import android.widget.ArrayAdapter;
+import android.widget.AutoCompleteTextView;
+import android.widget.ListView;
+
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.core.app.ActivityCompat;
 import androidx.core.content.ContextCompat;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
-import android.app.AlertDialog;
-import android.content.DialogInterface;
-import android.content.Intent;
 
-import android.Manifest;
-import android.app.ProgressDialog;
-import android.content.pm.PackageManager;
-import android.os.Bundle;
-import android.util.Log;
-import android.view.View;
-
+import com.google.android.material.floatingactionbutton.FloatingActionButton;
+import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.database.Query;
 import com.google.firebase.database.ValueEventListener;
 import com.squareup.picasso.Picasso;
-import com.google.android.material.floatingactionbutton.FloatingActionButton;
-import com.google.firebase.auth.FirebaseAuth;
-import com.google.firebase.auth.FirebaseUser;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -48,6 +53,8 @@ public class MainActivity extends AppCompatActivity {
 
     private String chatKey = "";
 
+
+
     private boolean dataSet = false;
     private RecyclerView messagesRecyclerView;
     private FloatingActionButton fab;
@@ -57,16 +64,47 @@ public class MainActivity extends AppCompatActivity {
     private FirebaseAuth mAuth;
     private String userType = "";
 
+
+
+    ArrayAdapter<String> arrayAdapter;
+
+
     // referencing Fire base real time database
 
     DatabaseReference databaseReference= FirebaseDatabase.getInstance().getReference();
 
+    DatabaseReference mref;
+    private ListView listdata;
+    private AutoCompleteTextView txtSearch;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
         verifyPermissions();
+
+        final CircleImageView userProfilePic = findViewById(R.id.userProfilePic);
+
+        //retrieving data from firebase for search feature
+        mref= FirebaseDatabase.getInstance().getReference("users");
+        listdata=(ListView)findViewById(R.id.listData);
+        txtSearch=(AutoCompleteTextView)findViewById(R.id.txtSearch);
+
+        ValueEventListener event= new ValueEventListener() {
+            @Override
+            public void onDataChange(@NonNull DataSnapshot snapshot) {
+                populateSearch(snapshot);
+            }
+
+            @Override
+            public void onCancelled(@NonNull DatabaseError error) {
+
+            }
+        };
+
+        mref.addListenerForSingleValueEvent(event);
+
+
 
         final CircleImageView userProfilePic = findViewById(R.id.userProfilePic);
 
@@ -253,7 +291,14 @@ public class MainActivity extends AppCompatActivity {
             }
         });
 
+
+
     }
+
+
+
+    // FUNCTION TO REQUEST PERMISSION FROM USER FOR READ & WRITE TO STORAGE, CAMERA
+
 
     // FUNCTION TO REQUEST PERMISSION FROM USER FOR READ & WRITE TO STORAGE, CAMERA
     private void verifyPermissions() {
@@ -277,7 +322,89 @@ public class MainActivity extends AppCompatActivity {
                     REQUEST_CODE);
         }
     }
+
+    // method for retrieving user info. from search
+    private void populateSearch(DataSnapshot snapshot) {
+        ArrayList<String> names=new ArrayList<>();
+        if(snapshot.exists())
+        {
+            for(DataSnapshot ds:snapshot.getChildren())
+            {
+                String name=ds.child("name").getValue(String.class);
+                names.add(name);
+            }
+
+            ArrayAdapter adapter= new ArrayAdapter(this, android.R.layout.simple_list_item_1, names);
+            txtSearch.setAdapter(adapter);
+            txtSearch.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+                @Override
+                public void onItemClick(AdapterView<?> adapterView, View view, int position, long id) {
+                    String name=txtSearch.getText().toString();
+                    searchUser(name);
+
+                }
+            });
+
+        }else{
+            Log.d("users", "No data found");
+        }
+
+    }
+
+    //Search user method
+    private void searchUser(String name) {
+        Query query=mref.orderByChild("name").equalTo(name);
+        query.addListenerForSingleValueEvent(new ValueEventListener() {
+            @Override
+            public void onDataChange(@NonNull DataSnapshot snapshot) {
+
+                if(snapshot.exists())
+                {
+                    ArrayList<String> listusers=new ArrayList<>();
+                    for(DataSnapshot ds:snapshot.getChildren())
+                    {
+                        search_data.User user= new search_data.User(ds.child("name").getValue(String.class), ds.child("email").getValue(String.class));
+                        listusers.add(user.getName()+"\n"+user.getEmail());
+                    }
+                    ArrayAdapter adapter = new ArrayAdapter(getApplicationContext(),android.R.layout.simple_list_item_1, listusers);
+                    listdata.setAdapter(adapter);
+
+                }else{
+                    Log.d("users", "No Data Found");
+                }
+
+            }
+
+            @Override
+            public void onCancelled(@NonNull DatabaseError error) {
+
+            }
+        });
+
+
+    }
+    static class User
+    {
+
+        public User(String name, String email) {
+            this.name = name;
+            this.email = email;
+        }
+
+        public User() {
+        }
+        public String getName() { return name; }
+
+        public String getEmail() { return email; }
+
+        public String name;
+        public String email;
+    }
+
 }
+
+
+
 
 //                        databaseReference.child("chat").addValueEventListener(new ValueEventListener() {
 //                            @Override
@@ -329,3 +456,8 @@ public class MainActivity extends AppCompatActivity {
 //
 //                            }
 //                        });
+
+
+
+
+

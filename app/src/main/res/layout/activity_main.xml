@@ -10,7 +10,14 @@
 
     <RelativeLayout
         android:layout_width="match_parent"
-        android:layout_height="wrap_content">
+        android:layout_height="150dp">
+
+
+
+
+
+
+
 
         <de.hdodenhof.circleimageview.CircleImageView
             android:layout_width="35dp"
@@ -27,17 +34,48 @@
             android:layout_height="wrap_content"
             android:layout_alignParentEnd="true"
             android:layout_marginStart="150dp"
-            android:layout_marginEnd="150dp"
             android:layout_marginTop="25dp"
+            android:layout_marginEnd="146dp"
             android:text="Messages"
-            android:textStyle="bold"
-            android:textColor="#424242">
+            android:textColor="#424242"
+            android:textStyle="bold">
             android:fontFamily="sans-serif-condensed"
             android:textStyle = "bold"
             android:textSize = "40dp"
-            android : layout_centerInParent="true"
-        </TextView>
+            android : layout_centerInParent="true"</TextView>
 
+        <de.hdodenhof.circleimageview.CircleImageView
+            android:id="@+id/userProfilePic"
+            android:layout_width="35dp"
+            android:layout_height="35dp"
+            android:layout_alignParentEnd="true"
+            android:layout_centerVertical="true"
+            android:layout_marginTop="40dp"
+            android:layout_marginEnd="20dp"
+            android:src="@drawable/pleasebeapng">
+
+        </de.hdodenhof.circleimageview.CircleImageView>
+
+        <AutoCompleteTextView
+            android:id="@+id/txtSearch"
+            android:layout_width="match_parent"
+            android:layout_height="30dp"
+            android:layout_marginLeft="20dp"
+            android:layout_marginTop="60dp"
+            android:layout_marginRight="20dp"
+            android:background="@drawable/round_back_theme"
+            android:drawableLeft="@drawable/ic_search"
+            android:padding="10dp"></AutoCompleteTextView>
+
+
+        <ListView
+            android:id="@+id/listData"
+            android:layout_width="match_parent"
+            android:layout_height="fill_parent"
+            android:layout_below="@+id/txtSearch"
+            android:layout_marginLeft="20dp"
+            android:layout_marginTop="10dp"
+            android:layout_marginRight="20dp"></ListView>
 
         <de.hdodenhof.circleimageview.CircleImageView
             android:id="@+id/userProfilePic"
@@ -64,6 +102,7 @@
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:id="@+id/messagesRecyclerView">
+            android:layout_height="737dp">
 
         </androidx.recyclerview.widget.RecyclerView>
 
@@ -78,5 +117,8 @@
     </FrameLayout>
 
 
+
 </LinearLayout>
+
+
 
