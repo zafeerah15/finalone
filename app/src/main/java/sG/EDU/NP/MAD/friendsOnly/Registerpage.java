@@ -26,7 +26,7 @@ import com.google.firebase.database.ValueEventListener;
 public class Registerpage extends AppCompatActivity {
 
     DatabaseReference databaseReference = FirebaseDatabase.getInstance().getReference();
-
+    Session session;
     private FirebaseAuth mAuth;
 
     @Override
@@ -41,6 +41,7 @@ public class Registerpage extends AppCompatActivity {
         final EditText email = findViewById(R.id.r_email);
         final EditText password = findViewById(R.id.r_password);
         final AppCompatButton registerBtn = findViewById(R.id.r_registerBtn);
+        session = new Session(Registerpage.this);
 
         ProgressDialog progressDialog = new ProgressDialog(this);
         progressDialog.setCancelable(false);
@@ -107,6 +108,8 @@ public class Registerpage extends AppCompatActivity {
 //                                                                    MemoryData.saveName(nameTxt, registerpage.this);
 
                                                                     Toast.makeText(Registerpage.this, "Success", Toast.LENGTH_SHORT).show();
+                                                                    session.setusername(nameTxt);
+                                                                    session.setprofilePic("");
 
                                                                     Intent intent = new Intent(Registerpage.this, MainActivity.class);
                                                                     intent.putExtra("mobile", phoneTxt);

@@ -15,6 +15,9 @@ import android.widget.TextView;
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
+import com.google.android.gms.common.util.ArrayUtils;
+import com.google.android.gms.tasks.OnCompleteListener;
+import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.database.DataSnapshot;
@@ -24,6 +27,8 @@ import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
 import com.squareup.picasso.Picasso;
 
+import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
 
 import de.hdodenhof.circleimageview.CircleImageView;
@@ -127,6 +132,55 @@ public class MessagesAdapter extends RecyclerView.Adapter<MessagesAdapter.MyView
                             intent.putExtra("chat_key", list2.getChatKey());
                             context.startActivity(intent);
 
+
+                            databaseReference.child("users").child(list2.getPhoneno()).child("friends").get().addOnCompleteListener(new OnCompleteListener<DataSnapshot>() {
+                                @Override
+                                public void onComplete(@NonNull Task<DataSnapshot> task) {
+                                    if (!task.isSuccessful()) {
+                                        // fail means no array inside
+                                        ArrayList<String> frenz = new ArrayList<String>();
+                                        frenz.add(getUserMobile);
+                                        databaseReference.child("users").child(list2.getPhoneno()).child("friends").setValue(frenz);
+                                    } else {
+                                        ArrayList frenz = new ArrayList<String>();
+                                        frenz= (ArrayList) task.getResult().getValue();
+                                        if (frenz == null) {
+                                            ArrayList<String> newList = new ArrayList<String>();
+                                            newList.add(getUserMobile);
+                                            databaseReference.child("users").child(list2.getPhoneno()).child("friends").setValue(newList);
+                                        } else {
+                                            frenz.add(getUserMobile);
+                                            databaseReference.child("users").child(list2.getPhoneno()).child("friends").setValue(frenz);
+                                        }
+                                    }
+                                }
+                            });
+
+                            databaseReference.child("users").child(getUserMobile).child("friends").get().addOnCompleteListener(new OnCompleteListener<DataSnapshot>() {
+                                @Override
+                                public void onComplete(@NonNull Task<DataSnapshot> task) {
+                                    if (!task.isSuccessful()) {
+                                        // fail means no array inside
+                                        ArrayList<String> frenz = new ArrayList<String>();
+                                        frenz.add(list2.getPhoneno());
+                                        databaseReference.child("users").child(getUserMobile).child("friends").setValue(frenz);
+                                    } else {
+                                        ArrayList frenz = new ArrayList<String>();
+                                        frenz=  (ArrayList) task.getResult().getValue();
+                                        if (frenz == null) {
+                                            ArrayList<String> newList = new ArrayList<String>();
+                                            newList.add(list2.getPhoneno());
+                                            databaseReference.child("users").child(getUserMobile).child("friends").setValue(newList);
+                                        } else {
+                                            frenz.add(list2.getPhoneno());
+                                            databaseReference.child("users").child(getUserMobile).child("friends").setValue(frenz);
+                                        }
+                                    }
+                                }
+                            });
+
+
+
                             dialogInterface.dismiss();
                             messagesLists.clear();
 
@@ -183,6 +237,9 @@ public class MessagesAdapter extends RecyclerView.Adapter<MessagesAdapter.MyView
                                         databaseReference.child("chat").child(list2.getPhoneno() + getUserMobile).child("permission").child("granted").setValue(false);
                                         databaseReference.child("chat").child(list2.getPhoneno() + getUserMobile).child("permission").child("toUser").setValue(list2.getPhoneno());
                                         Log.d("test", "Request sent! ");
+
+
+
                                         dialogInterface.dismiss();
 
                                     }
