@@ -83,6 +83,8 @@ public class MainActivity extends AppCompatActivity {
         setContentView(R.layout.activity_main);
         verifyPermissions();
 
+
+        //retrieving data from firebase for search feature
         mref= FirebaseDatabase.getInstance().getReference("users");
         listdata=(ListView)findViewById(R.id.listData);
         txtSearch=(AutoCompleteTextView)findViewById(R.id.txtSearch);
@@ -325,6 +327,8 @@ public class MainActivity extends AppCompatActivity {
                     REQUEST_CODE);
         }
     }
+
+    // method for retrieving user info. from search
     private void populateSearch(DataSnapshot snapshot) {
         ArrayList<String> names=new ArrayList<>();
         if(snapshot.exists())
@@ -352,6 +356,7 @@ public class MainActivity extends AppCompatActivity {
 
     }
 
+    //Search user method
     private void searchUser(String name) {
         Query query=mref.orderByChild("name").equalTo(name);
         query.addListenerForSingleValueEvent(new ValueEventListener() {
