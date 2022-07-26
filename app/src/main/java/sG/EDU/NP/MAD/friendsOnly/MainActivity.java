@@ -38,7 +38,7 @@ import sG.EDU.NP.MAD.friendsOnly.messages.MessagesList;
 public class MainActivity extends AppCompatActivity {
 
 
-
+    //testing
     LinearLayout radioFunc = findViewById(R.id.radioFunc);
 
     private final List<MessagesList> messagesLists = new ArrayList<>();
