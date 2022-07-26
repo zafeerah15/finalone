@@ -12,6 +12,8 @@
         android:id="@+id/topBar"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:layout_alignParentStart="true"
+        android:layout_alignParentTop="true"
         android:background="@color/theme_color">
 
 
@@ -20,7 +22,7 @@
             android:layout_width="35dp"
             android:layout_height="35dp"
             android:layout_centerVertical="true"
-            android:layout_marginStart="20dp"
+
             android:layout_marginTop="40dp"
             android:background="@drawable/round_back_light_10"
             android:paddingStart="12sp"
@@ -61,10 +63,40 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="2dp"
+
                 android:text="Online"
                 android:textColor="#00C853"
                 android:textSize="13sp" />
+
+
         </LinearLayout>
+
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_alignParentTop="true"
+
+            android:layout_alignParentEnd="true"
+            android:layout_marginTop="0dp"
+            android:layout_marginEnd="0dp"
+            android:foregroundGravity="center"
+            android:gravity="end">
+
+            <ImageView
+                android:id="@+id/attach"
+                android:layout_width="35dp"
+                android:layout_height="35dp"
+                android:layout_centerVertical="true"
+                android:layout_marginTop="40dp"
+                android:layout_marginEnd="20dp"
+                android:background="@drawable/round_back_light_10"
+                android:paddingStart="12sp"
+                android:paddingEnd="2dp"
+                android:src="@drawable/ic_baseline_attach_file_24" />
+        </RelativeLayout>
+
+
     </RelativeLayout>
 
     <androidx.recyclerview.widget.RecyclerView
@@ -115,28 +147,89 @@
         android:id="@+id/activity_main_record"
         android:layout_width="64dp"
         android:layout_height="64dp"
-        android:layout_alignParentStart="true"
+        android:layout_alignParentBottom="true"
+        android:layout_marginEnd="43dp"
+        android:layout_marginBottom="75dp"
+        android:layout_toStartOf="@id/activity_main_stop"
+        android:text="Record"
+        android:textColor="@color/black"
+        android:textSize="7sp" />
+
+    <Button
+        android:id="@+id/activity_main_stop"
+        android:layout_width="64dp"
+        android:layout_height="64dp"
+        android:layout_alignParentBottom="true"
+        android:layout_marginEnd="52dp"
+        android:layout_marginBottom="75dp"
+        android:layout_toStartOf="@id/activity_main_play"
+        android:text="Stop"
+        android:textColor="@color/black"
+        android:textSize="8sp" />
+
+    <Button
+        android:id="@+id/activity_main_play"
+        android:layout_width="64dp"
+        android:layout_height="64dp"
+        android:layout_alignParentBottom="true"
+        android:layout_marginEnd="46dp"
+        android:layout_marginBottom="75dp"
+        android:layout_toStartOf="@id/activity_main_stop_playing"
+        android:text="Play"
+        android:textColor="@color/black"
+        android:textSize="8sp" />
+
+    <Button
+        android:id="@+id/activity_main_stop_playing"
+        android:layout_width="64dp"
+        android:layout_height="64dp"
         android:layout_alignParentEnd="true"
         android:layout_alignParentBottom="true"
-        android:layout_marginStart="10dp"
-        android:layout_marginEnd="10dp"
+        android:layout_marginEnd="6dp"
         android:layout_marginBottom="75dp"
-        android:text="Record"
-        android:textColor="@color/theme_color_8"
-        android:textSize="25sp" />
-
+        android:text="Stop Play"
+        android:textColor="@color/black"
+        android:textSize="7sp" />
 
     <ImageView
         android:id="@+id/main_record"
         android:layout_width="64dp"
         android:layout_height="64dp"
-        android:layout_alignParentStart="true"
+        android:layout_alignParentBottom="true"
+        android:layout_marginEnd="42dp"
+        android:layout_marginBottom="73dp"
+        android:layout_toStartOf="@id/activity_main_stop"
+        app:srcCompat="@android:drawable/ic_btn_speak_now" />
+
+    <ImageView
+        android:id="@+id/main_stop"
+        android:layout_width="64dp"
+        android:layout_height="64dp"
+        android:layout_alignParentBottom="true"
+        android:layout_marginEnd="52dp"
+        android:layout_marginBottom="75dp"
+        android:layout_toStartOf="@id/activity_main_play"
+        app:srcCompat="@android:drawable/radiobutton_off_background" />
+
+    <ImageView
+        android:id="@+id/main_play"
+        android:layout_width="64dp"
+        android:layout_height="64dp"
+        android:layout_alignParentBottom="true"
+        android:layout_marginEnd="46dp"
+        android:layout_marginBottom="75dp"
+        android:layout_toStartOf="@id/activity_main_stop_playing"
+        app:srcCompat="@android:drawable/ic_media_play" />
+
+    <ImageView
+        android:id="@+id/main_stop_playing"
+        android:layout_width="64dp"
+        android:layout_height="64dp"
         android:layout_alignParentEnd="true"
         android:layout_alignParentBottom="true"
-        android:layout_marginStart="1dp"
-        android:layout_marginEnd="338dp"
-        android:layout_marginBottom="72dp"
-        app:srcCompat="@android:drawable/ic_btn_speak_now" />
+        android:layout_marginEnd="6dp"
+        android:layout_marginBottom="75dp"
+        app:srcCompat="@android:drawable/ic_media_pause" />
 
 
 </RelativeLayout>

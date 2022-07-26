@@ -16,7 +16,6 @@ import android.content.pm.PackageManager;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
-import android.widget.LinearLayout;
 
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
@@ -37,10 +36,6 @@ import sG.EDU.NP.MAD.friendsOnly.messages.MessagesList;
 
 public class MainActivity extends AppCompatActivity {
 
-
-    //testing
-    LinearLayout radioFunc = findViewById(R.id.radioFunc);
-
     private final List<MessagesList> messagesLists = new ArrayList<>();
     private static final String TAG = "MainActivity";
     private static final int REQUEST_CODE = 1;
@@ -48,7 +43,7 @@ public class MainActivity extends AppCompatActivity {
     private String email;
     private String name;
     private Boolean granted;
-//
+
     private int unseenMessages = 0;
 
     private String chatKey = "";
@@ -62,7 +57,6 @@ public class MainActivity extends AppCompatActivity {
     private FirebaseAuth mAuth;
     private String userType = "";
 
-    
     // referencing Fire base real time database
 
     DatabaseReference databaseReference= FirebaseDatabase.getInstance().getReference();
@@ -70,21 +64,11 @@ public class MainActivity extends AppCompatActivity {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
-
-        //Goes to radio selection page when clicked
-        radioFunc.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                Intent intent = new Intent(MainActivity.this, SelectRadioActivity.class);
-                startActivity(intent);
-            }
-        });
-
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
         verifyPermissions();
 
-        //final CircleImageView userProfilePic = findViewById(R.id.userProfilePic);
+        final CircleImageView userProfilePic = findViewById(R.id.userProfilePic);
 
         mAuth = FirebaseAuth.getInstance();
         FirebaseUser currentUser = mAuth.getCurrentUser();
@@ -124,7 +108,7 @@ public class MainActivity extends AppCompatActivity {
             public void onDataChange(@NonNull DataSnapshot snapshot) {
                 mobile = currentUser.getDisplayName();
             }
-//
+
             @Override
             public void onCancelled(@NonNull DatabaseError error) {
 
@@ -135,7 +119,7 @@ public class MainActivity extends AppCompatActivity {
         // get intent data from registerpage.class activity
 //        mobile = getIntent().getStringExtra("mobile");
 
-       //mobile = MemoryData.getData(MainActivity.this);
+        //mobile = MemoryData.getData(MainActivity.this);
         if (mobile.isEmpty()) {
             mobile = getIntent().getStringExtra("mobile");
         }
@@ -165,14 +149,13 @@ public class MainActivity extends AppCompatActivity {
 
                 if (profilepictureUrl == null || !profilepictureUrl.isEmpty()) {
                     // set profile pic to circle image view
-                    //Picasso.get().load(profilepictureUrl).into(userProfilePic);
+                    Picasso.get().load(profilepictureUrl).into(userProfilePic);
                 }
                 progressDialog.dismiss();
             }
             @Override
             public void onCancelled(@NonNull DatabaseError error) { progressDialog.dismiss();}
         });
-        //Log.d("test", "My name: " + name + "My Number:" + mobile);
 
         //firebase database event listener
         databaseReference.addValueEventListener(new ValueEventListener() {
@@ -222,18 +205,16 @@ public class MainActivity extends AppCompatActivity {
 
                                         if (profilepictureUrl == null || !profilepictureUrl.isEmpty()){
                                             //set the profile pic into circle imageview
-                                            //Picasso.get().load(profilepictureUrl).into(userProfilePic);
+                                            Picasso.get().load(profilepictureUrl).into(userProfilePic);
                                         }
                                         progressDialog.dismiss();
 
                                         if (dataSnapshot1.getKey().equals(chatKey) && dataSnapshot1.child("permission").hasChild("toUser")) {
-                                            //Log.d("test", chatKey + " " + pToUser);
                                             if (chatKey.contains(mobile) && chatKey.contains(getMobile) && pGranted.equals(false) && pToUser.equals(mobile)) {
                                                 lastMessage = getName + " wants to chat with you!";
                                                 unseenMessages = 1;
                                                 userType = "recipient";
 //
-                                                //Log.d("test", chatKey + " " + pToUser + " " + getName + " no is " + getMobile);
                                                 // For sender: check if recipient accept
 
                                             }
@@ -241,23 +222,19 @@ public class MainActivity extends AppCompatActivity {
                                             if (chatKey.contains(mobile) && chatKey.contains(getMobile) && pGranted.equals(false) && pFromUser.equals(mobile)) {
                                                 userType = "sender";
                                                 lastMessage = "Chat request sent!";
-                                                //Log.d("test", "recipient not accepted yet");
                                             }
                                         }
 
                                     }
 
                                 }
-
-
-                                Log.d("test", String.valueOf(messagesLists.size()));
-                                    dataSet = true;
-                                    MessagesList messagesList = new MessagesList(getName, getMobile, lastMessage, getProfilePic, unseenMessages,
-                                            getMobile, granted, userType, getBio);
+                                dataSet = true;
+                                MessagesList messagesList = new MessagesList(getName, getMobile, lastMessage, getProfilePic, unseenMessages,
+                                        getMobile, granted, userType, getBio);
                                 if (messagesLists.size() + 1 < userCount) {
-                                        messagesLists.add(messagesList);
-                                        messagesAdapter.updateData(messagesLists);
-                                    }
+                                    messagesLists.add(messagesList);
+                                    messagesAdapter.updateData(messagesLists);
+                                }
 
 
 
@@ -278,9 +255,7 @@ public class MainActivity extends AppCompatActivity {
 
     }
 
-
-
-// FUNCTION TO REQUEST PERMISSION FROM USER FOR READ & WRITE TO STORAGE, CAMERA
+    // FUNCTION TO REQUEST PERMISSION FROM USER FOR READ & WRITE TO STORAGE, CAMERA
     private void verifyPermissions() {
         Log.d(TAG, "verifyPermissions: asking user for permissions");
         String[] permissions = {Manifest.permission.READ_EXTERNAL_STORAGE,

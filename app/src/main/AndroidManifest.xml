@@ -20,10 +20,7 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.Chatapp">
         <activity
-            android:name=".CHAT.recording"
-            android:exported="false" />
-        <activity
-            android:name=".Loginpage"
+            android:name=".messages.Loginpage"
             android:exported="false" />
         <activity
             android:name=".Startup"

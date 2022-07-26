@@ -1,4 +1,4 @@
-package sG.EDU.NP.MAD.friendsOnly;
+package sG.EDU.NP.MAD.friendsOnly.messages;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
@@ -14,6 +14,9 @@ import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.AuthResult;
 import com.google.firebase.auth.FirebaseAuth;
+
+import sG.EDU.NP.MAD.friendsOnly.MainActivity;
+import sG.EDU.NP.MAD.friendsOnly.R;
 
 //Login page with firebase authentication
 public class Loginpage extends AppCompatActivity {
