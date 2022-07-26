@@ -15,10 +15,13 @@ import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
 
+import sG.EDU.NP.MAD.friendsOnly.bottomNav.NavMainPage;
+
 import sG.EDU.NP.MAD.friendsOnly.messages.Loginpage;
 
 public class Startup extends AppCompatActivity {
     private FirebaseAuth mAuth;
+    Session session;
 
     DatabaseReference databaseReference = FirebaseDatabase.getInstance().getReference();
 
@@ -30,7 +33,7 @@ public class Startup extends AppCompatActivity {
 
         final AppCompatButton gLogin = findViewById(R.id.g_login);
         final AppCompatButton gRegis = findViewById(R.id.g_register);
-
+        session = new Session(Startup.this);
 
         mAuth = FirebaseAuth.getInstance();
         //If user was already logged in previously
@@ -42,13 +45,19 @@ public class Startup extends AppCompatActivity {
                     String getNumber = mAuth.getCurrentUser().getDisplayName();
 
                     String name = snapshot.child("users").child(getNumber).child("name").getValue(String.class);
+                    String profilePic = snapshot.child("users").child(getNumber).child("profile_pic").getValue(String.class);
 //                String bio = snapshot.child("users").child(getNumber).child("bio").getValue(String.class);
 //                String email = snapshot.child("users").child(getNumber).child("email").getValue(String.class);
 
-                    Intent intent = new Intent(Startup.this, MainActivity.class);
+                    Intent intent = new Intent(Startup.this, NavMainPage.class);
                     intent.putExtra("mobile", getNumber);
                     intent.putExtra("name", name);
                     intent.putExtra("email", "");
+
+                    session.setusername(name);
+                    session.setprofilePic(profilePic);
+
+
                     startActivity(intent);
                     finish();
                 }
@@ -59,8 +68,6 @@ public class Startup extends AppCompatActivity {
                 }
             });
         }
-
-
 
 
 
