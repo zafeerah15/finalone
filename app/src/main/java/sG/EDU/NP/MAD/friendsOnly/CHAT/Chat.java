@@ -126,6 +126,11 @@ public class Chat extends AppCompatActivity {
         final CircleImageView profilePic = findViewById(R.id.profilepicture);
         final ImageView sendBtn = findViewById(R.id.sendBtn);
 
+        getMobile = getIntent().getStringExtra("mobile");
+        getName = getIntent().getStringExtra("name");
+        getProfilePic = getIntent().getStringExtra("profile_pic");
+        attach = (ImageView) findViewById(R.id.attach);
+
         //Recyclerview
         chattingRecyclerView = findViewById(R.id.chattingRecyclerView);
         // get data from messages adapter class
