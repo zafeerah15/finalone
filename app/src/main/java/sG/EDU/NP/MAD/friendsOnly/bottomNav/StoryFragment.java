@@ -13,6 +13,7 @@ import android.net.Uri;
 import android.os.Bundle;
 import android.os.Environment;
 import android.provider.MediaStore;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -34,6 +35,7 @@ import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 import androidx.swiperefreshlayout.widget.SwipeRefreshLayout;
 
+import com.google.android.gms.common.util.ArrayUtils;
 import com.google.android.gms.tasks.Continuation;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.OnFailureListener;
@@ -51,12 +53,14 @@ import com.google.firebase.storage.FirebaseStorage;
 import com.google.firebase.storage.StorageReference;
 import com.google.firebase.storage.UploadTask;
 
+import java.io.ByteArrayOutputStream;
 import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.OutputStream;
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.Collections;
 import java.util.List;
 
@@ -81,7 +85,6 @@ public class StoryFragment extends Fragment {
     Session session;
     DatabaseReference databaseReference = FirebaseDatabase.getInstance().getReference();
     private static CustomProgressBar progressBar = new CustomProgressBar();
-
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
@@ -125,41 +128,63 @@ public class StoryFragment extends Fragment {
         return root;
     }
 
+
+
+
     private void getData() {
+        mAuth = FirebaseAuth.getInstance();
+        FirebaseUser currentUser = mAuth.getCurrentUser();
+        final String getUser = currentUser.getDisplayName();
         storyLists.clear();
-        Query postAscending = databaseReference.child("stories").orderByChild("date");
-        postAscending.addListenerForSingleValueEvent(new ValueEventListener() {
+
+
+        databaseReference.child("users").child(getUser).child("friends").get().addOnCompleteListener(new OnCompleteListener<DataSnapshot>() {
             @Override
-            public void onDataChange(@NonNull DataSnapshot snapshot) {
-
-                ArrayList<StoryList> listInside = new ArrayList<StoryList>();
-                for (DataSnapshot dataSnapshot : snapshot.getChildren()) {
-
-                    final String getName = dataSnapshot.child("username").getValue(String.class);
-                    final String getProfilePic = dataSnapshot.child("prof_url").getValue(String.class);
-                    final String getstory_url = dataSnapshot.child("story_url").getValue(String.class);
-                    final String caption = dataSnapshot.child("caption").getValue(String.class);
-                    final Long time = dataSnapshot.child("date").getValue(Long.class);
+            public void onComplete(@NonNull Task<DataSnapshot> task) {
+                if (!task.isSuccessful()) {
 
 
-                    StoryList storyList = new StoryList(getName, getProfilePic, getstory_url, caption,time);
+                } else {
+                    ArrayList frenz = new ArrayList<String>();
+                    frenz = (ArrayList) task.getResult().getValue();
 
-                    storyLists.add(storyList);
+                    Query postAscending = databaseReference.child("stories").orderByChild("date");
 
+                    ArrayList finalFrenz = frenz;
+                    Log.d("tesyyy",getUser.toString());
+                    postAscending.addListenerForSingleValueEvent(new ValueEventListener() {
+                        @Override
+                        public void onDataChange(@NonNull DataSnapshot snapshot) {
 
+                            for (DataSnapshot dataSnapshot : snapshot.getChildren()) {
+                                final String storyId = dataSnapshot.child("userId").getValue(String.class);
+
+                                if (getUser.equals(storyId) || (finalFrenz !=null && finalFrenz.contains(storyId))) {
+                                    final String getName = dataSnapshot.child("username").getValue(String.class);
+                                    final String getProfilePic = dataSnapshot.child("prof_url").getValue(String.class);
+                                    final String getstory_url = dataSnapshot.child("story_url").getValue(String.class);
+                                    final String caption = dataSnapshot.child("caption").getValue(String.class);
+                                    final Long time = dataSnapshot.child("date").getValue(Long.class);
+
+                                    StoryList storyList = new StoryList(storyId, getName, getProfilePic, getstory_url, caption, time);
+                                    storyLists.add(storyList);
+                                }
+                            }
+                            Collections.reverse(storyLists);
+                            storyAdapter.updateData(storyLists);
+                        }
+
+                        @Override
+                        public void onCancelled(@NonNull DatabaseError error) {
+
+                        }
+                    });
                 }
-                Collections.reverse(storyLists);
-                storyAdapter.updateData(storyLists);
-
-            }
-
-            @Override
-            public void onCancelled(@NonNull DatabaseError error) {
 
             }
         });
 
-    }
+        }
 
     private void selectImage() {
         final CharSequence[] options = {"Take Photo", "Choose from Gallery", "Cancel"};
@@ -170,8 +195,8 @@ public class StoryFragment extends Fragment {
             public void onClick(DialogInterface dialog, int item) {
                 if (options[item].equals("Take Photo")) {
                     Intent intent = new Intent(MediaStore.ACTION_IMAGE_CAPTURE);
-                    File f = new File(Environment.getExternalStorageDirectory(), "temp.jpg");
-                    intent.putExtra(MediaStore.EXTRA_OUTPUT, Uri.fromFile(f));
+//                    File f = new File(Environment.getExternalStorageDirectory(), "temp.jpg");
+//                    intent.putExtra(MediaStore.EXTRA_OUTPUT, Uri.fromFile(f));
                     someActivityResultLauncher.launch(intent);
                     requestCode = 1;
                 } else if (options[item].equals("Choose from Gallery")) {
@@ -193,43 +218,54 @@ public class StoryFragment extends Fragment {
                 public void onActivityResult(ActivityResult result) {
 
                     if (result.getResultCode() == Activity.RESULT_OK) {
+
+
                         File f = new File(Environment.getExternalStorageDirectory().toString());
                         if (requestCode == 1) {
-                            for (File temp : f.listFiles()) {
-                                if (temp.getName().equals("temp.jpg")) {
-                                    f = temp;
-                                    break;
-                                }
-                            }
-                            try {
-                                Bitmap bitmap;
-                                BitmapFactory.Options bitmapOptions = new BitmapFactory.Options();
-                                bitmap = BitmapFactory.decodeFile(f.getAbsolutePath(),
-                                        bitmapOptions);
 
-//                            viewImage.setImageBitmap(bitmap);
-                                String path = Environment
-                                        .getExternalStorageDirectory()
-                                        + File.separator
-                                        + "Phoenix" + File.separator + "default";
-                                f.delete();
-                                OutputStream outFile = null;
-                                File file = new File(path, String.valueOf(System.currentTimeMillis()) + ".jpg");
-                                try {
-                                    outFile = new FileOutputStream(file);
-                                    bitmap.compress(Bitmap.CompressFormat.JPEG, 85, outFile);
-                                    outFile.flush();
-                                    outFile.close();
-                                } catch (FileNotFoundException e) {
-                                    e.printStackTrace();
-                                } catch (IOException e) {
-                                    e.printStackTrace();
-                                } catch (Exception e) {
-                                    e.printStackTrace();
-                                }
-                            } catch (Exception e) {
-                                e.printStackTrace();
-                            }
+                            Bitmap bp = (Bitmap) result.getData().getExtras().get("data");
+
+                            ByteArrayOutputStream bytes = new ByteArrayOutputStream();
+                            bp.compress(Bitmap.CompressFormat.JPEG, 75, bytes);
+                            String path = MediaStore.Images.Media.insertImage(getContext().getContentResolver(), bp, "Title", null);
+                            Uri uri = Uri.parse(path);
+                            showImage(uri);
+
+//                            for (File temp : f.listFiles()) {
+//                                if (temp.getName().equals("temp.jpg")) {
+//                                    f = temp;
+//                                    break;
+//                                }
+//                            }
+//                            try {
+//                                Bitmap bitmap;
+//                                BitmapFactory.Options bitmapOptions = new BitmapFactory.Options();
+//                                bitmap = BitmapFactory.decodeFile(f.getAbsolutePath(),
+//                                        bitmapOptions);
+//
+////                            viewImage.setImageBitmap(bitmap);
+//                                String path = Environment
+//                                        .getExternalStorageDirectory()
+//                                        + File.separator
+//                                        + "Phoenix" + File.separator + "default";
+//                                f.delete();
+//                                OutputStream outFile = null;
+//                                File file = new File(path, String.valueOf(System.currentTimeMillis()) + ".jpg");
+//                                try {
+//                                    outFile = new FileOutputStream(file);
+//                                    bitmap.compress(Bitmap.CompressFormat.JPEG, 85, outFile);
+//                                    outFile.flush();
+//                                    outFile.close();
+//                                } catch (FileNotFoundException e) {
+//                                    e.printStackTrace();
+//                                } catch (IOException e) {
+//                                    e.printStackTrace();
+//                                } catch (Exception e) {
+//                                    e.printStackTrace();
+//                                }
+//                            } catch (Exception e) {
+//                                e.printStackTrace();
+//                            }
                         } else if (requestCode == 2) {
 
 
@@ -347,7 +383,7 @@ public class StoryFragment extends Fragment {
 
                             // add story object into user
                             final String userKey = mAuth.getCurrentUser().getDisplayName();
-                            StoryList storyList = new StoryList(session.getusename(), session.getprofilePic(), downloadUri.toString(),caption.getText().toString(),timeMillis);
+                            StoryList storyList = new StoryList(userKey ,session.getusename(), session.getprofilePic(), downloadUri.toString(),caption.getText().toString(),timeMillis);
                             String id = databaseReference.child("users").child(userKey).child("stories").push().getKey();
 
 
