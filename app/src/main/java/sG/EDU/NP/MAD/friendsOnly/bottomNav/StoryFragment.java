@@ -15,6 +15,9 @@ import android.os.Environment;
 import android.provider.MediaStore;
 import android.util.Log;
 import android.view.LayoutInflater;
+import android.view.Menu;
+import android.view.MenuInflater;
+import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
 import android.view.Window;
@@ -130,7 +133,6 @@ public class StoryFragment extends Fragment {
 
 
 
-
     private void getData() {
         mAuth = FirebaseAuth.getInstance();
         FirebaseUser currentUser = mAuth.getCurrentUser();
@@ -139,12 +141,17 @@ public class StoryFragment extends Fragment {
 
 
         databaseReference.child("users").child(getUser).child("friends").get().addOnCompleteListener(new OnCompleteListener<DataSnapshot>() {
+
+
             @Override
             public void onComplete(@NonNull Task<DataSnapshot> task) {
                 if (!task.isSuccessful()) {
 
 
                 } else {
+
+
+
                     ArrayList frenz = new ArrayList<String>();
                     frenz = (ArrayList) task.getResult().getValue();
 
@@ -156,22 +163,34 @@ public class StoryFragment extends Fragment {
                         @Override
                         public void onDataChange(@NonNull DataSnapshot snapshot) {
 
-                            for (DataSnapshot dataSnapshot : snapshot.getChildren()) {
-                                final String storyId = dataSnapshot.child("userId").getValue(String.class);
+                            databaseReference.child("users").child(getUser).child("likes").get().addOnCompleteListener(new OnCompleteListener<DataSnapshot>() {
+                                @Override
+                                public void onComplete(@NonNull Task<DataSnapshot> task) {
+                                    ArrayList likes = new ArrayList<String>();
+                                    likes = (ArrayList) task.getResult().getValue();
 
-                                if (getUser.equals(storyId) || (finalFrenz !=null && finalFrenz.contains(storyId))) {
-                                    final String getName = dataSnapshot.child("username").getValue(String.class);
-                                    final String getProfilePic = dataSnapshot.child("prof_url").getValue(String.class);
-                                    final String getstory_url = dataSnapshot.child("story_url").getValue(String.class);
-                                    final String caption = dataSnapshot.child("caption").getValue(String.class);
-                                    final Long time = dataSnapshot.child("date").getValue(Long.class);
+                                    for (DataSnapshot dataSnapshot : snapshot.getChildren()) {
+                                        final String storyId = dataSnapshot.child("userId").getValue(String.class);
+                                        final String key = dataSnapshot.getKey();
+                                        if (getUser.equals(storyId) || (finalFrenz !=null && finalFrenz.contains(storyId))) {
+                                            final String getName = dataSnapshot.child("username").getValue(String.class);
+                                            final String getProfilePic = dataSnapshot.child("prof_url").getValue(String.class);
+                                            final String getstory_url = dataSnapshot.child("story_url").getValue(String.class);
+                                            final String caption = dataSnapshot.child("caption").getValue(String.class);
+                                            final Long time = dataSnapshot.child("date").getValue(Long.class);
 
-                                    StoryList storyList = new StoryList(storyId, getName, getProfilePic, getstory_url, caption, time);
-                                    storyLists.add(storyList);
+                                            Boolean like = (likes !=null && likes.contains(key));
+
+                                            StoryList storyList = new StoryList(key, storyId, getName, getProfilePic, getstory_url, caption, like, time);
+                                            storyLists.add(storyList);
+                                        }
+                                    }
+                                    Collections.reverse(storyLists);
+                                    storyAdapter.updateData(storyLists);
                                 }
-                            }
-                            Collections.reverse(storyLists);
-                            storyAdapter.updateData(storyLists);
+                            });
+
+
                         }
 
                         @Override
@@ -185,6 +204,7 @@ public class StoryFragment extends Fragment {
         });
 
         }
+
 
     private void selectImage() {
         final CharSequence[] options = {"Take Photo", "Choose from Gallery", "Cancel"};
@@ -218,7 +238,6 @@ public class StoryFragment extends Fragment {
                 public void onActivityResult(ActivityResult result) {
 
                     if (result.getResultCode() == Activity.RESULT_OK) {
-
 
                         File f = new File(Environment.getExternalStorageDirectory().toString());
                         if (requestCode == 1) {
@@ -380,11 +399,11 @@ public class StoryFragment extends Fragment {
                         if (task.isSuccessful()) {
                             Uri downloadUri = task.getResult();
 
-
                             // add story object into user
                             final String userKey = mAuth.getCurrentUser().getDisplayName();
-                            StoryList storyList = new StoryList(userKey ,session.getusename(), session.getprofilePic(), downloadUri.toString(),caption.getText().toString(),timeMillis);
                             String id = databaseReference.child("users").child(userKey).child("stories").push().getKey();
+                            StoryList storyList = new StoryList("", userKey ,session.getusename(), session.getprofilePic(), downloadUri.toString(),caption.getText().toString(), false, timeMillis);
+
 
 
                             databaseReference.child("users").child(userKey).child("stories").child(id).setValue(storyList);
@@ -394,7 +413,6 @@ public class StoryFragment extends Fragment {
                                     getData();
                                 }
                             });
-
                             progressBar.getDialog().dismiss();
                             builder.dismiss();
                         }
@@ -409,9 +427,6 @@ public class StoryFragment extends Fragment {
                         getData();
                     }
                 });
-
-
-
 
 
 
@@ -438,4 +453,5 @@ public class StoryFragment extends Fragment {
 
         builder.show();
     }
+
 }
