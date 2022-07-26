@@ -3,25 +3,25 @@
   <component name="DesignSurface">
     <option name="filePathToZoomLevelMap">
       <map>
-        <entry key="..\:/MAD-ASSIG-1- - Copy/app/src/main/res/drawable/ic_baseline_attach_file_24.xml" value="0.2265" />
-        <entry key="..\:/MAD-ASSIG-1- - Copy/app/src/main/res/layout/activity_chat.xml" value="0.25416666666666665" />
-        <entry key="..\:/MAD-ASSIG-1- - Copy/app/src/main/res/layout/activity_main.xml" value="0.19322916666666667" />
-        <entry key="..\:/MAD-ASSIG-1- - Copy/app/src/main/res/layout/chat_adapter_layout.xml" value="0.17916666666666667" />
-        <entry key="..\:/MAD-ASSIG-1- - Copy/app/src/main/res/layout/dialog_image.xml" value="0.17916666666666667" />
-        <entry key="..\:/MAD-ASSIG-1- - Copy/app/src/main/res/layout/loading_full.xml" value="0.17916666666666667" />
-        <entry key="..\:/MAD-ASSIG-1- - Copy/app/src/main/res/layout/messages_adapter_layout.xml" value="0.19322916666666667" />
-        <entry key="..\:/MAD-ASSIG-1- - Copy/app/src/main/res/layout/view_media_full.xml" value="0.17916666666666667" />
         <entry key="..\:/MAD-ASSIG-1-/app/src/main/res/layout/activity_chat.xml" value="0.25416666666666665" />
         <entry key="..\:/MAD-ASSIG-1-/app/src/main/res/layout/activity_main.xml" value="0.23854166666666668" />
         <entry key="..\:/MAD-ASSIG-1-/app/src/main/res/layout/activity_registerpage.xml" value="0.23854166666666668" />
         <entry key="..\:/MAD-ASSIG-1-/app/src/main/res/layout/activity_start_up.xml" value="0.23854166666666668" />
-        <entry key="..\:/Users/thaan/Desktop/MAD/MAD-ASSIG-1-/app/src/main/res/layout/activity_start_up.xml" value="0.14270833333333333" />
+        <entry key="..\:/Users/Zafee/AndroidStudioProjects/MAD-ASSIG-1-/app/src/main/res/drawable/gradient.xml" value="0.2555" />
+        <entry key="..\:/Users/Zafee/AndroidStudioProjects/MAD-ASSIG-1-/app/src/main/res/drawable/ic_baseline_radio_24.xml" value="0.2555" />
+        <entry key="..\:/Users/Zafee/AndroidStudioProjects/MAD-ASSIG-1-/app/src/main/res/layout/activity_main.xml" value="0.264" />
+        <entry key="..\:/Users/Zafee/AndroidStudioProjects/MAD-ASSIG-1-/app/src/main/res/layout/activity_radio.xml" value="0.25" />
+        <entry key="..\:/Users/Zafee/AndroidStudioProjects/MAD-ASSIG-1-/app/src/main/res/layout/activity_select_radio.xml" value="0.25" />
+        <entry key="..\:/Users/Zafee/AndroidStudioProjects/MAD-ASSIG-1-/app/src/main/res/layout/activity_start_up.xml" value="0.25" />
+        <entry key="..\:/Users/Zafee/AndroidStudioProjects/MAD-ASSIG-1-/app/src/main/res/layout/radio_item.xml" value="0.25" />
         <entry key="..\:/Users/user/Desktop/Poly Stuff/MAD/MAD-ASSIG-1-/app/src/main/res/drawable/back_btn.xml" value="0.1" />
         <entry key="..\:/Users/user/Desktop/Poly Stuff/MAD/MAD-ASSIG-1-/app/src/main/res/drawable/ic_logout.xml" value="0.1" />
         <entry key="..\:/Users/user/Desktop/Poly Stuff/MAD/MAD-ASSIG-1-/app/src/main/res/layout/activity_chat.xml" value="0.33" />
         <entry key="..\:/Users/user/Desktop/Poly Stuff/MAD/MAD-ASSIG-1-/app/src/main/res/layout/activity_login.xml" value="0.22" />
         <entry key="..\:/Users/user/Desktop/Poly Stuff/MAD/MAD-ASSIG-1-/app/src/main/res/layout/activity_loginpage.xml" value="0.25" />
         <entry key="..\:/Users/user/Desktop/Poly Stuff/MAD/MAD-ASSIG-1-/app/src/main/res/layout/activity_main.xml" value="0.1" />
+        <entry key="..\:/Users/user/Desktop/Poly Stuff/MAD/MAD-ASSIG-1-/app/src/main/res/layout/activity_recording.xml" value="0.15579710144927536" />
+        <entry key="..\:/Users/user/Desktop/Poly Stuff/MAD/MAD-ASSIG-1-/app/src/main/res/layout/activity_recording2.xml" value="0.2" />
         <entry key="..\:/Users/user/Desktop/Poly Stuff/MAD/MAD-ASSIG-1-/app/src/main/res/layout/activity_registerpage.xml" value="0.25" />
         <entry key="..\:/Users/user/Desktop/Poly Stuff/MAD/MAD-ASSIG-1-/app/src/main/res/layout/activity_start_up.xml" value="0.10597826086956522" />
         <entry key="..\:/Users/user/Desktop/Poly Stuff/MAD/MAD-ASSIG-1-/app/src/main/res/layout/messages_adapter_layout.xml" value="0.33" />
