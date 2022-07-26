@@ -77,19 +77,6 @@
             android:layout_marginTop="10dp"
             android:layout_marginRight="20dp"></ListView>
 
-        <de.hdodenhof.circleimageview.CircleImageView
-            android:id="@+id/userProfilePic"
-            android:layout_width="35dp"
-            android:layout_height="35dp"
-            android:layout_alignParentEnd="true"
-            android:layout_centerVertical="true"
-            android:layout_marginTop="40dp"
-            android:layout_marginEnd="20dp"
-            android:src="@drawable/pleasebeapng">
-
-        </de.hdodenhof.circleimageview.CircleImageView>
-
-
 
     </RelativeLayout>
 

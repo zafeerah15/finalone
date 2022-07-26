@@ -103,10 +103,7 @@ public class MainActivity extends AppCompatActivity {
         };
 
         mref.addListenerForSingleValueEvent(event);
-
-
-
-        final CircleImageView userProfilePic = findViewById(R.id.userProfilePic);
+        
 
         mAuth = FirebaseAuth.getInstance();
         FirebaseUser currentUser = mAuth.getCurrentUser();
