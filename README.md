@@ -29,10 +29,10 @@
 # Assignment 2
 # Features and Contributions of each member
 # Zafeerah : To do list/reminder
-# Tanya : posting photos feed/story
-# Syafiq : recording
-# Herman : image attachment
-# Junwei : search feature to find users
+# Tanya : Posting photos feed/story
+# Syafiq : Recording
+# Herman : Image attachment
+# Junwei : Search feature to find users
 
 
 
