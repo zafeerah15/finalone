@@ -73,9 +73,11 @@ public class MainActivity extends AppCompatActivity {
 
     DatabaseReference databaseReference= FirebaseDatabase.getInstance().getReference();
 
-    DatabaseReference mref;
+    //retrieving data from firebase for search feature
+
     private ListView listdata;
     private AutoCompleteTextView txtSearch;
+    DatabaseReference mref;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -85,14 +87,14 @@ public class MainActivity extends AppCompatActivity {
 
         final CircleImageView userProfilePic = findViewById(R.id.userProfilePic);
 
-        //retrieving data from firebase for search feature
-        mref= FirebaseDatabase.getInstance().getReference("users");
+        mref = FirebaseDatabase.getInstance().getReference("users");
         listdata=(ListView)findViewById(R.id.listData);
         txtSearch=(AutoCompleteTextView)findViewById(R.id.txtSearch);
 
         ValueEventListener event= new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot snapshot) {
+
                 populateSearch(snapshot);
             }
 
@@ -331,11 +333,11 @@ public class MainActivity extends AppCompatActivity {
                 names.add(name);
             }
 
-            ArrayAdapter adapter= new ArrayAdapter(this, android.R.layout.simple_list_item_1, names);
+            ArrayAdapter adapter= new ArrayAdapter(this,android.R.layout.simple_list_item_1,names);
             txtSearch.setAdapter(adapter);
             txtSearch.setOnItemClickListener(new AdapterView.OnItemClickListener() {
                 @Override
-                public void onItemClick(AdapterView<?> adapterView, View view, int position, long id) {
+                public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
                     String name=txtSearch.getText().toString();
                     searchUser(name);
 
@@ -363,7 +365,7 @@ public class MainActivity extends AppCompatActivity {
                         search_data.User user= new search_data.User(ds.child("name").getValue(String.class), ds.child("email").getValue(String.class));
                         listusers.add(user.getName()+"\n"+user.getEmail());
                     }
-                    ArrayAdapter adapter = new ArrayAdapter(getApplicationContext(),android.R.layout.simple_list_item_1, listusers);
+                    ArrayAdapter adapter = new ArrayAdapter(getApplicationContext(), android.R.layout.simple_list_item_1,listusers);
                     listdata.setAdapter(adapter);
 
                 }else{

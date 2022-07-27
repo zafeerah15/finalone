@@ -6,6 +6,7 @@
     android:layout_height="match_parent"
     tools:context=".bottomNav.NavMainPage">
 
+
     <com.google.android.material.appbar.AppBarLayout
         android:id="@+id/app_bar"
         android:layout_width="match_parent"
@@ -49,6 +50,8 @@
         app:layout_constraintStart_toStartOf="parent"
         app:menu="@menu/bottom_navigation_menu"
         />
+
+
 
 
 </androidx.constraintlayout.widget.ConstraintLayout>

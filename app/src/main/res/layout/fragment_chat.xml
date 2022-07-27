@@ -9,16 +9,46 @@
     tools:context=".bottomNav.ChatFragment">
 
 
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="150dp">
+
+        <AutoCompleteTextView
+            android:id="@+id/txtSearch"
+            android:layout_width="match_parent"
+            android:layout_height="40dp"
+            android:layout_marginLeft="20dp"
+            android:layout_marginTop="64dp"
+            android:layout_marginRight="20dp"
+            android:background="@drawable/round_back_theme"
+            android:drawableLeft="@drawable/ic_search"
+            android:padding="10dp"></AutoCompleteTextView>
+
+
+        <ListView
+            android:id="@+id/listData"
+            android:layout_width="match_parent"
+            android:layout_height="fill_parent"
+            android:layout_below="@+id/txtSearch"
+            android:layout_marginLeft="20dp"
+            android:layout_marginTop="0dp"
+            android:layout_marginRight="20dp"
+            android:background="@color/cardview_light_background"></ListView>
+
+
+    </RelativeLayout>
+
     <FrameLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:orientation="vertical"
+        android:layout_marginTop="50dp"
         >
 
         <androidx.recyclerview.widget.RecyclerView
+            android:id="@+id/messagesRecyclerView"
             android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:id="@+id/messagesRecyclerView">
+            android:layout_height="match_parent">
 
         </androidx.recyclerview.widget.RecyclerView>
 

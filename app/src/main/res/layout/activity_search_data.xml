@@ -11,12 +11,11 @@
         android:layout_width="match_parent"
         android:layout_height="60dp"
         android:layout_marginLeft="20dp"
-        android:layout_marginRight="20dp"
         android:layout_marginTop="20dp"
-        android:padding="10dp"
-        android:drawableLeft="@drawable/ic_search"
+        android:layout_marginRight="20dp"
         android:background="@color/cardview_light_background"
-    ></AutoCompleteTextView>
+        android:drawableLeft="@drawable/ic_search"
+        android:padding="10dp"></AutoCompleteTextView>
 
 
     <ListView
