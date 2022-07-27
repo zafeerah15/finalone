@@ -13,7 +13,7 @@ import com.google.android.material.bottomnavigation.BottomNavigationView;
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
 import com.google.android.material.navigation.NavigationBarView;
 
-import sG.EDU.NP.MAD.friendsOnly.MainActivity;
+import sG.EDU.NP.MAD.friendsOnly.LikesPage;
 import sG.EDU.NP.MAD.friendsOnly.R;
 import sG.EDU.NP.MAD.friendsOnly.ToDoActivity;
 
