@@ -31,6 +31,7 @@ import de.hdodenhof.circleimageview.CircleImageView;
 import sG.EDU.NP.MAD.friendsOnly.R;
 import sG.EDU.NP.MAD.friendsOnly.Session;
 import sG.EDU.NP.MAD.friendsOnly.Startup;
+import sG.EDU.NP.MAD.friendsOnly.ToDoActivity;
 import sG.EDU.NP.MAD.friendsOnly.databinding.FragmentChatBinding;
 import sG.EDU.NP.MAD.friendsOnly.messages.MessagesAdapter;
 import sG.EDU.NP.MAD.friendsOnly.messages.MessagesList;
@@ -51,6 +52,7 @@ public class ChatFragment extends Fragment {
     private boolean dataSet = false;
     private RecyclerView messagesRecyclerView;
     private FloatingActionButton fab;
+    private FloatingActionButton ToDoFunc;
     private String lastMessage = "";
     private MessagesAdapter messagesAdapter;
     private FirebaseAuth mAuth;
@@ -95,6 +97,14 @@ public class ChatFragment extends Fragment {
                 builder.show();
             }
 
+        });
+        ToDoFunc = root.findViewById(R.id.toDoFunc);
+        ToDoFunc.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(getContext(), ToDoActivity.class);
+                startActivity(intent);
+            }
         });
 
         databaseReference.addListenerForSingleValueEvent(new ValueEventListener() {

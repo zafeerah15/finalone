@@ -22,6 +22,8 @@
             app:title="test"
             app:titleTextColor="@color/cardview_dark_background"
 
+            
+
             />
 
     </com.google.android.material.appbar.AppBarLayout>
@@ -37,6 +39,8 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="@+id/app_bar"
         app:layout_constraintVertical_bias="1.0">
+
+
 
 
     </FrameLayout>

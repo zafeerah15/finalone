@@ -47,11 +47,7 @@
         <activity
             android:name=".MainActivity"
             android:exported="true" />
-        <activity android:name=".SelectRadioActivity" />
-        <activity
-            android:name=".RadioActivity"
-            android:configChanges="orientation|keyboardHidden"
-            android:screenOrientation="portrait"/>
+
         <activity android:name=".ToDoActivity" />
     </application>
 

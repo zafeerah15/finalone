@@ -59,7 +59,7 @@
                 android:background="#B53333"
                 android:padding="5dp"
                 android:text="Cancel"
-                app:backgroundTint="#D11A2A"
+                app:backgroundTint="#BD2533"
                 app:cornerRadius="20dp"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintEnd_toStartOf="@+id/addBtn"
@@ -74,23 +74,31 @@
                 android:layout_marginTop="16dp"
                 android:layout_marginEnd="56dp"
                 android:layout_marginBottom="20dp"
-                android:background="#A4C639"
+                android:background="#2EC17C"
                 android:padding="5dp"
                 android:text="Add"
-                app:backgroundTint="#99CC33"
+                app:backgroundTint="#29B661"
                 app:cornerRadius="20dp"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintTop_toBottomOf="@+id/addTask" />
 
-            <ImageView
+            <ImageButton
                 android:id="@+id/attach"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
+                android:layout_width="29dp"
+                android:layout_height="31dp"
+                android:layout_marginTop="76dp"
+                android:layout_marginEnd="24dp"
+                android:layout_marginBottom="93dp"
+                android:background="#57F1E1"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintTop_toTopOf="parent"
+                app:layout_constraintVertical_bias="1.0"
                 app:srcCompat="@drawable/ic_baseline_attach_file_24"
-                tools:ignore="MissingConstraints"
-                tools:layout_editor_absoluteX="240dp"
-                tools:layout_editor_absoluteY="84dp" />
+                tools:ignore="ContentDescription" />
+
+
         </androidx.constraintlayout.widget.ConstraintLayout>
     </androidx.cardview.widget.CardView>
 

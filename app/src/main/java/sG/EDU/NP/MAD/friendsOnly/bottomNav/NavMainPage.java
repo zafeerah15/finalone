@@ -1,29 +1,38 @@
 package sG.EDU.NP.MAD.friendsOnly.bottomNav;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.view.MenuItem;
+import android.view.View;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
 
 import com.google.android.material.bottomnavigation.BottomNavigationView;
+import com.google.android.material.floatingactionbutton.FloatingActionButton;
 import com.google.android.material.navigation.NavigationBarView;
 
+import sG.EDU.NP.MAD.friendsOnly.MainActivity;
 import sG.EDU.NP.MAD.friendsOnly.R;
+import sG.EDU.NP.MAD.friendsOnly.ToDoActivity;
 
 public class NavMainPage extends AppCompatActivity {
 
     BottomNavigationView bottomNavigationView;
-
+    private FloatingActionButton ToDoFunc;
     ChatFragment chatFragment = new ChatFragment();
     StoryFragment storyFragment = new StoryFragment();
+
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_nav_main_page);
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
+
+
 
         // using toolbar as ActionBar
         setSupportActionBar(toolbar);
