@@ -11,6 +11,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.LinearLayout;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
@@ -174,6 +175,8 @@ public class MessagesAdapter extends RecyclerView.Adapter<MessagesAdapter.MyView
                                         } else {
                                             frenz.add(list2.getPhoneno());
                                             databaseReference.child("users").child(getUserMobile).child("friends").setValue(frenz);
+
+
                                         }
                                     }
                                 }
