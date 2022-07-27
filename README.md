@@ -26,8 +26,8 @@
 # Thanya : Coded the base - a chatting app, researched how to build other features. 
 # Zafeerah : Did the accept / request feature
 
-# assignment 2
-# Roles and Contributions of each member
+# Assignment 2
+# Features and Contributions of each member
 # Zafeerah : To do list/reminder
 # Tanya : posting photos feed/story
 # Syafiq : recording
