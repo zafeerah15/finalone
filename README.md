@@ -32,7 +32,7 @@
 # Tanya : posting photos feed/story
 # Syafiq : recording
 # Herman : image attachment
-# JW : search feature to find users
+# Junwei : search feature to find users
 
 
 
