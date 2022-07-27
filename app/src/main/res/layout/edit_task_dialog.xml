@@ -17,7 +17,8 @@
 
         <androidx.constraintlayout.widget.ConstraintLayout
             android:layout_width="match_parent"
-            android:layout_height="match_parent">
+            android:layout_height="match_parent"
+            android:background="#40C4D5">
 
             <TextView
                 android:id="@+id/editTitle"
@@ -55,10 +56,10 @@
                 android:layout_marginStart="56dp"
                 android:layout_marginTop="16dp"
                 android:layout_marginBottom="20dp"
-                android:background="#B53333"
+                android:background="#5E2E2E"
                 android:padding="5dp"
                 android:text="Cancel"
-                app:backgroundTint="#D11A2A"
+                app:backgroundTint="#BC2F3B"
                 app:cornerRadius="20dp"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintEnd_toStartOf="@+id/confirmBtn"
@@ -73,10 +74,11 @@
                 android:layout_marginTop="16dp"
                 android:layout_marginEnd="56dp"
                 android:layout_marginBottom="20dp"
-                android:background="#A4C639"
+                android:background="#0CBAA8"
+                android:backgroundTint="#11A899"
                 android:padding="5dp"
                 android:text="Confirm"
-                app:backgroundTint="#99CC33"
+                app:backgroundTint="#098763"
                 app:cornerRadius="20dp"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintEnd_toEndOf="parent"
