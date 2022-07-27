@@ -10,9 +10,10 @@
     tools:context=".RadioActivity">
 
     <LinearLayout
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:orientation="vertical">
+        android:layout_width="365dp"
+        android:layout_height="576dp"
+        android:orientation="vertical"
+        app:layout_constraintEnd_toEndOf="parent">
 
         <androidx.cardview.widget.CardView
             android:layout_width="wrap_content"
@@ -25,7 +26,7 @@
             <ImageView
                 android:id="@+id/radioImage"
                 android:layout_width="250dp"
-                android:layout_height="250dp"
+                android:layout_height="270dp"
                 android:layout_gravity="center"
                 android:background="@drawable/gradient"
                 app:srcCompat="@drawable/ic_baseline_radio_24"
@@ -57,7 +58,7 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginTop="10dp"
-            android:background="#99DCD5"
+            android:background="#14B8CC"
             android:gravity="center"
             android:orientation="horizontal">
 
@@ -77,6 +78,7 @@
                 app:srcCompat="@android:drawable/ic_media_pause" />
 
         </LinearLayout>
+
     </LinearLayout>
 
 </androidx.constraintlayout.widget.ConstraintLayout>

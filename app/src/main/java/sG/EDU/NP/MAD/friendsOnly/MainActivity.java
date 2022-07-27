@@ -58,6 +58,7 @@ public class MainActivity extends AppCompatActivity {
     private boolean dataSet = false;
     private RecyclerView messagesRecyclerView;
     private FloatingActionButton fab;
+    private FloatingActionButton ToDoFunc;
     private String lastMessage = "";
     private MessagesAdapter messagesAdapter;
 
@@ -137,6 +138,15 @@ public class MainActivity extends AppCompatActivity {
                 builder.show();
             }
 
+        });
+        //Goes to To do activity page clicked
+        ToDoFunc = findViewById(R.id.toDoFunc);
+        ToDoFunc.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(MainActivity.this, ToDoActivity.class);
+                startActivity(intent);
+            }
         });
 
         //firebase database on data change listener
