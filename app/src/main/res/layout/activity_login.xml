@@ -7,7 +7,7 @@
     android:layout_height="match_parent"
     android:gravity="center"
     android:background="@color/theme_color_8"
-    tools:context=".Loginpage">
+    tools:context=".messages.Loginpage">
 
 
     <TextView

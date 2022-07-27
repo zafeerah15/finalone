@@ -1,31 +1,36 @@
 package sG.EDU.NP.MAD.friendsOnly;
 
+import android.Manifest;
+import android.app.AlertDialog;
+import android.app.ProgressDialog;
+import android.content.DialogInterface;
+import android.content.Intent;
+import android.content.pm.PackageManager;
+import android.os.Bundle;
+import android.util.Log;
+import android.view.View;
+import android.widget.AdapterView;
+import android.widget.ArrayAdapter;
+import android.widget.AutoCompleteTextView;
+import android.widget.ListView;
+
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.core.app.ActivityCompat;
 import androidx.core.content.ContextCompat;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
-import android.app.AlertDialog;
-import android.content.DialogInterface;
-import android.content.Intent;
 
-import android.Manifest;
-import android.app.ProgressDialog;
-import android.content.pm.PackageManager;
-import android.os.Bundle;
-import android.util.Log;
-import android.view.View;
-
+import com.google.android.material.floatingactionbutton.FloatingActionButton;
+import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.database.Query;
 import com.google.firebase.database.ValueEventListener;
 import com.squareup.picasso.Picasso;
-import com.google.android.material.floatingactionbutton.FloatingActionButton;
-import com.google.firebase.auth.FirebaseAuth;
-import com.google.firebase.auth.FirebaseUser;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -48,19 +53,32 @@ public class MainActivity extends AppCompatActivity {
 
     private String chatKey = "";
 
+
+
     private boolean dataSet = false;
     private RecyclerView messagesRecyclerView;
     private FloatingActionButton fab;
+    private FloatingActionButton ToDoFunc;
     private String lastMessage = "";
     private MessagesAdapter messagesAdapter;
 
     private FirebaseAuth mAuth;
     private String userType = "";
-    
+
+
+
+    ArrayAdapter<String> arrayAdapter;
+
+
     // referencing Fire base real time database
 
     DatabaseReference databaseReference= FirebaseDatabase.getInstance().getReference();
 
+    //retrieving data from firebase for search feature
+
+    private ListView listdata;
+    private AutoCompleteTextView txtSearch;
+    DatabaseReference mref;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -69,6 +87,26 @@ public class MainActivity extends AppCompatActivity {
         verifyPermissions();
 
         final CircleImageView userProfilePic = findViewById(R.id.userProfilePic);
+
+        mref = FirebaseDatabase.getInstance().getReference("users");
+        listdata=(ListView)findViewById(R.id.listData);
+        txtSearch=(AutoCompleteTextView)findViewById(R.id.txtSearch);
+
+        ValueEventListener event= new ValueEventListener() {
+            @Override
+            public void onDataChange(@NonNull DataSnapshot snapshot) {
+
+                populateSearch(snapshot);
+            }
+
+            @Override
+            public void onCancelled(@NonNull DatabaseError error) {
+
+            }
+        };
+
+        mref.addListenerForSingleValueEvent(event);
+        
 
         mAuth = FirebaseAuth.getInstance();
         FirebaseUser currentUser = mAuth.getCurrentUser();
@@ -101,6 +139,15 @@ public class MainActivity extends AppCompatActivity {
             }
 
         });
+        //Goes to To do activity page clicked
+        ToDoFunc = findViewById(R.id.toDoFunc);
+        ToDoFunc.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(MainActivity.this, ToDoActivity.class);
+                startActivity(intent);
+            }
+        });
 
         //firebase database on data change listener
         databaseReference.addListenerForSingleValueEvent(new ValueEventListener() {
@@ -119,7 +166,7 @@ public class MainActivity extends AppCompatActivity {
         // get intent data from registerpage.class activity
 //        mobile = getIntent().getStringExtra("mobile");
 
-       //mobile = MemoryData.getData(MainActivity.this);
+        //mobile = MemoryData.getData(MainActivity.this);
         if (mobile.isEmpty()) {
             mobile = getIntent().getStringExtra("mobile");
         }
@@ -156,7 +203,6 @@ public class MainActivity extends AppCompatActivity {
             @Override
             public void onCancelled(@NonNull DatabaseError error) { progressDialog.dismiss();}
         });
-        //Log.d("test", "My name: " + name + "My Number:" + mobile);
 
         //firebase database event listener
         databaseReference.addValueEventListener(new ValueEventListener() {
@@ -211,13 +257,11 @@ public class MainActivity extends AppCompatActivity {
                                         progressDialog.dismiss();
 
                                         if (dataSnapshot1.getKey().equals(chatKey) && dataSnapshot1.child("permission").hasChild("toUser")) {
-                                            //Log.d("test", chatKey + " " + pToUser);
                                             if (chatKey.contains(mobile) && chatKey.contains(getMobile) && pGranted.equals(false) && pToUser.equals(mobile)) {
                                                 lastMessage = getName + " wants to chat with you!";
                                                 unseenMessages = 1;
                                                 userType = "recipient";
 //
-                                                //Log.d("test", chatKey + " " + pToUser + " " + getName + " no is " + getMobile);
                                                 // For sender: check if recipient accept
 
                                             }
@@ -225,23 +269,19 @@ public class MainActivity extends AppCompatActivity {
                                             if (chatKey.contains(mobile) && chatKey.contains(getMobile) && pGranted.equals(false) && pFromUser.equals(mobile)) {
                                                 userType = "sender";
                                                 lastMessage = "Chat request sent!";
-                                                //Log.d("test", "recipient not accepted yet");
                                             }
                                         }
 
                                     }
 
                                 }
-
-
-                                Log.d("test", String.valueOf(messagesLists.size()));
-                                    dataSet = true;
-                                    MessagesList messagesList = new MessagesList(getName, getMobile, lastMessage, getProfilePic, unseenMessages,
-                                            getMobile, granted, userType, getBio);
+                                dataSet = true;
+                                MessagesList messagesList = new MessagesList(getName, getMobile, lastMessage, getProfilePic, unseenMessages,
+                                        getMobile, granted, userType, getBio);
                                 if (messagesLists.size() + 1 < userCount) {
-                                        messagesLists.add(messagesList);
-                                        messagesAdapter.updateData(messagesLists);
-                                    }
+                                    messagesLists.add(messagesList);
+                                    messagesAdapter.updateData(messagesLists);
+                                }
 
 
 
@@ -260,9 +300,16 @@ public class MainActivity extends AppCompatActivity {
             }
         });
 
+
+
     }
 
-// FUNCTION TO REQUEST PERMISSION FROM USER FOR READ & WRITE TO STORAGE, CAMERA
+
+
+    // FUNCTION TO REQUEST PERMISSION FROM USER FOR READ & WRITE TO STORAGE, CAMERA
+
+
+    // FUNCTION TO REQUEST PERMISSION FROM USER FOR READ & WRITE TO STORAGE, CAMERA
     private void verifyPermissions() {
         Log.d(TAG, "verifyPermissions: asking user for permissions");
         String[] permissions = {Manifest.permission.READ_EXTERNAL_STORAGE,
@@ -284,7 +331,89 @@ public class MainActivity extends AppCompatActivity {
                     REQUEST_CODE);
         }
     }
+
+    // method for retrieving user info. from search
+    private void populateSearch(DataSnapshot snapshot) {
+        ArrayList<String> names=new ArrayList<>();
+        if(snapshot.exists())
+        {
+            for(DataSnapshot ds:snapshot.getChildren())
+            {
+                String name=ds.child("name").getValue(String.class);
+                names.add(name);
+            }
+
+            ArrayAdapter adapter= new ArrayAdapter(this,android.R.layout.simple_list_item_1,names);
+            txtSearch.setAdapter(adapter);
+            txtSearch.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+                @Override
+                public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+                    String name=txtSearch.getText().toString();
+                    searchUser(name);
+
+                }
+            });
+
+        }else{
+            Log.d("users", "No data found");
+        }
+
+    }
+
+    //Search user method
+    private void searchUser(String name) {
+        Query query=mref.orderByChild("name").equalTo(name);
+        query.addListenerForSingleValueEvent(new ValueEventListener() {
+            @Override
+            public void onDataChange(@NonNull DataSnapshot snapshot) {
+
+                if(snapshot.exists())
+                {
+                    ArrayList<String> listusers=new ArrayList<>();
+                    for(DataSnapshot ds:snapshot.getChildren())
+                    {
+                        search_data.User user= new search_data.User(ds.child("name").getValue(String.class), ds.child("email").getValue(String.class));
+                        listusers.add(user.getName()+"\n"+user.getEmail());
+                    }
+                    ArrayAdapter adapter = new ArrayAdapter(getApplicationContext(), android.R.layout.simple_list_item_1,listusers);
+                    listdata.setAdapter(adapter);
+
+                }else{
+                    Log.d("users", "No Data Found");
+                }
+
+            }
+
+            @Override
+            public void onCancelled(@NonNull DatabaseError error) {
+
+            }
+        });
+
+
+    }
+    static class User
+    {
+
+        public User(String name, String email) {
+            this.name = name;
+            this.email = email;
+        }
+
+        public User() {
+        }
+        public String getName() { return name; }
+
+        public String getEmail() { return email; }
+
+        public String name;
+        public String email;
+    }
+
 }
+
+
+
 
 //                        databaseReference.child("chat").addValueEventListener(new ValueEventListener() {
 //                            @Override
@@ -336,3 +465,8 @@ public class MainActivity extends AppCompatActivity {
 //
 //                            }
 //                        });
+
+
+
+
+

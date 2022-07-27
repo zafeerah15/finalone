@@ -12,6 +12,8 @@
         android:id="@+id/topBar"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:layout_alignParentStart="true"
+        android:layout_alignParentTop="true"
         android:background="@color/theme_color">
 
 
@@ -20,7 +22,7 @@
             android:layout_width="35dp"
             android:layout_height="35dp"
             android:layout_centerVertical="true"
-            android:layout_marginStart="20dp"
+
             android:layout_marginTop="40dp"
             android:background="@drawable/round_back_light_10"
             android:paddingStart="12sp"
@@ -61,10 +63,40 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="2dp"
+
                 android:text="Online"
                 android:textColor="#00C853"
                 android:textSize="13sp" />
+
+
         </LinearLayout>
+
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_alignParentTop="true"
+
+            android:layout_alignParentEnd="true"
+            android:layout_marginTop="0dp"
+            android:layout_marginEnd="0dp"
+            android:foregroundGravity="center"
+            android:gravity="end">
+
+            <ImageView
+                android:id="@+id/attach"
+                android:layout_width="35dp"
+                android:layout_height="35dp"
+                android:layout_centerVertical="true"
+                android:layout_marginTop="40dp"
+                android:layout_marginEnd="20dp"
+                android:background="@drawable/round_back_light_10"
+                android:paddingStart="12sp"
+                android:paddingEnd="2dp"
+                android:src="@drawable/ic_baseline_attach_file_24" />
+        </RelativeLayout>
+
+
     </RelativeLayout>
 
     <androidx.recyclerview.widget.RecyclerView
@@ -137,6 +169,7 @@
         android:layout_marginEnd="338dp"
         android:layout_marginBottom="72dp"
         app:srcCompat="@android:drawable/ic_btn_speak_now" />
+
 
 
 </RelativeLayout>
