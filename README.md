@@ -22,7 +22,7 @@
 # Roles and Contributions of each member
 # Syafiq : Start/stop recording and play/stop playing of recording. The Bio for the chat and login page.
 # Herman : Helped with Ui/UX design, coded portions in manifest,Chat_list,MainActivity, Troubleshooter
-# Junwei : Search feature + troubleshooting navigation page
+# Junwei : Search feature, troubleshooting navigation page
 # Thanya : Coded the base - a chatting app, researched how to build other features. 
 # Zafeerah : Did the accept / request feature
 
