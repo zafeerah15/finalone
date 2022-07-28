@@ -35,16 +35,16 @@
 # Features and Contributions of each member
 # Zafeerah : To do list/reminder
 # Zafeerah has implemented a reminder feature. most of us tend to get distracted and do not keep track of our task, or the time 
-#when we are using socializing apps. the presence of this floating button will remind the user that they have tasks to do. 
-#in this feature users will be able to add tasks + pictures, edit, check to show they have completed and delete it eventually.
+# when we are using socializing apps. the presence of this floating button will remind the user that they have tasks to do. 
+# in this feature users will be able to add tasks + pictures, edit, check to show they have completed and delete it eventually.
 # Tanya : Posting photos feed/story
-#Tanya implemented a post pictures feature
+# Tanya implemented a post pictures feature
 # Syafiq : Recording - Will appear a new "page" in chat to record and play voice
-#Syafiq implemented a recording feature in the chat area. With the old recording not working. A new "page" will appear in your friend's chat once you click on record.
+# Syafiq implemented a recording feature in the chat area. With the old recording not working. A new "page" will appear in your friend's chat once you click on record.
 # Herman : Image attachment
-#Herman implemented a send attachment feature in chat area
+# Herman implemented a send attachment feature in chat area
 # Junwei : Search feature to find users
-#Jun Wei implemented a search feature in the main page to search for users
+# Jun Wei implemented a search feature in the main page to search for users
 
 
 
