@@ -3,10 +3,22 @@
 
 # Team Members:
 # Ahmad Syafiq Bin Hamzah (S10208272)
+#Syafiq implemented a recording feature in the chat area.
+
 # Herman Lee Junpeng (S10208320)
+#Herman implemented a send attachment feature in chat area
+
 # Ong Jun Wei (S10204864)
+#Jun Wei implemented a search feature in the main page to search for users
+
 # Rajeshkanna Thanya (S10205556)
+#Tanya implemented a post pictures feature
+
+
 # Zafeerah (S10205175)
+# Zafeerah has implemented a reminder feature. most of us tend to get distracted and do not keep track of our task, or the time 
+#when we are using socializing apps. the presence of this floating button will remind the user that they have tasks to do. 
+#in this feature users will be able to add tasks + pictures, edit, check to show they have completed and delete it eventually.
 
 
 
