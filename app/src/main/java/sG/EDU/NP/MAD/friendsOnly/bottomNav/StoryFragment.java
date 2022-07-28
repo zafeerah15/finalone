@@ -215,8 +215,7 @@ public class StoryFragment extends Fragment {
             public void onClick(DialogInterface dialog, int item) {
                 if (options[item].equals("Take Photo")) {
                     Intent intent = new Intent(MediaStore.ACTION_IMAGE_CAPTURE);
-//                    File f = new File(Environment.getExternalStorageDirectory(), "temp.jpg");
-//                    intent.putExtra(MediaStore.EXTRA_OUTPUT, Uri.fromFile(f));
+
                     someActivityResultLauncher.launch(intent);
                     requestCode = 1;
                 } else if (options[item].equals("Choose from Gallery")) {
@@ -250,84 +249,14 @@ public class StoryFragment extends Fragment {
                             Uri uri = Uri.parse(path);
                             showImage(uri);
 
-//                            for (File temp : f.listFiles()) {
-//                                if (temp.getName().equals("temp.jpg")) {
-//                                    f = temp;
-//                                    break;
-//                                }
-//                            }
-//                            try {
-//                                Bitmap bitmap;
-//                                BitmapFactory.Options bitmapOptions = new BitmapFactory.Options();
-//                                bitmap = BitmapFactory.decodeFile(f.getAbsolutePath(),
-//                                        bitmapOptions);
-//
-////                            viewImage.setImageBitmap(bitmap);
-//                                String path = Environment
-//                                        .getExternalStorageDirectory()
-//                                        + File.separator
-//                                        + "Phoenix" + File.separator + "default";
-//                                f.delete();
-//                                OutputStream outFile = null;
-//                                File file = new File(path, String.valueOf(System.currentTimeMillis()) + ".jpg");
-//                                try {
-//                                    outFile = new FileOutputStream(file);
-//                                    bitmap.compress(Bitmap.CompressFormat.JPEG, 85, outFile);
-//                                    outFile.flush();
-//                                    outFile.close();
-//                                } catch (FileNotFoundException e) {
-//                                    e.printStackTrace();
-//                                } catch (IOException e) {
-//                                    e.printStackTrace();
-//                                } catch (Exception e) {
-//                                    e.printStackTrace();
-//                                }
-//                            } catch (Exception e) {
-//                                e.printStackTrace();
-//                            }
+
                         } else if (requestCode == 2) {
 
 
                             Uri selectedImage = result.getData().getData();
-//                            String[] filePath = {MediaStore.Images.Media.DATA};
-//                            Cursor c = getActivity().getContentResolver().query(selectedImage, filePath, null, null, null);
-//                            c.moveToFirst();
-//                            int columnIndex = c.getColumnIndex(filePath[0]);
-//                            String picturePath = c.getString(columnIndex);
-//                            c.close();
-//                            Bitmap thumbnail = (BitmapFactory.decodeFile(picturePath));
-//                            Log.w("path of image from gallery......******************.........", picturePath + "");
+
                             showImage(selectedImage);
-//                        picturePath    viewImage.setImageBitmap(thumbnail);
 
-
-                            // upload image to Firebase
-//                            StorageReference storageRef = FirebaseStorage.getInstance().getReference();
-//
-//                            mediaRef = storageRef.child("/stories/" + "test.jpeg");
-//
-//                            UploadTask uploadTask = mediaRef.putFile(selectedImage);
-//                            uploadTask.addOnFailureListener(new OnFailureListener() {
-//                                @Override
-//                                public void onFailure(@NonNull Exception e) {
-//                                    Log.d("test", e.toString());
-//                                }
-//                            }).addOnSuccessListener(new OnSuccessListener<UploadTask.TaskSnapshot>() {
-//                                @Override
-//                                public void onSuccess(UploadTask.TaskSnapshot taskSnapshot) {
-//                                    Log.d("test", taskSnapshot.getMetadata().toString());
-//                                }
-//                            });
-
-
-//                        Cursor c = ().query(selectedImage,filePath, null, null, null);
-//                        c.moveToFirst();
-//                        int columnIndex = c.getColumnIndex(filePath[0]);
-//                        String picturePath = c.getString(columnIndex);
-//                        c.close();
-//                        Bitmap thumbnail = (BitmapFactory.decodeFile(picturePath));
-//                        Log.w("path of image from gallery......******************.........", picturePath+"");
-//                        viewImage.setImageBitmap(thumbnail);
                         }
                     }
                 }
@@ -339,9 +268,7 @@ public class StoryFragment extends Fragment {
         Dialog builder = new Dialog(getContext(),android.R.style.Theme_Black_NoTitleBar_Fullscreen);
 
         builder.requestWindowFeature(Window.FEATURE_NO_TITLE);
-//        builder.getWindow().set
-//        builder.getWindow().setBackgroundDrawable(
-//                new ColorDrawable(android.graphics.Color.TRANSPARENT));
+
         builder.setOnDismissListener(new DialogInterface.OnDismissListener() {
             @Override
             public void onDismiss(DialogInterface dialogInterface) {
@@ -349,10 +276,7 @@ public class StoryFragment extends Fragment {
             }
         });
 
-//
-//        builder.addContentView(imageView, new RelativeLayout.LayoutParams(
-//                ViewGroup.LayoutParams.MATCH_PARENT,
-//                ViewGroup.LayoutParams.MATCH_PARENT));
+
         builder.setContentView((R.layout.dialog_image));
         EditText caption = builder.findViewById(R.id.edit_caption);
         ImageView img = builder.findViewById(R.id.popup_image);
@@ -427,25 +351,6 @@ public class StoryFragment extends Fragment {
                         getData();
                     }
                 });
-
-
-
-//                uploadTask.addOnSuccessListener(new OnSuccessListener<UploadTask.TaskSnapshot>() {
-//                    @Override
-//                    public void onSuccess(UploadTask.TaskSnapshot taskSnapshot) {
-//
-////                        Log.d("test", );
-//
-//                    }
-//                }).addOnFailureListener(new OnFailureListener() {
-//                    @Override
-//                    public void onFailure(@NonNull Exception e) {
-//                        Log.d("test", e.toString());
-//                        Toast.makeText(getContext(), "Error, please try again", Toast.LENGTH_SHORT).show();
-//                        builder.dismiss();
-//                    }
-//                });
-
 
             }
         });
