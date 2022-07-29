@@ -12,6 +12,7 @@ public class ToDoViewHolder extends RecyclerView.ViewHolder {
     TextView txtTitle, txtDate;
     CheckBox checkBox;
     ImageView editIcon;
+    ImageView Attachment;
 
     public ToDoViewHolder(View itemView) {
         super(itemView);
@@ -19,5 +20,6 @@ public class ToDoViewHolder extends RecyclerView.ViewHolder {
         txtDate = itemView.findViewById(R.id.taskDate);
         checkBox = itemView.findViewById(R.id.checkBox);
         editIcon = itemView.findViewById(R.id.editIcon);
+        Attachment = itemView.findViewById(R.id.attach);
     }
 }
