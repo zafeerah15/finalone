@@ -293,22 +293,19 @@ public class Chat extends AppCompatActivity {
 
 
     private void selectImage() {
-        final CharSequence[] options = {"Take Photo", "Choose from Gallery", "Cancel"};
+        final CharSequence[] options = {"Choose from Gallery", "Cancel"};
         AlertDialog.Builder builder = new AlertDialog.Builder(Chat.this);
         builder.setTitle("Upload Image");
         builder.setItems(options, new DialogInterface.OnClickListener() {
             @Override
             public void onClick(DialogInterface dialog, int item) {
-                if (options[item].equals("Take Photo")) {
-                    if (ContextCompat.checkSelfPermission(Chat.this, Manifest.permission.CAMERA) != PackageManager.PERMISSION_GRANTED) {
-                        ActivityCompat.requestPermissions((Activity) Chat.this, new String[]{Manifest.permission.CAMERA}, 101);
-                    }
-                    Intent intent = new Intent(MediaStore.ACTION_IMAGE_CAPTURE);
-                    //File f = new File(Environment.getExternalStorageDirectory(), "temp.jpg");
-                    //intent.putExtra(MediaStore.EXTRA_OUTPUT, Uri.fromFile(f));
-                    someActivityResultLauncher.launch(intent);
-                    requestCode = 1;
-                } else if (options[item].equals("Choose from Gallery")) {
+//                if (options[item].equals("Take Photo")) {
+//                    Intent intent = new Intent(MediaStore.ACTION_IMAGE_CAPTURE);
+//                    //File f = new File(Environment.getExternalStorageDirectory(), "temp.jpg");
+//                    //intent.putExtra(MediaStore.EXTRA_OUTPUT, Uri.fromFile(f));
+//                    someActivityResultLauncher.launch(intent);
+//                    requestCode = 1;
+                if (options[item].equals("Choose from Gallery")) {
                     Intent intent = new Intent(Intent.ACTION_PICK, MediaStore.Images.Media.EXTERNAL_CONTENT_URI);
                     someActivityResultLauncher.launch(intent);
                     requestCode = 2;
