@@ -106,6 +106,7 @@ public class ToDoActivity extends AppCompatActivity {
                     @Override
                     public void onClick(View view) {
                         selectImage();
+
                     }
                 });
                 addBtn.setOnClickListener(new View.OnClickListener() {
@@ -248,13 +249,12 @@ public class ToDoActivity extends AppCompatActivity {
 //                progressBar.show(getContext(),"");
 
                 Long timeMillis = System.currentTimeMillis();
-//
-//                // create id -> userUniquekey + timestamp
+
                 String uniquePhotoId = currentUser.getUid() + timeMillis;
 
                 StorageReference storageRef = FirebaseStorage.getInstance().getReference();
 //                // upload image to Firebase
-                StorageReference riversRef = storageRef.child("chatMedia/" + uniquePhotoId + ".jpg");
+                StorageReference riversRef = storageRef.child("ToDolistMedia/" + uniquePhotoId + ".jpg");
                 UploadTask uploadTask = riversRef.putFile(uri);
 
                 uploadTask.continueWithTask(new Continuation() {
