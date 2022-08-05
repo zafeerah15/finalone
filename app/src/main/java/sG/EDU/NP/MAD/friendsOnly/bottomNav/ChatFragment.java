@@ -1,5 +1,6 @@
 package sG.EDU.NP.MAD.friendsOnly.bottomNav;
 
+import android.app.Activity;
 import android.app.AlertDialog;
 import android.app.ProgressDialog;
 import android.content.DialogInterface;
