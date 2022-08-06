@@ -58,7 +58,7 @@ public class ChatFragment extends Fragment {
     private MessagesAdapter messagesAdapter;
     private FirebaseAuth mAuth;
     private String userType = "";
-
+    // reset hard
     DatabaseReference databaseReference = FirebaseDatabase.getInstance().getReference();
 
     @Override

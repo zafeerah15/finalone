@@ -28,6 +28,9 @@
             android:name=".messages.Loginpage"
             android:exported="false" />
         <activity
+            android:name=".LikesPage"
+            android:exported="false" />
+        <activity
             android:name=".Startup"
             android:exported="true">
             <intent-filter>

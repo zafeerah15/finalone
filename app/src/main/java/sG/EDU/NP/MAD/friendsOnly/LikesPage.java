@@ -51,7 +51,13 @@ public class LikesPage extends AppCompatActivity {
         final SwipeRefreshLayout pullToRefresh = findViewById(R.id.refresh_story);
         storyRecyclerView = findViewById(R.id.storyRecyclerView);
 
+        // calling the action bar
+        ActionBar actionBar = getSupportActionBar();
 
+        actionBar.setTitle("Likes");
+
+        // showing the back button in action bar
+        actionBar.setDisplayHomeAsUpEnabled(true);
 
         pullToRefresh.setOnRefreshListener(new SwipeRefreshLayout.OnRefreshListener() {
             @Override
@@ -62,13 +68,6 @@ public class LikesPage extends AppCompatActivity {
         });
 
 
-
-        Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
-        setSupportActionBar(toolbar);
-        // showing the back button in action bar
-        setSupportActionBar(toolbar);
-        this.getSupportActionBar().setDisplayHomeAsUpEnabled(true);
-        this.getSupportActionBar().setTitle("Likes");
         session = new Session(LikesPage.this);
         storyRecyclerView.setHasFixedSize(true);
         storyRecyclerView.setLayoutManager(new LinearLayoutManager(LikesPage.this));
@@ -144,6 +143,13 @@ public class LikesPage extends AppCompatActivity {
         });
 
 
+    }
+
+    @Override
+    public boolean onSupportNavigateUp() {
+        onBackPressed(); // go back previous activity
+        finish();
+        return super.onSupportNavigateUp();
     }
 
 }
